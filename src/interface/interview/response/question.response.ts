@@ -9,7 +9,7 @@ export class QuestionResponse {
   type: string;
 
   @ApiProperty()
-  answer?: AnswerResponse | null;
+  question: string;
 
   @ApiProperty()
   status: string; //답변 대기, 답변 완료
@@ -21,10 +21,13 @@ export class QuestionResponse {
   finishedAt: string;
 
   @ApiProperty({ type: [QuestionResponse] })
-  followUpQuestion?: QuestionResponse[];
+  followUpQuestions?: QuestionResponse[];
 
   @ApiProperty()
-  cratedAt: string;
+  answer?: AnswerResponse | null;
+
+  @ApiProperty()
+  createdAt: string;
 
   constructor(answer?: AnswerResponse) {
     this.answer = answer;

@@ -29,8 +29,10 @@ export class InterviewController {
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse]})
   async getMyInterviews()
   : Promise<MyInterviewResponse[]> {
+    
     const userId = 1;
-    return this.interviewService.getMyInterviews(userId);
+    return this.interviewService
+      .getMyInterviews(userId);
   }
 
   @Get(':interviewId')
@@ -38,8 +40,10 @@ export class InterviewController {
   async getMyInterviewDetail(
     @Param('interviewId') interviewId: number)
   : Promise<MyInterviewDetailResponse> {
-    const userId = '';
-    return new MyInterviewDetailResponse(interviewId, 'U', '2023-09-01 13:00', []);
+    
+    const userId = 1;
+    return this.interviewService
+      .getMyInterviewDetail(userId, interviewId);
   }
 
   @Put(':interviewId')
