@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Query } from "@nestjs/common";
-import { ApiCreatedResponse, ApiOkResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
+import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { MyInterviewResponse } from "./response/my-interview.response";
 import { MyInterviewDetailResponse } from "./response/my-interview-detail.response";
 import { CreateInterviewRequest } from "./request/create-interview.request";
@@ -39,9 +39,17 @@ export class InterviewController {
     return new MyInterviewDetailResponse(interviewId, 'U', '2023-09-01 13:00', []);
   }
 
-  @Delete(':interviewId')
-  @ApiOkResponse({ description: '면접 취소'})
+  @Put(':interviewId')
+  @ApiNoContentResponse({ description: '면접 취소'})
   async cancelInterview(
+    @Param('interviewId') interviewId: number)
+  : Promise<any> {
+    return null;
+  }
+
+  @Delete(':interviewId')
+  @ApiOkResponse({ description: '면접 삭제'})
+  async deleteInterview(
     @Param('interviewId') interviewId: number)
   : Promise<any> {
     return null;
