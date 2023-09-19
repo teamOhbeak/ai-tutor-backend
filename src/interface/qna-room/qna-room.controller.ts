@@ -23,7 +23,7 @@ export class QnaRoomController {
 
   @Get(':id')
   @ApiOkResponse()
-  async getQuaRoomDetail()
+  async getQnaRoomDetail()
   : Promise<any> {
     return {};
   }
