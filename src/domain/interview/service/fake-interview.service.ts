@@ -3,7 +3,7 @@ import { IInterviewService } from "./interview.service.interface";
 import { MyInterviewResponse } from "src/interface/interview/response/my-interview.response";
 
 @Injectable()
-export class InterviewService implements IInterviewService {
+export class FakeInterviewService implements IInterviewService {
 
   constructor() {
     
