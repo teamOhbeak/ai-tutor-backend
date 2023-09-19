@@ -18,4 +18,4 @@ RUN yarn \
 
 EXPOSE 3000 
 
-CMD [ "yarn", "run", "start:prod" ]
+CMD yarn "$(if [ $NODE_ENV = 'production' ] ; then echo 'start:prod' ; else echo 'start:dev'; fi)"
