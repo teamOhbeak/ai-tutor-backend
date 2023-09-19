@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 
 @Controller('api/qna-rooms')
@@ -25,6 +25,15 @@ export class QnaRoomController {
   @ApiOkResponse()
   async getQnaRoomDetail()
   : Promise<any> {
+    return {};
+  }
+
+  @Delete(':id')
+  @ApiOkResponse()
+  async deleteQnaRoom(
+    @Param('id') roomId: number) 
+  : Promise<any> {
+
     return {};
   }
 }
