@@ -14,6 +14,12 @@ export class QuestionResponse {
   @ApiProperty()
   status: string; //답변 대기, 답변 완료
 
+  @ApiProperty()
+  startedAt: string;
+
+  @ApiProperty()
+  finishedAt: string;
+
   @ApiProperty({ type: [QuestionResponse] })
   followUpQuestion?: QuestionResponse[];
 
