@@ -29,21 +29,21 @@ export const winstonSetting = {
           }),
         ),
       }),
-      new (require('winston-daily-rotate-file'))({
-        format: winston.format.combine(
-          winston.format.timestamp({
-            format: 'YYYY-MM-DD HH:mm:ss',
-          }),
-          winston.format.printf((verbose) => {
-            return `[${verbose.timestamp}] ${process.env.REACT_APP_ENV_MODE}.${verbose.level}: ${verbose.message}`;
-          }),
-        ),
-        filename: 'responder-logs/%DATE%.log',
-        datePattern: 'YYYY-MM-DD',
-        zippedArchive: true,
-        maxSize: '20m',
-        maxFiles: '14d',
-      }),
+      // new (require('winston-daily-rotate-file'))({
+      //   format: winston.format.combine(
+      //     winston.format.timestamp({
+      //       format: 'YYYY-MM-DD HH:mm:ss',
+      //     }),
+      //     winston.format.printf((verbose) => {
+      //       return `[${verbose.timestamp}] ${process.env.REACT_APP_ENV_MODE}.${verbose.level}: ${verbose.message}`;
+      //     }),
+      //   ),
+      //   filename: 'responder-logs/%DATE%.log',
+      //   datePattern: 'YYYY-MM-DD',
+      //   zippedArchive: true,
+      //   maxSize: '20m',
+      //   maxFiles: '14d',
+      // }),
       // new winston.transports.File({
       //   filename: "./log/error.log",
       //   level: "error",

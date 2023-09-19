@@ -1,6 +1,4 @@
-import { DataSource } from 'typeorm';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Logger } from '@nestjs/common';
 
 export default () => ({
   DB: {
