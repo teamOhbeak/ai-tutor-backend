@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
 import { PromptService } from './domain/prompt/service/prompt.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PromptController } from './interface/prompt/prompt.controller';
 import config from './config/config';
 import { InterviewModule } from 'src/domain/interview/interview.module';
 import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { AuthModule } from './domain/auth/auth.module';
 import { PromptModule } from './domain/prompt/prompt.module';
+import { DatabaseModule } from './domain/database/database.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '../.env',
+      envFilePath: '.env',
       isGlobal: true,
       load: [config],
     }),
@@ -19,6 +20,7 @@ import { PromptModule } from './domain/prompt/prompt.module';
     QnaRoomModule,
     AuthModule,
     PromptModule,
+    DatabaseModule,
   ],
   controllers: [PromptController],
   providers: [PromptService],
