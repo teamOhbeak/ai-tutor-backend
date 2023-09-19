@@ -9,7 +9,7 @@ export class FakeInterviewService implements IInterviewService {
     
   }
 
-  async getMyInterviews()
+  async getMyInterviews(userId: number)
   : Promise<MyInterviewResponse[]> {
 
     return Promise.resolve(

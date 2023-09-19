@@ -3,12 +3,18 @@ import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiResponse, A
 import { MyInterviewResponse } from "./response/my-interview.response";
 import { MyInterviewDetailResponse } from "./response/my-interview-detail.response";
 import { CreateInterviewRequest } from "./request/create-interview.request";
+import { IInterviewService } from "src/domain/interview/service/interview.service.interface";
+import { FakeInterviewService } from "src/domain/interview/service/fake-interview.service";
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
 export class InterviewController {
 
-  constructor() {}
+  private readonly interviewService: IInterviewService
+  constructor() {
+    
+    this.interviewService = new FakeInterviewService();
+  }
 
   @Post()
   @ApiCreatedResponse({ description: '인터뷰 생성', type: MyInterviewDetailResponse })
@@ -23,11 +29,8 @@ export class InterviewController {
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse]})
   async getMyInterviews()
   : Promise<MyInterviewResponse[]> {
-    const userId = '';
-    return <MyInterviewResponse[]>[
-      new MyInterviewResponse(1, 'U', '2023-09-01 13:00'),
-      new MyInterviewResponse(2, 'U', '2023-09-02 18:30'),
-    ];
+    const userId = 1;
+    return this.interviewService.getMyInterviews(userId);
   }
 
   @Get(':interviewId')
