@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { QnaRoomController } from 'src/interface/qna/qna-room.controller';
+import { QnaRoomController } from 'src/interface/qna-room/qna-room.controller';
 @Module({
   imports: [],
   controllers: [
