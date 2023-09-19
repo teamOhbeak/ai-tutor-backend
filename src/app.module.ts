@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserController } from './user/user.controller';
-import { PromptService } from './prompt/prompt.service';
+import { PromptService } from './domain/prompt/service/prompt.service';
 import { ConfigModule } from '@nestjs/config';
-import { PromptController } from './prompt/prompt.controller';
+import { PromptController } from './interface/prompt/prompt.controller';
 import config from './config/config';
 
 import { InterviewModule } from 'src/domain/interview/interview.module';
 import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { AuthModule } from './domain/auth/auth.module';
-import { PromptModule } from './prompt/prompt.module';
+import { PromptModule } from './domain/prompt/prompt.module';
 
 @Module({
   imports: [
@@ -24,7 +23,7 @@ import { PromptModule } from './prompt/prompt.module';
     AuthModule,
     PromptModule,
   ],
-  controllers: [AppController, UserController, PromptController],
+  controllers: [AppController, PromptController],
   providers: [AppService, PromptService],
 })
 export class AppModule {}

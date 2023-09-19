@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { PromptService } from './prompt.service';
+import { PromptService } from '../../domain/prompt/service/prompt.service';
 
 @Controller('prompt')
 export class PromptController {
