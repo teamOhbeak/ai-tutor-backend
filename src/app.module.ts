@@ -4,10 +4,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PromptController } from './interface/prompt/prompt.controller';
 import config from './config/config';
 import { InterviewModule } from 'src/domain/interview/interview.module';
-import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { AuthModule } from './domain/auth/auth.module';
 import { PromptModule } from './domain/prompt/prompt.module';
 import { DatabaseModule } from './domain/database/database.module';
+import { QnaModule } from './domain/qna/qna.module';
+import { QnaRoomModule } from './domain/qna-room/qna-room.module';
+import { QnaRoomService } from './domain/qna-room/service/qna-room.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -21,8 +24,10 @@ import { DatabaseModule } from './domain/database/database.module';
     AuthModule,
     PromptModule,
     DatabaseModule,
+    QnaModule,
+    TypeOrmModule.forRoot()
   ],
   controllers: [PromptController],
-  providers: [PromptService],
+  providers: [PromptService, QnaRoomService],
 })
-export class AppModule {}
+export class AppModule { }
