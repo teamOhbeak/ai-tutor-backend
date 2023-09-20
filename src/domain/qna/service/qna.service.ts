@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class QnaService {
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
     console.log(qnaRequest);
