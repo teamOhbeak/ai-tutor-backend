@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { QuestionBankEntity } from '../interface/questionBank/entity/questionBank.entity';
 
 export default () => ({
   DB: {
@@ -34,7 +35,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
   autoLoadEntities: true,
   logging: true,
   // entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
-  // entities: [Photo, Reservation,],
+  entities: [QuestionBankEntity],
 };
 
 export const openAIConfig = process.env.OPEN_API_KEY;

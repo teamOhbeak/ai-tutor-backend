@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 export class PromptService {
   constructor(private readonly configService: ConfigService) {}
 
-  async getTutorPrompt(prompt: string) {
+  async getInterviewQuestionsPrompt() {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
