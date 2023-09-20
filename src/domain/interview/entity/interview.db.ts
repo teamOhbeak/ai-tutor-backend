@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InterviewEntity } from './interview.entity';
-import { InterviewRepository } from '../repository/interview.repository';
 import {
   CreateInterviewInfo,
   Interview,
@@ -8,6 +7,7 @@ import {
 } from '@/domain/interview/service/interview.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { InterviewRepository } from '../repository/interview.repository.interface';
 
 @Injectable()
 export class InterviewRepositoryImpl implements InterviewRepository {

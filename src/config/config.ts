@@ -2,13 +2,16 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export default () => ({
   DB: {
-    type: process.env.DB_TYPE === 'mariadb' ? 'mariadb' : 'mysql',
-    host: process.env.DB_HOST,
+    type: 'mysql',
+    host: process.env.ENV_MODE === 'local' ? 'localhost' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: ['dist/**/*.entity.js'],
+    entities: [
+      __dirname + '/../domain/**/*.entity.{js,ts}',
+      __dirname + '/../domain/**/entity/*.entity.{js,ts}',
+    ],
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
   NEST: {

@@ -15,19 +15,15 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { MyInterviewResponse } from './response/my-interview.response';
 import { MyInterviewDetailResponse } from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
-import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
-import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
 import { createInterview } from '../../domain/interview/service/interview.model';
 import { InterviewService } from '@/domain/interview/service/interview.service';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
 export class InterviewController {
-  // private readonly interviewService: IInterviewService;
-  constructor(private readonly interviewService: IInterviewService) {}
+  constructor(private readonly interviewService: InterviewService) {}
 
   @Post()
   @ApiCreatedResponse({

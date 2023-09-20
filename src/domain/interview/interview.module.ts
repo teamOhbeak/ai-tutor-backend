@@ -5,18 +5,12 @@ import { DatabaseModule } from '../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InterviewEntity } from './entity/interview.entity';
 import { InterviewService } from './service/interview.service';
-import { InterviewRepositoryImpl } from './entity/interview.db';
+import { InterviewRepositoryImpl } from './repository/interview.repository';
 import { InterviewController } from '@/interface/interview/interview.controller';
 
 @Module({
-  imports: [DatabaseModule, TypeOrmModule.forFeature([InterviewEntity])],
+  imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [
-    InterviewService,
-    {
-      provide: 'InterviewRepository',
-      useClass: InterviewRepositoryImpl,
-    },
-  ],
+  providers: [InterviewService, InterviewRepositoryImpl],
 })
 export class InterviewModule {}

@@ -2,16 +2,14 @@ import { MyInterviewDetailResponse } from '@/interface/interview/response/my-int
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 import { IInterviewService } from './interview.service.interface';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { InterviewRepository } from '../repository/interview.repository';
+import { InterviewRepository } from '../repository/interview.repository.interface';
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateInterviewInfo } from './interview.model';
+import { InterviewRepositoryImpl } from '../repository/interview.repository';
 
 @Injectable()
 export class InterviewService implements IInterviewService {
-  constructor(
-    @Inject('InterviewRepository')
-    private readonly repository: InterviewRepository,
-  ) {}
+  constructor(private readonly repository: InterviewRepositoryImpl) {}
 
   public async createInterview(
     requestModel: CreateInterviewInfo,
