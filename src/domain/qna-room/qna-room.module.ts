@@ -6,4 +6,4 @@ import { QnaRoomController } from '@/interface/qna-room/QnaRoomController';
   controllers: [QnaRoomController, QnaRoomQnaController],
   providers: [],
 })
-export class QnaRoomModule { }
+export class QnaRoomModule {}

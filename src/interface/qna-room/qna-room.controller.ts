@@ -9,7 +9,7 @@ import { QnaRoomDeleteResponse } from './response/qna-room-delete.response';
 @Controller('api/qna-rooms')
 @ApiTags('QnaRoomController')
 export class QnaRoomController {
-  constructor(private readonly qnaRoomService: QnaRoomService) { }
+  constructor(private readonly qnaRoomService: QnaRoomService) {}
 
   @Post()
   @ApiCreatedResponse({
@@ -25,7 +25,7 @@ export class QnaRoomController {
   @Get()
   @ApiOkResponse({
     description: '질문방 리스트 조회',
-    type: QnaRoomResponse[],
+    type: [QnaRoomResponse],
   })
   async getQnaRooms(): Promise<QnaRoomResponse[]> {
     return this.qnaRoomService.getQnaRooms();
@@ -45,7 +45,9 @@ export class QnaRoomController {
     description: '질문방 삭제',
     type: QnaRoomDeleteResponse,
   })
-  async deleteQnaRoom(@Param('id') roomId: number): Promise<QnaRoomDeleteResponse> {
-    return this.qnaRoomService.deleteQnaRoom(roomId)
+  async deleteQnaRoom(
+    @Param('id') roomId: number,
+  ): Promise<QnaRoomDeleteResponse> {
+    return this.qnaRoomService.deleteQnaRoom(roomId);
   }
 }

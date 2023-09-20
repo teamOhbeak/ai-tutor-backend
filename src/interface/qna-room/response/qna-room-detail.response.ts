@@ -6,7 +6,7 @@ export class QnaRoomDetailResponse {
   id: number;
 
   @ApiProperty({ example: 'this is title' })
-  title: string
+  title: string;
 
   @ApiProperty({ example: '2023-09-01 13:00' })
   createdAt: string;

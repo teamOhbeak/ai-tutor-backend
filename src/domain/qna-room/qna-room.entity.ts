@@ -11,8 +11,5 @@ export class QnaRoom {
 
   updatedAt: Date;
 
-  deleted: boolean
-
-
-
+  deleted: boolean;
 }

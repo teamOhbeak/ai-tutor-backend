@@ -8,7 +8,7 @@ import OpenAI from 'openai';
 
 @Injectable()
 export class QnaRoomService {
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
