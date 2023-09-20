@@ -6,21 +6,84 @@ import OpenAI from 'openai';
 export class PromptService {
   constructor(private readonly configService: ConfigService) {}
 
-  async aiTutorPrompt() {
-    const prompt = `나는 Java 개발자이고, 지원자야. 너는 AI면접관이야. Java관련된 대답을 내가 할건데, 
-    내 대답이 틀리거나 부족하다면 그거에 대한 옳고 그름과 평가를 얘기해주고, 그 다음에 이어서 관련된 꼬리질문을 해줘. 
-    나의 대답은 'Java는 싱글스레드 환경입니다'. A : `;
-
+  async getTutorPrompt(prompt: string) {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
 
-    const promptResult = await openAI.chat.completions.create({
-      messages: [{ role: 'user', content: prompt }],
-      model: 'gpt-3.5-turbo',
-    });
+    const schema = {
+      type: 'object',
+      properties: {
+        JAVA: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        JAVASCRIPT: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        KOTLIN: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        REACTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        NEXTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        NESTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        SPRING: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        CS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+      },
+    };
 
-    console.log(promptResult);
+    const promptResult = await openAI.chat.completions
+      .create({
+        messages: [
+          { role: 'system', content: '당신은 면접질문 어시스턴스 입니다.' },
+          {
+            role: 'user',
+            content: '각 해당하는 항목에 대한 면접 질문을 10개씩 return 해줘',
+          },
+        ],
+        functions: [{ name: 'set_questions', parameters: schema }],
+        function_call: { name: 'set_questions' },
+        model: 'gpt-3.5-turbo-0613',
+      })
+      .then((competions) => {
+        const generateText =
+          competions.choices[0].message.function_call.arguments;
+
+        return JSON.parse(generateText);
+      });
 
     return promptResult;
   }
