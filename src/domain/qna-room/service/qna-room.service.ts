@@ -4,11 +4,10 @@ import { QnaRoomDetailResponse } from '@/interface/qna-room/response/qna-room-de
 import { QnaRoomResponse } from '@/interface/qna-room/response/qna-room.response';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import OpenAI from 'openai';
 
 @Injectable()
 export class QnaRoomService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,

@@ -1,4 +1,4 @@
-import { QnaResponse } from '@/interface/qna-room-qna/response/question-response';
+import { QnaResponse } from '@/interface/qna-room-qna/response/qna-response';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class QnaRoomDetailResponse {

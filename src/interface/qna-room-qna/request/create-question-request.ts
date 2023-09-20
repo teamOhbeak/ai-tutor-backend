@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateQuestionRoomRequest {
+export class CreateQuestionRequest {
   @ApiProperty({ example: '1000' })
-  questionRoomId: number;
+  roomId: number;
 
-  @ApiProperty({ example: 'this is title.' })
+  @ApiProperty({ example: 'this is qusetion.' })
   question: string;
 
-  constructor(questionRoomId: number, question: string) {
-    this.questionRoomId = questionRoomId;
+  constructor(roomId: number, question: string) {
+    this.roomId = roomId;
     this.question = question;
   }
 }

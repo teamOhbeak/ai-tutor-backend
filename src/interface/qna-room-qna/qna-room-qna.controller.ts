@@ -1,23 +1,31 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { QnaResponse } from './response/qna-response';
+import { QnaService } from '@/domain/qna/service/qna.service';
+import { CreateQuestionRequest } from './request/create-question-request';
 
 @Controller('api/qna-rooms/:roomId/questions')
 @ApiTags('QnaRoomQnaController')
 export class QnaRoomQnaController {
-  constructor() {}
+  constructor(private readonly qnaService: QnaService) { }
 
   @Post()
-  @ApiCreatedResponse()
+  @ApiCreatedResponse({
+    description: '질문 생성',
+    type: QnaResponse,
+  })
   async createQuestion(
-    @Param('roomId') roomId: number,
-    @Body() params: any,
-  ): Promise<any> {
-    return { id: 'questionId', contents: '' };
+    @Body() request: CreateQuestionRequest,
+  ): Promise<QnaResponse> {
+    return this.qnaService.createQna(request);
   }
 
   @Get()
-  @ApiOkResponse()
-  async getQuestions(@Param('roomId') roomId: number): Promise<any> {
-    return [];
+  @ApiOkResponse({
+    description: '질문 목록 조회',
+    type: [QnaResponse],
+  })
+  async getQuestions(@Param('roomId') roomId: number): Promise<QnaResponse[]> {
+    return this.qnaService.getQnas(roomId);
   }
 }
