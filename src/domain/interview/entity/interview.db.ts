@@ -1,43 +1,29 @@
-import {
-  Injectable
-} from "@nestjs/common";
-import {
-  InterviewEntity
-} from "./interview.entity";
-import {
-  InterviewRepository
-} from "../repository/interview.repository";
+import { Injectable } from '@nestjs/common';
+import { InterviewEntity } from './interview.entity';
+import { InterviewRepository } from '../repository/interview.repository.interface';
 import {
   CreateInterviewInfo,
   Interview,
-  Stack
-} from "@/domain/interview/service/interview.model";
-import {
-  InjectRepository
-} from "@nestjs/typeorm";
-import {
-  Repository
-} from "typeorm";
-
-
+  Stack,
+} from '@/domain/interview/service/interview.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class InterviewRepositoryImpl implements InterviewRepository {
   constructor(
     // DB 주입
-    @InjectRepository(InterviewEntity) private interviewDB: Repository < InterviewEntity >
-    // @InjectRepository(UserEntity)
-    // private UserDB: Repository<UserEntity>,
+    @InjectRepository(InterviewEntity)
+    private interviewDB: Repository<InterviewEntity>, // @InjectRepository(UserEntity) // private UserDB: Repository<UserEntity>,
   ) {}
 
-  async saveInterview(interviewInfo: CreateInterviewInfo): Promise < Interview > {
-
+  async saveInterview(interviewInfo: CreateInterviewInfo): Promise<Interview> {
     // model -> entity
     const entity = this.interviewDB.create({
       userId: 1,
-      stack: interviewInfo.stack ,
+      stack: interviewInfo.stack,
       questionCount: interviewInfo.questionCount,
-      maxWait: interviewInfo.maxWait
+      maxWait: interviewInfo.maxWait,
     });
 
     try {
@@ -47,11 +33,10 @@ export class InterviewRepositoryImpl implements InterviewRepository {
         stack: entity.stack as Stack,
         questionCount: entity.questionCount,
         maxWait: entity.maxWait,
-        createdAt: entity.createdAt
-      }
+        createdAt: entity.createdAt,
+      };
     } catch (error) {
-
-      throw new Error("Method not implemented.");
+      throw new Error('Method not implemented.');
     }
   }
 }

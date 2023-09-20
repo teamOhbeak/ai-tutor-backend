@@ -10,10 +10,7 @@ import { InterviewRepositoryImpl } from './entity/interview.db';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [
-    InterviewController, 
-    InterviewQnaController
-  ],
+  controllers: [InterviewController, InterviewQnaController],
   providers: [InterviewService],
 })
 export class InterviewModule {}

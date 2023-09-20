@@ -27,8 +27,7 @@ import { InterviewService } from '@/domain/interview/service/interview.service';
 @ApiTags('InterviewController')
 export class InterviewController {
   // private readonly interviewService: IInterviewService;
-  constructor(private readonly interviewService: IInterviewService) {
-  }
+  constructor(private readonly interviewService: IInterviewService) {}
 
   @Post()
   @ApiCreatedResponse({
@@ -36,10 +35,11 @@ export class InterviewController {
     type: MyInterviewDetailResponse,
   })
   async createInterview(
-    @Body() request: CreateInterviewRequest): Promise<MyInterviewDetailResponse> {
-      // dto -> model
-      const interviewInfoResult = createInterview(request);
-      this.interviewService.createInterview(interviewInfoResult);
+    @Body() request: CreateInterviewRequest,
+  ): Promise<MyInterviewDetailResponse> {
+    // dto -> model
+    const interviewInfoResult = createInterview(request);
+    this.interviewService.createInterview(interviewInfoResult);
 
     return new MyInterviewDetailResponse(1, 'U', '2023-09-01 13:00', []);
   }

@@ -9,7 +9,9 @@ import { CreateInterviewRequest } from '@/interface/interview/request/create-int
 @Injectable()
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
-  createInterview(request: CreateInterviewRequest): Promise<MyInterviewDetailResponse> {
+  createInterview(
+    request: CreateInterviewRequest,
+  ): Promise<MyInterviewDetailResponse> {
     throw new Error('Method not implemented.');
   }
 
