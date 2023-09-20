@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from './interview.repository.interface';
 import {
@@ -7,19 +7,23 @@ import {
   Stack,
 } from '@/domain/interview/service/interview.model';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
 
-@Injectable()
-export class InterviewRepositoryImpl implements InterviewRepository {
+@EntityRepository(InterviewEntity)
+export class InterviewRepositoryImpl
+  extends Repository<InterviewEntity>
+  implements InterviewRepository
+{
   constructor(
-    // DB 주입
-    @InjectRepository(InterviewEntity)
-    private interviewDB: Repository<InterviewEntity>, // @InjectRepository(UserEntity) // private UserDB: Repository<UserEntity>,
-  ) {}
+    @Inject('DATA_SOURCE')
+    private readonly dataSource: DataSource,
+  ) {
+    super(InterviewEntity, dataSource.createEntityManager());
+  }
 
   async saveInterview(interviewInfo: CreateInterviewInfo): Promise<Interview> {
     // model -> entity
-    const entity = this.interviewDB.create({
+    const entity = this.create({
       userId: 1,
       stack: interviewInfo.stack,
       questionCount: interviewInfo.questionCount,
@@ -27,7 +31,7 @@ export class InterviewRepositoryImpl implements InterviewRepository {
     });
 
     try {
-      await this.interviewDB.save(entity);
+      await this.save(entity);
       return {
         userId: entity.userId,
         stack: entity.stack as Stack,
