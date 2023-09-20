@@ -5,7 +5,7 @@ import { QnaRoomDetailResponse } from '@/interface/qna-room/response/qna-room-de
 import { QnaRoomResponse } from '@/interface/qna-room/response/qna-room.response';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { QnaRoom } from '../qna-room.entity';
+import { QnaRoom } from '../entity/qna-room.entity';
 import { QnaRoomRepository } from '../repository/qna-room-repository';
 
 @Injectable()

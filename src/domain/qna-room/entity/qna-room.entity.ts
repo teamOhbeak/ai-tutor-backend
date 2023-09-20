@@ -1,4 +1,5 @@
 import { QnaRoomResponse } from '@/interface/qna-room/response/qna-room.response';
+import { CreateQnaRoomRequest } from '@/interface/qna-room/request/create-qna-room.request';
 import {
   Entity,
   Column,
@@ -7,19 +8,18 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Qna } from '../qna/qna.entity';
-import { CreateQnaRoomRequest } from '@/interface/qna-room/request/create-qna-room.request';
+import { Qna } from '@/domain/qna/qna.entity';
 
-@Entity()
+@Entity('qna_room')
 export class QnaRoom {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
+  @Column()
   title: string;
+
+  @Column()
+  deleted: boolean;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -32,19 +32,15 @@ export class QnaRoom {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
-
-  @Column({
-    type: 'boolean',
-  })
-  deleted: boolean;
-
+  
   @OneToMany(() => Qna, (qna) => qna.qnaRoom)
   qnas: Qna[];
-  static qnas: any;
 
-  constructor(createQnaRoomRequest: CreateQnaRoomRequest) {
-    this.title = createQnaRoomRequest.title;
-    this.deleted = false;
+  constructor(createQnaRoomRequest?: CreateQnaRoomRequest) {
+    if (createQnaRoomRequest) {
+      this.title = createQnaRoomRequest.title;
+      this.deleted = false;
+    }
   }
 
   toResponse(): QnaRoomResponse {

@@ -8,7 +8,10 @@ export default () => ({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: ['dist/src/domain/**/*.entity.ts'],
+    entities: [
+      __dirname + '/../domain/**/*.entity.{js,ts}',
+      __dirname + '/../domain/**/entity/*.entity.{js,ts}',
+    ],
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
   NEST: {

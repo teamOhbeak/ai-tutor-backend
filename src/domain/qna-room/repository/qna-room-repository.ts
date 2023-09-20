@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { QnaRoom } from '../qna-room.entity';
+import { QnaRoom } from '../entity/qna-room.entity';
 import { DataSource, EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(QnaRoom)

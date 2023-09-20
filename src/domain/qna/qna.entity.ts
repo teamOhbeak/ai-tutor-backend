@@ -7,12 +7,21 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { QnaRoom } from '../qna-room/qna-room.entity';
+import { QnaRoom } from '../qna-room/entity/qna-room.entity';
 
 @Entity()
 export class Qna {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  question?: string;
+
+  @Column()
+  answer?: boolean;
+
+  @Column()
+  sequence: number;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -26,23 +35,6 @@ export class Qna {
   })
   updatedAt: Date;
 
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
-  question: string;
-
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
-  answer: boolean;
-
-  @Column({
-    type: 'int',
-  })
-  sequence: number;
-
-  @ManyToOne((type) => QnaRoom, (qnaRoom) => QnaRoom.qnas)
+  @ManyToOne((type) => QnaRoom)
   qnaRoom!: QnaRoom;
 }
