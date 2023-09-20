@@ -11,9 +11,6 @@ import { InterviewRepositoryImpl } from './repository/interview.repository';
 @Module({
   imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [
-    InterviewService,
-    InterviewRepositoryImpl
-  ],
+  providers: [InterviewService, InterviewRepositoryImpl],
 })
 export class InterviewModule {}

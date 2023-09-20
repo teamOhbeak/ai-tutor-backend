@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from './interview.repository.interface';
 import {
@@ -6,7 +6,6 @@ import {
   Interview,
   Stack,
 } from '@/domain/interview/service/interview.model';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(InterviewEntity)

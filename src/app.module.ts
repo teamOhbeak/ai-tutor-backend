@@ -16,11 +16,11 @@ import { DatabaseModule } from './domain/database/database.module';
       isGlobal: true,
       load: [config],
     }),
+    DatabaseModule,
     InterviewModule,
     QnaRoomModule,
     AuthModule,
-    PromptModule,
-    DatabaseModule,
+    PromptModule
   ],
   controllers: [PromptController],
   providers: [PromptService],
