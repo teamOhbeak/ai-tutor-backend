@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
-import { CreateInterviewRequest } from '../../../interface/interview/request/create-interview.request'
-
+import { CreateInterviewRequest } from '../../../interface/interview/request/create-interview.request';
 
 // Request Dto -> model
 export type CreateInterviewInfo = {
@@ -17,7 +16,7 @@ export type Interview = {
   questionCount: number;
   maxWait: number;
   createdAt: Date;
-}
+};
 
 export enum Stack {
   Java = 'Java',
@@ -31,7 +30,9 @@ export enum Stack {
   CS = 'CS',
 }
 
-export function createInterview(request: CreateInterviewRequest): CreateInterviewInfo {
+export function createInterview(
+  request: CreateInterviewRequest,
+): CreateInterviewInfo {
   // CreateInterviewInfo 객체를 생성하여 반환
   const interviewInfo: CreateInterviewInfo = {
     userId: 1,
@@ -42,4 +43,3 @@ export function createInterview(request: CreateInterviewRequest): CreateIntervie
 
   return interviewInfo;
 }
-
