@@ -9,12 +9,11 @@ import { InterviewService } from './service/interview.service';
 import { InterviewRepositoryImpl } from './entity/interview.db';
 
 @Module({
-  imports: [DatabaseModule, TypeOrmModule.forFeature([InterviewEntity])],
-  controllers: [InterviewController, InterviewQnaController],
-  providers: [InterviewService,
-  {
-    provide: 'InterviewRepository',
-    useClass: InterviewRepositoryImpl,
-  }],
+  imports: [DatabaseModule],
+  controllers: [
+    InterviewController, 
+    InterviewQnaController
+  ],
+  providers: [InterviewService],
 })
 export class InterviewModule {}
