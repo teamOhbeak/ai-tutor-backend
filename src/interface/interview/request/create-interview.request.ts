@@ -1,8 +1,9 @@
+import { Stack } from '@/domain/interview/service/interview.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateInterviewRequest {
   @ApiProperty()
-  stack: string;
+  stack: Stack;
 
   @ApiProperty()
   questionCount: number;

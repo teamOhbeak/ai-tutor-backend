@@ -3,10 +3,18 @@ import { InterviewQnaController } from 'src/interface/interview-qna/interview-qn
 import { InterviewController } from 'src/interface/interview/interview.controller';
 import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
 import { DatabaseModule } from '../database/database.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { InterviewEntity } from './entity/interview.entity';
+import { InterviewService } from './service/interview.service';
+import { InterviewRepositoryImpl } from './entity/interview.db';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, TypeOrmModule.forFeature([InterviewEntity])],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [FakeInterviewService],
+  providers: [InterviewService,
+  {
+    provide: 'InterviewRepository',
+    useClass: InterviewRepositoryImpl,
+  }],
 })
 export class InterviewModule {}
