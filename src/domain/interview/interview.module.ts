@@ -6,7 +6,7 @@ import { DatabaseModule } from '../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InterviewEntity } from './entity/interview.entity';
 import { InterviewService } from './service/interview.service';
-import { InterviewRepositoryImpl } from './repository/interview.db';
+import { InterviewRepositoryImpl } from './repository/interview.repository';
 
 @Module({
   imports: [DatabaseModule],
