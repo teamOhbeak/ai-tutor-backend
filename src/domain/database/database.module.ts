@@ -9,4 +9,3 @@ import { InterviewEntity } from '../interview/entity/interview.entity';
   exports: [...databaseProviders],
 })
 export class DatabaseModule {}
-
