@@ -1,0 +1,68 @@
+# docker-compose.yaml
+version: "3.1"
+
+services:
+  mysql:
+    platform: linux/x86_64
+    container_name: mysql 
+    image: mysql:8.0.23
+    restart: always
+    env_file: ./.env
+    expose:
+      - $DB_PORT 
+    ports:
+      - $DB_PORT:3306
+    volumes:
+      - ./ai_tutor_backend/sql:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_DATABASE
+      - "TZ=Asia/Seoul"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    networks:
+      - backend
+
+  # front:
+  #   depends_on:
+  #     - backend
+  #   build: ./vet_react
+  #   # dockerfile: Dockerfile
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   ports:
+  #     - $REACT_APP_LOCAL_PORT:$REACT_APP_DOCKER_PORT
+  #   volumes:
+  #     - ./vet_react:/app
+  #   networks:
+  #     - backend
+
+  backend:
+    depends_on:
+      - mysql 
+    build: ./
+    restart: unless-stopped
+    env_file: ./.env
+    expose:
+      - $BACKEND_PORT
+    ports:
+      - $BACKEND_PORT:$BACKEND_PORT
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=$DB_USERNAME
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_DATABASE
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    networks:
+      - backend
+volumes:
+  db:
+
+networks:
+  backend:
+    driver: bridge

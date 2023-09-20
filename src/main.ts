@@ -52,7 +52,7 @@ async function bootstrap() {
 
   const port = config().NEST.PORT;
   await app.listen(port || 3005);
-  logger.log(`Application running on port:: ${port}`);
+  logger.log(`Application running on port:: ${port ? port : 3005}`);
 
   if (module.hot) {
     module.hot.accept();
