@@ -28,13 +28,13 @@ export class Qna {
 
   @Column({
     type: 'varchar',
-    nullable: true
+    nullable: true,
   })
   question: string;
 
   @Column({
     type: 'varchar',
-    nullable: true
+    nullable: true,
   })
   answer: boolean;
 

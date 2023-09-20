@@ -25,9 +25,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     PromptModule,
     DatabaseModule,
     QnaModule,
-    TypeOrmModule.forRoot()
+    TypeOrmModule.forRoot(),
   ],
   controllers: [PromptController],
   providers: [PromptService, QnaRoomService],
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,11 +10,10 @@ import { QnaRoomRepository } from '../repository/qna-room-repository';
 
 @Injectable()
 export class QnaRoomService {
-
   constructor(
     // private readonly _configService: ConfigService,
     private qnaRoomRepository: QnaRoomRepository,
-  ) { }
+  ) {}
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
@@ -40,7 +39,6 @@ export class QnaRoomService {
   }
 
   async getQnaRoomDetail(): Promise<QnaRoomDetailResponse> {
-
     return Promise.resolve(<QnaRoomDetailResponse>{
       id: 1,
       title: 'this is title.',

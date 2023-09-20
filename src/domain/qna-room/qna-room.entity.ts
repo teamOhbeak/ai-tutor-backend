@@ -27,7 +27,6 @@ export class QnaRoom {
   })
   createdAt: Date;
 
-
   @UpdateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',

@@ -7,7 +7,7 @@ import { CreateQuestionRequest } from './request/create-question-request';
 @Controller('api/qna-rooms/:roomId/questions')
 @ApiTags('QnaRoomQnaController')
 export class QnaController {
-  constructor(private readonly qnaService: QnaService) { }
+  constructor(private readonly qnaService: QnaService) {}
 
   @Post()
   @ApiCreatedResponse({

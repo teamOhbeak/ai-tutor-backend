@@ -8,4 +8,4 @@ import { QnaService } from './service/qna.service';
   controllers: [QnaController],
   providers: [QnaService],
 })
-export class QnaModule { }
+export class QnaModule {}

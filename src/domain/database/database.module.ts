@@ -7,4 +7,4 @@ import { databaseProviders } from '../../provider/database/database.provider';
   providers: [...databaseProviders],
   exports: [...databaseProviders],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

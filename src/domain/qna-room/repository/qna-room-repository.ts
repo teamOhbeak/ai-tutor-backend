@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class QnaRoomRepository {
   constructor(
     @InjectRepository(QnaRoom) private qnaRoomModel: Repository<QnaRoom>,
-  ) { }
+  ) {}
 
   async createQnaRoom(qnaRoom: QnaRoom): Promise<QnaRoom> {
     const result = await this.qnaRoomModel.save(qnaRoom);
