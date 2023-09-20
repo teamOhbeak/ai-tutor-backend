@@ -5,12 +5,10 @@ import { DataSource, EntityRepository, Repository } from 'typeorm';
 @EntityRepository(QnaRoom)
 export class QnaRoomRepository extends Repository<QnaRoom> {
   constructor(
-    @Inject("DATA_SOURCE")
-    private readonly dataSource: DataSource
+    @Inject('DATA_SOURCE')
+    private readonly dataSource: DataSource,
   ) {
-    super(
-      QnaRoom,
-      dataSource.createEntityManager());
+    super(QnaRoom, dataSource.createEntityManager());
   }
 
   async createQnaRoom(qnaRoom: QnaRoom): Promise<QnaRoom> {

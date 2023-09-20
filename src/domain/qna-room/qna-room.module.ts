@@ -6,10 +6,7 @@ import { QnaRoomRepository } from './repository/qna-room-repository';
 @Module({
   imports: [DatabaseModule],
   controllers: [QnaRoomController],
-  providers: [
-    QnaRoomService, 
-    QnaRoomRepository
-  ],
+  providers: [QnaRoomService, QnaRoomRepository],
   exports: [QnaRoomRepository],
 })
 export class QnaRoomModule {}
