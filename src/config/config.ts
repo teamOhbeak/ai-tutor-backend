@@ -3,7 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export default () => ({
   DB: {
     type: process.env.DB_TYPE === 'mariadb' ? 'mariadb' : 'mysql',
-    host: process.env.DB_HOST,
+    host: process.env.MODE_ENV === 'local' ? 'mysql' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -24,8 +24,8 @@ export default () => ({
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: process.env.DB_TYPE === 'mariadb' ? 'mariadb' : 'mysql',
-  host: 'localhost',
-  // process.env.REACT_APP_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
+  // host: 'localhost',
+  host: process.env.MODE_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
   port: 3306,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
