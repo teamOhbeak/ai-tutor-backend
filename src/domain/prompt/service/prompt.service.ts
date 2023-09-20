@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 export class PromptService {
   constructor(private readonly configService: ConfigService) {}
 
-  async getTutorPrompt(prompt: string) {
+  async getInterviewQuestionsPrompt() {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
@@ -83,6 +83,9 @@ export class PromptService {
           competions.choices[0].message.function_call.arguments;
 
         return JSON.parse(generateText);
+      })
+      .catch((err) => {
+        return { error: err.message };
       });
 
     return promptResult;

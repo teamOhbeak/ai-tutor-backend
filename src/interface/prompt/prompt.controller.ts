@@ -2,7 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { PromptService } from '../../domain/prompt/service/prompt.service';
 import { QuestionsBankService } from '../../domain/questionsBank/service/questionsBank.service';
 
-@Controller('prompt')
+@Controller('promptTest')
 export class PromptController {
   constructor(
     private readonly promptService: PromptService,
@@ -11,7 +11,7 @@ export class PromptController {
 
   @Get()
   async getAiTutorPrompt() {
-    const result = await this.questionsBankService.questionCollector();
+    const result = await this.promptService.getInterviewQuestionsPrompt();
 
     return result;
   }

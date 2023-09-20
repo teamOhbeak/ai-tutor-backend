@@ -16,7 +16,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { MyInterviewResponse } from './response/my-interview.response';
-import { MyInterviewDetailResponse } from './response/my-interview-detail.response';
+import {
+  InterviewStatus,
+  MyInterviewDetailResponse,
+} from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
 import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
 import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
@@ -37,7 +40,12 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
-    return new MyInterviewDetailResponse(1, 'U', '2023-09-01 13:00', []);
+    return new MyInterviewDetailResponse(
+      1,
+      InterviewStatus.COMPLETED,
+      '2023-09-01 13:00',
+      [],
+    );
   }
 
   @Get()
