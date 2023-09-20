@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InterviewEntity } from './interview.entity';
-import { InterviewRepository } from '../repository/interview.repository.interface';
+import { InterviewEntity } from '../entity/interview.entity';
+import { InterviewRepository } from './interview.repository.interface';
 import {
   CreateInterviewInfo,
   Interview,
