@@ -32,7 +32,7 @@ export class QnaRoom {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
-  
+
   @OneToMany(() => Qna, (qna) => qna.qnaRoom)
   qnas: Qna[];
 

@@ -9,14 +9,15 @@ export const databaseProviders = [
       const dataSource = new DataSource(
         configService.get<DataSourceOptions>('DB'),
       );
-      dataSource.initialize()
-      .then(() => {
-        console.log(`DB initialized`);
-      })
-      .catch((reason: any) => {
-        console.log(`DB initialization failed
+      dataSource
+        .initialize()
+        .then(() => {
+          console.log(`DB initialized`);
+        })
+        .catch((reason: any) => {
+          console.log(`DB initialization failed
         \nreason: ${JSON.stringify(reason)}`);
-      });
+        });
       return dataSource;
     },
   },
