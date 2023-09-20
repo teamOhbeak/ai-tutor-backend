@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
+import { Stack } from '@/domain/interview/service/interview.model';
 
 export class MyInterviewDetailResponse {
   @ApiProperty({ example: 1000 })
@@ -8,9 +9,8 @@ export class MyInterviewDetailResponse {
   @ApiProperty({ example: 'U' })
   status: string;
 
-  // TODO: enum 선언되면 교체
   @ApiProperty({ example: 'java' })
-  stack: string;
+  stack: Stack;
 
   @ApiProperty()
   questionCount: number;

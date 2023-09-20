@@ -7,10 +7,11 @@ import { InterviewEntity } from './entity/interview.entity';
 import { InterviewService } from './service/interview.service';
 import { InterviewRepositoryImpl } from './repository/interview.repository';
 import { InterviewController } from '@/interface/interview/interview.controller';
+import { PromptService } from '../prompt/service/prompt.service';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [InterviewService, InterviewRepositoryImpl],
+  providers: [InterviewService, InterviewRepositoryImpl, PromptService],
 })
 export class InterviewModule {}

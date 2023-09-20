@@ -35,9 +35,7 @@ export class InterviewController {
   ): Promise<MyInterviewDetailResponse> {
     // dto -> model
     const interviewInfoResult = createInterview(request);
-    this.interviewService.createInterview(interviewInfoResult);
-
-    return new MyInterviewDetailResponse(1, 'U', '2023-09-01 13:00', []);
+    return await this.interviewService.createInterview(interviewInfoResult);
   }
 
   // @Get()

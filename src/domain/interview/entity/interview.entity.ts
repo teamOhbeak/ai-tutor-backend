@@ -15,7 +15,7 @@ export class InterviewEntity {
   // @Column('varchar', { name: 'type', length: 50, nullable: false  })
   // type: string;
 
-  @Column('bigint', { name: 'user_id', nullable: false })
+  @Column('bigint', { name: 'user_id', nullable: false  })
   userId: number;
 
   @Column('enum', {
@@ -29,9 +29,9 @@ export class InterviewEntity {
       'Node.js',
       'Nest.js',
       'Spring',
-      'CS',
+      'CS'
     ],
-    nullable: true,
+    nullable: true
   })
   stack:
     | 'Java'
@@ -44,16 +44,12 @@ export class InterviewEntity {
     | 'Spring'
     | 'CS';
 
-  @Column('int', { name: 'questionCount', nullable: false })
+  @Column('int', { name: 'questionCount', nullable: false  })
   questionCount: number;
 
-  @Column('int', { name: 'maxWait', nullable: false })
+  @Column('int', { name: 'maxWait', nullable: false  })
   maxWait: number;
 
-  @Column('datetime', {
-    name: 'created_at',
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
-  })
+  @Column('datetime', { name: 'created_at', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }
