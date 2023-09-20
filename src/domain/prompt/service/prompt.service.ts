@@ -83,6 +83,9 @@ export class PromptService {
           competions.choices[0].message.function_call.arguments;
 
         return JSON.parse(generateText);
+      })
+      .catch((err) => {
+        return { error: err.message };
       });
 
     return promptResult;
