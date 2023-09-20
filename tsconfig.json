@@ -10,6 +10,14 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@configs": ["config/configs"],
+      "@jobpost/*": ["src/jobpost/*"],
+      "@AppSourceData": ["config/configs"],
+      "@ErrorCode": ["util/errorCode"],
+      "@DataTransform": ["util/databaseTransform"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

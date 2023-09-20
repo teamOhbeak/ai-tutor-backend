@@ -12,33 +12,21 @@ export default () => ({
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
   NEST: {
-    PORT: process.env.REACT_APP_NEST_LOCAL_PORT,
+    PORT: process.env.BACKEND_PORT,
     HOST:
-      process.env.REACT_APP_ENV === 'local'
+      process.env.MODE_ENV === 'local'
         ? 'localhost'
-        : process.env.REACT_APP_NEST_HOSTNAME,
+        : process.env.BACKEND_HOSTNAME,
   },
-
-  REACT: {
-    PORT: process.env.REACT_LOCAL_PORT,
-  },
-  REDIS: {
-    PORT: process.env.REACT_APP_REDIS_LOCAL_PORT,
-    HOST:
-      process.env.REACT_APP_ENV === 'local'
-        ? 'localhost'
-        : process.env.REACT_APP_REDIS_HOSTNAME,
-  },
-
-  // databaseProviders: databaseProviders,
   databaseConfig,
+  openAIConfig,
 });
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: process.env.DB_TYPE === 'mariadb' ? 'mariadb' : 'mysql',
   host: 'localhost',
   // process.env.REACT_APP_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT),
+  port: 3306,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
@@ -48,3 +36,5 @@ export const databaseConfig: TypeOrmModuleOptions = {
   // entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
   // entities: [Photo, Reservation,],
 };
+
+export const openAIConfig = process.env.OPEN_API_KEY;
