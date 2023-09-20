@@ -20,7 +20,7 @@ import { DatabaseModule } from './domain/database/database.module';
     InterviewModule,
     QnaRoomModule,
     AuthModule,
-    PromptModule
+    PromptModule,
   ],
   controllers: [PromptController],
   providers: [PromptService],
