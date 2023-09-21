@@ -13,7 +13,12 @@ export class QuestionBankRepository extends Repository<QuestionBank> {
   }
 
   async createQuestions(createQuestionBankReponse: CreateQuestionBankResponse) {
-    const result = await this.insert(createQuestionBankReponse);
+    try {
+      const result = await this.insert(createQuestionBankReponse);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getQuestions(count: number) {

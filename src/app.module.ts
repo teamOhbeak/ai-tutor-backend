@@ -14,6 +14,7 @@ import { QnaModule } from './domain/qna/qna.module';
 import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { QnaRoomService } from './domain/qna-room/service/qna-room.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
 
 @Module({
@@ -38,6 +39,7 @@ import { UserModule } from './domain/user/user.module';
     QuestionBankService,
     QuestionBankRepository,
     QnaRoomService,
+    BatchService,
   ],
 })
 export class AppModule {}
