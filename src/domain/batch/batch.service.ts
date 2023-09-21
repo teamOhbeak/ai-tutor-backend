@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule';
 import { PromptService } from '../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
-import { StackType } from '../../interface/interview/response/my-interview-detail.response';
 import { QuestionStatus } from '../questionsBank/entity/questionBank.entity';
 import data from './fake-data';
+import { StackType } from '../interview/entity/stack-type.enum';
 
 @Injectable()
 export class BatchService {

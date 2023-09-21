@@ -4,7 +4,6 @@ import { MyInterviewResponse } from 'src/interface/interview/response/my-intervi
 import {
   InterviewStatus,
   MyInterviewDetailResponse,
-  StackType,
 } from 'src/interface/interview/response/my-interview-detail.response';
 import {
   QuestionResponse,
@@ -12,11 +11,20 @@ import {
   QuestionType,
 } from 'src/interface/interview/response/question.response';
 import { AnswerResponse } from 'src/interface/interview/response/answer.response';
-import { In } from 'typeorm';
+import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
+import { InterviewEntity } from '../entity/interview.entity';
+import { StackType } from '../entity/stack-type.enum';
 
 @Injectable()
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
+
+  async createInterview(
+    userId: number,
+    dto: CreateInterviewRequest,
+  ): Promise<InterviewEntity> {
+    throw new Error('Method not implemented.');
+  }
 
   async getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {
     return Promise.resolve([
