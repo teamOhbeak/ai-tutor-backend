@@ -26,6 +26,7 @@ import { UserResponse } from './response/user.response';
 import { InterviewService } from '@/domain/interview/service/interview.service';
 import { MyInterviewResponse } from './response/my-interview.response';
 import { AuthService } from '@/domain/auth/service/auth.service';
+import { CreateInterviewResponse } from './response/create-interview.response';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -42,22 +43,12 @@ export class InterviewController {
   })
   async createInterview(
     @Body() dto: CreateInterviewRequest,
-  ): Promise<MyInterviewDetailResponse> {
+  ): Promise<CreateInterviewResponse> {
+    
     const userId = await this.authService.getAuth().userId;
-    const interviewId = await this.interviewService.createInterview(
-      userId,
-      dto,
-    );
-
-    const user = new UserResponse();
-    user.userName = '이민규';
-    return new MyInterviewDetailResponse(
-      1,
-      InterviewStatus.COMPLETED,
-      '2023-09-01 13:00',
-      [],
-      user,
-    );
+    const interview = await this.interviewService
+      .createInterview(userId, dto);
+    return new CreateInterviewResponse(interview.id);
   }
 
   @Get()

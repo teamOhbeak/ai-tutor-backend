@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
 import { UserResponse } from './user.response';
-import { Stack } from '@/domain/interview/service/interview.model';
 import { StackType } from '@/domain/interview/entity/interview.entity';
 
 export enum InterviewStatus {
