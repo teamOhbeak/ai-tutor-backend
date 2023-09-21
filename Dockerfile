@@ -12,6 +12,8 @@ COPY package*.json ./
 # CMD echo ls -al 
 COPY ./ ./ 
 
+CMD [ "/bin/ls", "-l" ]
+
 RUN yarn \
     && yarn run build 
    

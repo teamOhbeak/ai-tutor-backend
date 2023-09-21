@@ -6,9 +6,11 @@ export const databaseProviders = [
     provide: 'DATA_SOURCE',
     inject: [ConfigService],
     useFactory: async (configService: ConfigService) => {
-      const dataSource = new DataSource(
-        configService.get<DataSourceOptions>('DB'),
-      );
+      console.log(`mode: ${process.env.MODE_ENV}`);
+      console.log(`host: ${process.env.DB_HOST}`);
+      const dataSourceOption = configService.get<DataSourceOptions>('DB');
+      console.log(`dataSourceOption: ${JSON.stringify(dataSourceOption)}`);
+      const dataSource = new DataSource(dataSourceOption);
       dataSource.initialize();
       return dataSource;
     },

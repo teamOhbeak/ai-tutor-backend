@@ -5,8 +5,8 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { InterviewEntity } from './interview.entity';
-import { QuestionBankEntity } from './questionBank.entity';
+import { InterviewEntity } from '../../interview/entity/interview.entity';
+import { QuestionBankEntity } from '../../interview/entity/questionBank.entity';
 
 @Entity('Interview_questions', { schema: 'test' })
 export class InterviewQuestionsEntity {

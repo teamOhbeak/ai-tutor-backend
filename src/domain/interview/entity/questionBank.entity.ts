@@ -1,5 +1,12 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { InterviewQuestionsEntity } from './interviewQuestions.entity';
+import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
+
+export enum status {
+  PENDING = 0,
+  APPROVED = 1,
+  DELETED = 2,
+}
+
 
 @Entity('question_bank', { schema: 'test' })
 export class QuestionBankEntity {

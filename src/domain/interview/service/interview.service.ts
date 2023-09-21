@@ -7,34 +7,26 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateInterviewInfo, Stack } from './interview.model';
 import { InterviewRepositoryImpl } from '../repository/interview.repository';
 import { PromptService } from '@/domain/prompt/service/prompt.service';
+import { QuestionBankRepository } from '@/domain/questionsBank/repository/questionsBank.repository';
 
 @Injectable()
 export class InterviewService implements IInterviewService {
   constructor(
-    private readonly repository: InterviewRepositoryImpl,
+    private readonly interviewRepository: InterviewRepositoryImpl,
+    private readonly questionBankRepository: QuestionBankRepository,
     private readonly openAi: PromptService,
   ) {}
 
   public async createInterview(
     requestModel: CreateInterviewInfo,
-  ): Promise<MyInterviewDetailResponse> {
-    // const repoResult = await this.repository.saveInterview(requestModel);
+  ): Promise<number> {
+    
+    const interviewId = await this.interviewRepository.saveInterview(requestModel);
 
-    const response = await this.openAi.aiTutorPrompt(
-      requestModel.stack,
-      requestModel.questionCount,
-    );
-    console.log(response);
-    return {
-      id: 1,
-      status: 'U',
-      stack: Stack.Java,
-      questionCount: 10,
-      maxWait: 3,
-      createdAt: '2023-09-01',
-      questions: response,
-      userId: 1,
-    };
+    const aiQuestions = await this.questionBankRepository.getQuestions(requestModel.questionCount);
+    console.log(aiQuestions);
+
+    return interviewId;
   }
 
   getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {

@@ -4,5 +4,5 @@ import {
 } from '@/domain/interview/service/interview.model';
 
 export interface InterviewRepository {
-  saveInterview(interviewInfo: CreateInterviewInfo): Promise<Interview>;
+  saveInterview(interviewInfo: CreateInterviewInfo): Promise<number>;
 }

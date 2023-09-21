@@ -28,12 +28,12 @@ export class InterviewController {
 
   @Post()
   @ApiCreatedResponse({
-    description: '인터뷰 생성',
+    description: '인터뷰 생성', // 입장한 면접 id
     type: MyInterviewDetailResponse,
   })
   async createInterview(
     @Body() request: CreateInterviewRequest,
-  ): Promise<MyInterviewDetailResponse> {
+  ): Promise<number> {
     // dto -> model
     const interviewInfoResult = createInterview(request);
     return await this.interviewService.createInterview(interviewInfoResult);

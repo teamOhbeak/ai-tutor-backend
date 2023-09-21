@@ -20,7 +20,7 @@ export class InterviewRepositoryImpl
     super(InterviewEntity, dataSource.createEntityManager());
   }
 
-  async saveInterview(interviewInfo: CreateInterviewInfo): Promise<Interview> {
+  async saveInterview(interviewInfo: CreateInterviewInfo): Promise<number> {
     // model -> entity
     const entity = this.create({
       userId: 1,
@@ -31,13 +31,7 @@ export class InterviewRepositoryImpl
 
     try {
       await this.save(entity);
-      return {
-        userId: entity.userId,
-        stack: entity.stack as Stack,
-        questionCount: entity.questionCount,
-        maxWait: entity.maxWait,
-        createdAt: entity.createdAt,
-      };
+      return entity.id;
     } catch (error) {
       throw new Error('Method not implemented.');
     }

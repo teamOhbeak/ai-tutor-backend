@@ -1,17 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { IInterviewService } from './interview.service.interface';
 import { MyInterviewResponse } from 'src/interface/interview/response/my-interview.response';
-import { MyInterviewDetailResponse } from 'src/interface/interview/response/my-interview-detail.response';
-import { QuestionResponse } from 'src/interface/interview/response/question.response';
+import {
+  InterviewStatus,
+  MyInterviewDetailResponse
+} from 'src/interface/interview/response/my-interview-detail.response';
+import {
+  QuestionResponse,
+  QuestionStatus,
+  QuestionType,
+} from 'src/interface/interview/response/question.response';
 import { AnswerResponse } from 'src/interface/interview/response/answer.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
+import { CreateInterviewInfo } from './interview.model';
+import { StackType } from '../entity/interview.entity';
 
 @Injectable()
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
   createInterview(
-    request: CreateInterviewRequest,
-  ): Promise<MyInterviewDetailResponse> {
+    requestModel: CreateInterviewInfo,
+  ): Promise<number> {
     throw new Error('Method not implemented.');
   }
 
@@ -30,8 +39,8 @@ export class FakeInterviewService implements IInterviewService {
   ): Promise<MyInterviewDetailResponse> {
     return Promise.resolve(<MyInterviewDetailResponse>{
       id: interviewId,
-      status: 'COMPLETED',
-      stack: 'Nest.js',
+      status: InterviewStatus.COMPLETED,
+      stack: StackType.Java,
       questionCount: 2,
       maxWait: 1,
       createdAt: '2023-09-19 13:00',
@@ -43,9 +52,9 @@ export class FakeInterviewService implements IInterviewService {
   questions = <QuestionResponse[]>[
     {
       id: 1,
-      type: 'MAIN_QUESTION',
+      type: QuestionType.MAIN_QUESTION,
       question: 'Nest.js에서 DI는 어떻게 하는 겁니까?',
-      status: 'COMPLETED',
+      status: QuestionStatus.COMPLETED,
       startedAt: '2023-09-19 13:01',
       finishedAt: '2023-09-19 13:02',
       answer: <AnswerResponse>{
@@ -56,9 +65,9 @@ export class FakeInterviewService implements IInterviewService {
       followUpQuestions: [
         {
           id: 3,
-          type: 'FOLLOWUP_QUESTION',
+          type: QuestionType.FOLLOWUP_QUESTION,
           question: '어떻게 잘해야 하나요?',
-          status: 'COMPLETED',
+          status: QuestionStatus.WAITING,
           startedAt: '2023-09-19 13:02',
           finishedAt: '2023-09-19 13:02',
           answer: <AnswerResponse>{
@@ -71,9 +80,9 @@ export class FakeInterviewService implements IInterviewService {
     },
     {
       id: 2,
-      type: 'MAIN_QUESTION',
+      type: QuestionType.MAIN_QUESTION,
       question: 'Nest.js에서 Module은 어떤 역할을 합니까?',
-      status: 'COMPLETED',
+      status: QuestionStatus.COMPLETED,
       startedAt: '2023-09-19 13:03',
       finishedAt: '2023-09-19 13:03',
       answer: null, // Pass한 경우 -> 별도의 속성 추가해도 괜찮을듯

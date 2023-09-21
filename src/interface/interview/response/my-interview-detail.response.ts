@@ -1,16 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
 import { Stack } from '@/domain/interview/service/interview.model';
+import { StackType } from '@/domain/interview/entity/interview.entity';
+
+export enum InterviewStatus {
+  COMPLETED = 0,
+  IN_PROGRESS = 1,
+  WAITING = 2,
+  CANCELED = 3,
+  EXPIRED = 4,
+  NO_SHOW = 5,
+}
 
 export class MyInterviewDetailResponse {
   @ApiProperty({ example: 1000 })
   id: number;
 
-  @ApiProperty({ example: 'U' })
-  status: string;
+  @ApiProperty({ example: 'U', enum: InterviewStatus })
+  status: InterviewStatus;
 
   @ApiProperty({ example: 'java' })
-  stack: Stack;
+  stack: StackType;
 
   @ApiProperty()
   questionCount: number;
@@ -29,7 +39,7 @@ export class MyInterviewDetailResponse {
 
   constructor(
     id: number,
-    status: string,
+    status: InterviewStatus,
     createdAt: string,
     questions: QuestionResponse[],
   ) {

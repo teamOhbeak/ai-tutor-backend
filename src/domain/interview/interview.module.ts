@@ -8,10 +8,11 @@ import { InterviewService } from './service/interview.service';
 import { InterviewRepositoryImpl } from './repository/interview.repository';
 import { InterviewController } from '@/interface/interview/interview.controller';
 import { PromptService } from '../prompt/service/prompt.service';
+import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [InterviewService, InterviewRepositoryImpl, PromptService],
+  providers: [InterviewService, InterviewRepositoryImpl, PromptService, QuestionBankRepository],
 })
 export class InterviewModule {}

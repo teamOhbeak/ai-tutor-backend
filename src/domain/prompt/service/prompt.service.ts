@@ -1,4 +1,3 @@
-import { Stack } from '@/domain/interview/service/interview.model';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
@@ -7,40 +6,99 @@ import OpenAI from 'openai';
 export class PromptService {
   constructor(private readonly configService: ConfigService) {}
 
-  async aiTutorPrompt(stack: Stack, questionCount: number) {
-    // const prompt = `나는 ${stack} 개발자이고, 지원자야. 너는 AI면접관이야. ${stack}관련된 대답을 내가 할건데,
-    // 내 대답이 틀리거나 부족하다면 그거에 대한 옳고 그름과 평가를 얘기해주고, 그 다음에 이어서 관련된 꼬리질문을 해줘.
-    // 나의 대답은 'Java는 싱글스레드 환경입니다'. A : `;
-
-    const prompt = `\n
-    Q: Google 입사 수준의 Java 인터뷰 질문 생성해줘.
-    - 기술 스택: ${stack}
-    - 검증하고 싶은 내용: [CS, 사용법]
-    - 질문 수: ${questionCount}개
-    - outputType: json array, 질문 키: question:`;
-
+  async getInterviewQuestionsPrompt() {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
 
-    const promptResult = await openAI.chat.completions.create({
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
+    interface InterviewQuestion {
+      JAVA: string[];
+      JAVASCRIPT: string[];
+      KOTLIN: string[];
+      REACTJS: string[];
+      NEXTJS: string[];
+      NESTJS: string[];
+      SPRINT: string[];
+      CS: string[];
+    }
+
+    const schema = {
+      type: 'object',
+      properties: {
+        JAVA: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
         },
-      ],
-      model: 'gpt-3.5-turbo',
-    });
+        JAVASCRIPT: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        KOTLIN: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        REACTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        NEXTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        NESTJS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        SPRING: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        CS: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+      },
+    };
 
-    const message = promptResult.choices[0].message;
-    // console.log(JSON.stringify(message, null, 2));
-    // content 문자열을 JSON 객체로 파싱합니다.
-    const contentObj = JSON.parse(message.content);
+    const promptResult = await openAI.chat.completions
+      .create({
+        messages: [
+          { role: 'system', content: '당신은 면접질문 어시스턴스 입니다.' },
+          {
+            role: 'user',
+            content: '각 해당하는 항목에 대한 면접 질문을 10개씩 return 해줘',
+          },
+        ],
+        functions: [{ name: 'set_questions', parameters: schema }],
+        function_call: { name: 'set_questions' },
+        model: 'gpt-3.5-turbo-0613',
+      })
+      .then((competions) => {
+        const generateText =
+          competions.choices[0].message.function_call.arguments;
 
-    // question 속성의 값을 추출하여 문자열 배열로 만듭니다.
-    const questions = contentObj.map((item) => item.question);
+        return JSON.parse(generateText);
+      })
+      .catch((err) => {
+        return { error: err.message };
+      });
 
-    return questions;
+    return promptResult;
   }
 }
