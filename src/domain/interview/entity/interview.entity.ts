@@ -8,10 +8,8 @@ import {
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { IsEnum } from 'class-validator';
-import { StackType } from './stack-type.enum';
 import { InterviewStatus } from './insterview-status.enum';
-
-
+import { StackType } from './stack-type.enum';
 
 @Entity('interview')
 export class InterviewEntity {
@@ -62,6 +60,7 @@ export class InterviewEntity {
     interview.maxWait = dto.maxWait;
     interview.questions = [];
     interview.userId = userId;
+    interview.status = InterviewStatus.WAIT;
     return interview;
   }
 }
