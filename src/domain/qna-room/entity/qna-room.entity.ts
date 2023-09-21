@@ -35,12 +35,13 @@ export class QnaRoom {
   updatedAt: Date;
 
   @OneToMany(() => Qna, (qna) => qna.qnaRoom)
-  qnas: Qna[];
+  qnas: Qna[] = [];
 
   constructor(createQnaRoomRequest?: CreateQnaRoomRequest) {
     if (createQnaRoomRequest) {
       this.title = createQnaRoomRequest.title;
       this.deleted = false;
+      this.qnas = [];
     }
   }
 

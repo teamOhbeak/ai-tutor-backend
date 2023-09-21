@@ -13,7 +13,7 @@ export class QnaRoomService {
   constructor(
     // private readonly _configService: ConfigService,
     private qnaRoomRepository: QnaRoomRepository,
-  ) {}
+  ) { }
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
@@ -35,13 +35,6 @@ export class QnaRoomService {
     const found = await this.qnaRoomRepository.findQnaRoomById(id);
     const qnaRoomDetailResponse = found.toDetailResponse();
     return qnaRoomDetailResponse;
-    // return Promise.resolve(<QnaRoomDetailResponse>{
-    //   id: 1,
-    //   title: 'this is title.',
-    //   username: 'user1',
-    //   createdAt: '2023-09-01 13:00',
-    //   qnas: [],
-    // });
   }
 
   async deleteQnaRoom(id: number): Promise<QnaRoomDeleteResponse> {

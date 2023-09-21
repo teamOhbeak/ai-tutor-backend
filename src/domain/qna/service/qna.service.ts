@@ -1,27 +1,64 @@
+import { QnaRoomRepository } from '@/domain/qna-room/repository/qna-room-repository';
 import { CreateQuestionRequest } from '@/interface/qna-room-qna/request/create-question-request';
 import { QnaResponse } from '@/interface/qna-room-qna/response/qna-response';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Qna } from '../entity/qna.entity';
+import { QnaRepository } from '../repository/qna-repository';
 
 @Injectable()
 export class QnaService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private qnaRepository: QnaRepository,
+    private qnaRoomRepository: QnaRoomRepository,
+  ) { }
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
     console.log(qnaRequest);
-    return Promise.resolve(<QnaResponse>{
-      id: 1,
-      sequence: 1,
-      question: 'this is question.',
-      answer: 'this is answer.',
-    });
+    const qnaRoom = await this.qnaRoomRepository.findQnaRoomById(
+      qnaRequest.roomId,
+    );
+    console.log('qnaRoomId: ' + qnaRoom.id);
+
+    const qnaList = qnaRoom.qnas;
+    let sequence: number;
+
+    if (qnaRoom == null) {
+      throw new Error('qnaRoom is null');
+    }
+
+    if (!qnaList || qnaList.length === 0) {
+      sequence = 0;
+    } else {
+      const maxSequence = Math.max(...qnaList.map((qna) => qna.sequence));
+      sequence = maxSequence + 1;
+    }
+
+    /* TODO: answer
+    아래 answer에 프롬프트 응답값 받아야함. 
+    */
+    const answer = 'this is answer.';
+    const qna = new Qna(qnaRequest.question, answer, sequence, qnaRoom);
+    const savedQna = await this.qnaRepository.save(qna);
+    qnaRoom.qnas.push(savedQna);
+    return savedQna.toResponse();
+    // return Promise.resolve(<QnaResponse>{
+    //   id: 1,
+    //   sequence: 1,
+    //   question: 'this is question.',
+    //   answer: 'this is answer.',
+    // });
   }
 
   async getQnas(roomId: number): Promise<QnaResponse[]> {
     console.log('roomId: ' + roomId);
-    return Promise.resolve([
-      new QnaResponse(1, 1, 'this is question1.', 'this is answer1.'),
-      new QnaResponse(2, 2, 'this is question2.', 'this is answer2.'),
-    ]);
+    const qnaRoom = await this.qnaRoomRepository.findQnaRoomById(roomId);
+    if (qnaRoom! == null && qnaRoom!.qnas.length === 0) {
+      const qnaList = qnaRoom.qnas;
+      const qnaRoomResponses = qnaList.map((qna) => qna.toResponse());
+      return qnaRoomResponses;
+    } else {
+      return Promise.resolve([]);
+    }
   }
 }

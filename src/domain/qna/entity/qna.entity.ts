@@ -39,6 +39,19 @@ export class Qna {
   @ManyToOne((type) => QnaRoom)
   qnaRoom!: QnaRoom;
 
+  constructor(
+    question: string,
+    answer: string,
+    sequence: number,
+    qnaRoom: QnaRoom,
+  ) {
+    this.question = question;
+    this.answer = answer;
+    this.sequence = sequence;
+    this.qnaRoom = qnaRoom;
+
+  }
+
   toResponse(): QnaResponse {
     return new QnaResponse(this.id, this.sequence, this.question, this.answer);
   }
