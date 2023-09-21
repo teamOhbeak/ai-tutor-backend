@@ -1,12 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
-  
-  async getAuth(): Promise<any> {
+  getAuth(): any {
     return {
       userId: 1,
-      userName: '이민규'
-    }
+      userName: '이민규',
+    };
   }
 }

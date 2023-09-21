@@ -1,13 +1,10 @@
-import { DateTime } from 'luxon';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  OneToMany,
+  CreateDateColumn,
 } from 'typeorm';
-import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
+import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 
 export enum StackType {
   'Java',
@@ -21,34 +18,54 @@ export enum StackType {
   'CS',
 }
 
-@Entity('interview', { schema: 'test' })
+@Entity('interview')
 export class InterviewEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('bigint', { name: 'user_id', nullable: false })
+  @Column()
   userId: number;
 
-  @Column('enum', {
-    name: 'stack',
-    enum: StackType,
-    nullable: true,
-  })
-  stack: StackType;
+  // @Column({
+  //   name: 'stack',
+  //   enum: StackType
+  // })
+  // stack: StackType;
 
-  @Column('int', { name: 'questionCount', nullable: false })
-  questionCount: number;
+  // @Column({
+  //   type: 'int'
+  // })
+  // questionCount: number;
 
-  @Column('int', { name: 'maxWait', nullable: false })
-  maxWait: number;
+  // @Column({
+  //   type: 'int'
+  // })
+  // maxWait: number;
 
-  @Column('datetime', {
-    name: 'created_at',
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
-  })
-  createdAt: Date;
+  // @CreateDateColumn({
+  //   name: 'created_at'
+  // })
+  // createdAt: Date;
 
-  @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-  questions: InterviewQuestionsEntity[];
+  // @Column({
+  //   name: 'finished_at'
+  // })
+  // finishedAt?: Date;
+
+  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  // questions: InterviewQuestionsEntity[];
+
+
+  constructor() {
+
+  }
+
+  static CreateInterview(userId: number, dto: CreateInterviewRequest) {
+    const interview = new InterviewEntity();
+    // interview.stack = dto.stack;
+    // interview.questionCount = dto.questionCount;
+    // interview.questions = [];
+    interview.userId = userId;
+    return interview;
+  }
 }

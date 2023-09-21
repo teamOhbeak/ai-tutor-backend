@@ -12,15 +12,17 @@ import {
 } from 'src/interface/interview/response/question.response';
 import { AnswerResponse } from 'src/interface/interview/response/answer.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { CreateInterviewInfo } from './interview.model';
-import { StackType } from '../entity/interview.entity';
+import { InterviewEntity, StackType } from '../entity/interview.entity';
 
 @Injectable()
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
-  createInterview(requestModel: CreateInterviewInfo): Promise<number> {
+
+  async createInterview(userId: number, dto: CreateInterviewRequest)
+  : Promise<InterviewEntity>
+  {
     throw new Error('Method not implemented.');
-  }
+  };
 
   async getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {
     return Promise.resolve([

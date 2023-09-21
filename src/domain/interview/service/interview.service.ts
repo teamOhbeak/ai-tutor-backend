@@ -2,15 +2,14 @@ import { MyInterviewDetailResponse } from '@/interface/interview/response/my-int
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 import { IInterviewService } from './interview.service.interface';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { InterviewRepository } from '../repository/interview.repository.interface';
-import { Inject, Injectable } from '@nestjs/common';
-import { CreateInterviewInfo, Stack } from './interview.model';
+import { Injectable } from '@nestjs/common';
 import { InterviewRepositoryImpl } from '../repository/interview.repository';
 import { PromptService } from '@/domain/prompt/service/prompt.service';
 import { QuestionBankRepository } from '@/domain/questionsBank/repository/questionsBank.repository';
+import { InterviewEntity } from '../entity/interview.entity';
 
 @Injectable()
-export class InterviewService implements IInterviewService {
+export class InterviewService {
   constructor(
     private readonly interviewRepository: InterviewRepositoryImpl,
     private readonly questionBankRepository: QuestionBankRepository,
@@ -18,18 +17,12 @@ export class InterviewService implements IInterviewService {
   ) {}
 
   public async createInterview(
-    requestModel: CreateInterviewInfo,
-  ): Promise<number> {
-    const interviewId = await this.interviewRepository.saveInterview(
-      requestModel,
-    );
-
-    const aiQuestions = await this.questionBankRepository.getQuestions(
-      requestModel.questionCount,
-    );
-    console.log(aiQuestions);
-
-    return interviewId;
+    userId: number, 
+    dto: CreateInterviewRequest,
+  ): Promise<InterviewEntity> {
+    
+    const interview = InterviewEntity.CreateInterview(userId, dto);
+    return await this.interviewRepository.save(interview);
   }
 
   getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {

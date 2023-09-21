@@ -25,11 +25,14 @@ import { FakeInterviewService } from 'src/domain/interview/service/fake-intervie
 import { UserResponse } from './response/user.response';
 import { InterviewService } from '@/domain/interview/service/interview.service';
 import { MyInterviewResponse } from './response/my-interview.response';
+import { AuthService } from '@/domain/auth/service/auth.service';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
 export class InterviewController {
-  constructor(private readonly interviewService: InterviewService) {}
+  constructor(
+    private readonly authService: AuthService, 
+    private readonly interviewService: InterviewService) {}
 
   @Post()
   @ApiCreatedResponse({
@@ -39,6 +42,10 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
+    
+    const userId = await this.authService.getAuth().userId;
+    const interviewId = await this.interviewService.createInterview(userId, dto);
+
     const user = new UserResponse();
     user.userName = '이민규';
     return new MyInterviewDetailResponse(

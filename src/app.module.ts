@@ -26,10 +26,9 @@ import { UserModule } from './domain/user/user.module';
     QnaRoomModule,
     AuthModule,
     PromptModule,
-    DatabaseModule,
     QuestionBankModule,
   ],
-  controllers: [PromptController],
-  providers: [PromptService, QuestionBankService, QuestionBankRepository],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

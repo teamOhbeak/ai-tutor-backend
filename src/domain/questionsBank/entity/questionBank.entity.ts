@@ -1,5 +1,5 @@
 import { StackType } from '@/domain/interview/entity/interview.entity';
-import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+// import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum QuestionStatus {
@@ -34,6 +34,6 @@ export class QuestionBank {
   @Column({ type: 'timestamp' })
   updatedAt: Date;
 
-  @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-  questions: InterviewQuestionsEntity[];
+//   @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+//   questions: InterviewQuestionsEntity[];
 }
