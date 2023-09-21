@@ -53,7 +53,5 @@ export class Qna {
     this.answer = answer;
     this.sequence = sequence;
     this.qnaRoom = qnaRoom;
-
   }
-
 }

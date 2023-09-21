@@ -11,7 +11,7 @@ export class QnaService {
   constructor(
     private qnaRepository: QnaRepository,
     private qnaRoomRepository: QnaRoomRepository,
-  ) { }
+  ) {}
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
     console.log(qnaRequest);

@@ -11,4 +11,4 @@ import { QnaRoomRepository } from '../qna-room/repository/qna-room-repository';
   providers: [QnaService, QnaRepository, QnaRoomRepository],
   exports: [QnaRepository],
 })
-export class QnaModule { }
+export class QnaModule {}
