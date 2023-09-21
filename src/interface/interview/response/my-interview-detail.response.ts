@@ -56,7 +56,7 @@ export class MyInterviewDetailResponse {
     status: InterviewStatus,
     createdAt: string,
     questions: QuestionResponse[],
-    user: UserResponse
+    user: UserResponse,
   ) {
     this.id = id;
     this.status = status;

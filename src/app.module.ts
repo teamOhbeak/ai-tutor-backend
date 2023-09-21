@@ -31,6 +31,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     QnaModule,
   ],
   controllers: [PromptController],
-  providers: [PromptService, QuestionBankService, QuestionBankRepository, QnaRoomService],
+  providers: [
+    PromptService,
+    QuestionBankService,
+    QuestionBankRepository,
+    QnaRoomService,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

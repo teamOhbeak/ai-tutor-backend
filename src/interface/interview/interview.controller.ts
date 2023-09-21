@@ -48,7 +48,7 @@ export class InterviewController {
       InterviewStatus.COMPLETED,
       '2023-09-01 13:00',
       [],
-      user  
+      user,
     );
   }
 
