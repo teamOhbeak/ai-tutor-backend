@@ -11,6 +11,17 @@ export class PromptService {
       apiKey: this.configService.get<string>('openAIConfig'),
     });
 
+    interface InterviewQuestion {
+      JAVA: string[];
+      JAVASCRIPT: string[];
+      KOTLIN: string[];
+      REACTJS: string[];
+      NEXTJS: string[];
+      NESTJS: string[];
+      SPRINT: string[];
+      CS: string[];
+    }
+
     const schema = {
       type: 'object',
       properties: {

@@ -1,12 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { PromptService } from '../../domain/prompt/service/prompt.service';
-import { QuestionsBankService } from '../../domain/questionsBank/service/questionsBank.service';
+import { QuestionBankService } from '../../domain/questionsBank/service/questionBank.service';
 
 @Controller('promptTest')
 export class PromptController {
   constructor(
     private readonly promptService: PromptService,
-    private readonly questionsBankService: QuestionsBankService,
+    private readonly questionsBankService: QuestionBankService,
   ) {}
 
   @Get()

@@ -8,8 +8,9 @@ import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { AuthModule } from './domain/auth/auth.module';
 import { PromptModule } from './domain/prompt/prompt.module';
 import { DatabaseModule } from './domain/database/database.module';
-import { QuestionsBankModule } from './domain/questionsBank/questionsBank.module';
-import { QuestionsBankService } from './domain/questionsBank/service/questionsBank.service';
+import { QuestionBankModule } from './domain/questionsBank/questionBank.module';
+import { QuestionBankService } from './domain/questionsBank/service/questionBank.service';
+import { QuestionBankRepository } from './domain/questionsBank/repository/questionsBank.repository';
 
 @Module({
   imports: [
@@ -23,9 +24,9 @@ import { QuestionsBankService } from './domain/questionsBank/service/questionsBa
     AuthModule,
     PromptModule,
     DatabaseModule,
-    QuestionsBankModule,
+    QuestionBankModule,
   ],
   controllers: [PromptController],
-  providers: [PromptService, QuestionsBankService],
+  providers: [PromptService, QuestionBankService, QuestionBankRepository],
 })
 export class AppModule {}
