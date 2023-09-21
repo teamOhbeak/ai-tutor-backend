@@ -40,6 +40,7 @@ export class FakeInterviewService implements IInterviewService {
       createdAt: '2023-09-19 13:00',
       questions: this.questions,
       userId: userId,
+      userName: '이민규'
     });
   }
 
