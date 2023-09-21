@@ -11,10 +11,9 @@ export class UserRepository extends Repository<UserEntity> {
     super(UserEntity, dataSource.createEntityManager());
   }
 
-  async findUserById(userId: number)
-  : Promise<UserEntity> {
+  async findUserById(userId: number): Promise<UserEntity> {
     return await this.findOneBy({
-      id: userId
+      id: userId,
     });
   }
 }
