@@ -23,21 +23,6 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     networks:
       - backend
-
-  # front:
-  #   depends_on:
-  #     - backend
-  #   build: ./vet_react
-  #   # dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   env_file: ./.env
-  #   ports:
-  #     - $REACT_APP_LOCAL_PORT:$REACT_APP_DOCKER_PORT
-  #   volumes:
-  #     - ./vet_react:/app
-  #   networks:
-  #     - backend
-
   backend:
     depends_on:
       - mysql 
@@ -49,7 +34,7 @@ services:
     ports:
       - $BACKEND_PORT:$BACKEND_PORT
     environment:
-      - DB_HOST=mysql
+      - DB_HOST=$DB_HOST
       - DB_USER=$DB_USERNAME
       - DB_PASSWORD=$DB_PASSWORD
       - DB_NAME=$DB_DATABASE
