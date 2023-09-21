@@ -1,12 +1,12 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { QuestionBankEntity } from '../interface/questionBank/entity/questionBank.entity';
 
 export default () => ({
   DB: {
     type: 'mysql',
     host: process.env.MODE_ENV === 'local' ? 'mysql' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
-    username: process.env.MODE_ENV === 'local' ? 'root' : process.env.DB_USERNAME,
+    username:
+      process.env.MODE_ENV === 'local' ? 'root' : process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [
@@ -38,7 +38,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
   autoLoadEntities: true,
   logging: true,
   // entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
-  entities: [QuestionBankEntity],
+  // entities: [QuestionBankEntity],
 };
 
 export const openAIConfig = process.env.OPEN_API_KEY;
