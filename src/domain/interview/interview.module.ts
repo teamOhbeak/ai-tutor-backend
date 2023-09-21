@@ -13,6 +13,11 @@ import { QuestionBankRepository } from '../questionsBank/repository/questionsBan
 @Module({
   imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
-  providers: [InterviewService, InterviewRepositoryImpl, PromptService, QuestionBankRepository],
+  providers: [
+    InterviewService,
+    InterviewRepositoryImpl,
+    PromptService,
+    QuestionBankRepository,
+  ],
 })
 export class InterviewModule {}

@@ -3,9 +3,7 @@ import { MyInterviewResponse } from 'src/interface/interview/response/my-intervi
 import { CreateInterviewInfo } from './interview.model';
 
 export interface IInterviewService {
-  createInterview(
-    requestModel: CreateInterviewInfo,
-  ): Promise<number>;
+  createInterview(requestModel: CreateInterviewInfo): Promise<number>;
   getMyInterviews(userId: number): Promise<MyInterviewResponse[]>;
   getMyInterviewDetail(
     userId: number,

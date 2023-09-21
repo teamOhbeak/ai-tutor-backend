@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
 
-
 export enum StackType {
   'Java',
   'JavaScript',

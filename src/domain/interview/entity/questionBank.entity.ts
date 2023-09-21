@@ -7,7 +7,6 @@ export enum status {
   DELETED = 2,
 }
 
-
 @Entity('question_bank', { schema: 'test' })
 export class QuestionBankEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

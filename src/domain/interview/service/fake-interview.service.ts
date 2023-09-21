@@ -3,7 +3,7 @@ import { IInterviewService } from './interview.service.interface';
 import { MyInterviewResponse } from 'src/interface/interview/response/my-interview.response';
 import {
   InterviewStatus,
-  MyInterviewDetailResponse
+  MyInterviewDetailResponse,
 } from 'src/interface/interview/response/my-interview-detail.response';
 import {
   QuestionResponse,
@@ -18,9 +18,7 @@ import { StackType } from '../entity/interview.entity';
 @Injectable()
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
-  createInterview(
-    requestModel: CreateInterviewInfo,
-  ): Promise<number> {
+  createInterview(requestModel: CreateInterviewInfo): Promise<number> {
     throw new Error('Method not implemented.');
   }
 

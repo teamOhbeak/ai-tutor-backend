@@ -20,10 +20,13 @@ export class InterviewService implements IInterviewService {
   public async createInterview(
     requestModel: CreateInterviewInfo,
   ): Promise<number> {
-    
-    const interviewId = await this.interviewRepository.saveInterview(requestModel);
+    const interviewId = await this.interviewRepository.saveInterview(
+      requestModel,
+    );
 
-    const aiQuestions = await this.questionBankRepository.getQuestions(requestModel.questionCount);
+    const aiQuestions = await this.questionBankRepository.getQuestions(
+      requestModel.questionCount,
+    );
     console.log(aiQuestions);
 
     return interviewId;

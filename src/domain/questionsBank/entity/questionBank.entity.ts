@@ -7,7 +7,6 @@ export enum QuestionStatus {
   DELETED = 2,
 }
 
-
 @Entity()
 export class QuestionBank {
   @PrimaryGeneratedColumn()
