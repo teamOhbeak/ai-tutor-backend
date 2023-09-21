@@ -15,8 +15,9 @@ export const databaseProviders = [
       const dataSource = new DataSource(dataSourceOption);
 
       dataSource.initialize()
-      .then((source: DataSource) => {})
-      .catch(() => {});
+        .then((source: DataSource) => { })
+        .catch(() => { });
+      return dataSource;
     },
   },
 ];

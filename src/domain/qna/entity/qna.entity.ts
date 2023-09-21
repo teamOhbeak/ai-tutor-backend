@@ -7,7 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { QnaRoom } from '../qna-room/entity/qna-room.entity';
+import { QnaRoom } from '../../qna-room/entity/qna-room.entity';
+import { QnaResponse } from '@/interface/qna-room-qna/response/qna-response';
 
 @Entity()
 export class Qna {
@@ -18,7 +19,7 @@ export class Qna {
   question?: string;
 
   @Column()
-  answer?: boolean;
+  answer?: string;
 
   @Column()
   sequence: number;
@@ -37,4 +38,8 @@ export class Qna {
 
   @ManyToOne((type) => QnaRoom)
   qnaRoom!: QnaRoom;
+
+  toResponse(): QnaResponse {
+    return new QnaResponse(this.id, this.sequence, this.question, this.answer);
+  }
 }

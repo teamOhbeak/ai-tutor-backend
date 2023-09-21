@@ -1,4 +1,4 @@
-import { Qna } from '@/domain/qna/qna.entity';
+import { Qna } from '@/domain/qna/entity/qna.entity';
 import { CreateQnaRoomRequest } from '@/interface/qna-room/request/create-qna-room.request';
 import { QnaRoomDeleteResponse } from '@/interface/qna-room/response/qna-room-delete.response';
 import { QnaRoomDetailResponse } from '@/interface/qna-room/response/qna-room-detail.response';
@@ -13,7 +13,7 @@ export class QnaRoomService {
   constructor(
     // private readonly _configService: ConfigService,
     private qnaRoomRepository: QnaRoomRepository,
-  ) {}
+  ) { }
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
@@ -22,30 +22,26 @@ export class QnaRoomService {
     const qnaRoom = await new QnaRoom(qnaRoomRequest);
     const result = await this.qnaRoomRepository.createQnaRoom(qnaRoom);
     const response = await result.toResponse();
-    // return Promise.resolve(<QnaRoomResponse>{
-    //   id: 1,
-    //   title: 'this is title.',
-    //   username: 'user1',
-    //   createdAt: '2023-09-01 13:00',
-    // });
     return response;
   }
 
   async getQnaRooms(): Promise<QnaRoomResponse[]> {
     const result = await this.qnaRoomRepository.findQnaRoomNotDeleted();
     const qnaRoomResponses = result.map((qnaRoom) => qnaRoom.toResponse());
-    // add logic for filtering rooms which is deleted
     return qnaRoomResponses;
   }
 
-  async getQnaRoomDetail(): Promise<QnaRoomDetailResponse> {
-    return Promise.resolve(<QnaRoomDetailResponse>{
-      id: 1,
-      title: 'this is title.',
-      username: 'user1',
-      createdAt: '2023-09-01 13:00',
-      qnas: [],
-    });
+  async getQnaRoomDetail(id: number): Promise<QnaRoomDetailResponse> {
+    const found = await this.qnaRoomRepository.findQnaRoomById(id);
+    const qnaRoomDetailResponse = found.toDetailResponse();
+    return qnaRoomDetailResponse;
+    // return Promise.resolve(<QnaRoomDetailResponse>{
+    //   id: 1,
+    //   title: 'this is title.',
+    //   username: 'user1',
+    //   createdAt: '2023-09-01 13:00',
+    //   qnas: [],
+    // });
   }
 
   async deleteQnaRoom(id: number): Promise<QnaRoomDeleteResponse> {
