@@ -1,12 +1,19 @@
+import { IsEnum, IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-
+import { Stack } from '@/domain/interview/service/interview.model';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 export class CreateInterviewRequest {
-  @ApiProperty()
-  stack: string;
+  @ApiProperty({ enum: Stack, example: Stack.Java })
+  @IsEnum(Stack) // Stack 열거형 값 중 하나여야 합니다.
+  stack: StackType;
 
-  @ApiProperty()
+  @ApiProperty({ example: 10 })
+  @IsInt()
+  @IsNotEmpty()
   questionCount: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 3 })
+  @IsInt()
+  @IsNotEmpty()
   maxWait: number;
 }

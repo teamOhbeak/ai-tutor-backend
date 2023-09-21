@@ -1,56 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule';
 import { PromptService } from '../../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../repository/questionsBank.repository';
-import {
-  CreateQuestionBankResponse,
-  QuestionBankResponse,
-} from '../../../interface/questionBank/response/questionBank.response';
+import { QuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
-import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
 import { QuestionStatus } from '../entity/questionBank.entity';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 
 @Injectable()
 export class FakeQuestionBankService implements IFakeQuestionBankService {
-  constructor(
-    private readonly promptService: PromptService,
-    private readonly questionBankRepository: QuestionBankRepository,
-  ) {}
+  constructor() {}
 
   async getFakeQuestions(count: number): Promise<QuestionBankResponse[]> {
     return Promise.resolve([
-      new QuestionBankResponse(
-        1,
-        StackType.JAVA,
-        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
-        QuestionStatus.APPROVED,
-        new Date('2023-09-12 15:01'),
-        null,
-      ),
-      new QuestionBankResponse(
-        1,
-        StackType.JAVA,
-        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
-        QuestionStatus.APPROVED,
-        new Date('2023-09-12 15:01'),
-        null,
-      ),
-      new QuestionBankResponse(
-        1,
-        StackType.JAVA,
-        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
-        QuestionStatus.APPROVED,
-        new Date('2023-09-12 15:01'),
-        null,
-      ),
-      new QuestionBankResponse(
-        1,
-        StackType.JAVA,
-        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
-        QuestionStatus.APPROVED,
-        new Date('2023-09-12 15:01'),
-        null,
-      ),
       new QuestionBankResponse(
         1,
         StackType.JAVA,

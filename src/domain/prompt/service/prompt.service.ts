@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
-import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
-import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 
 export interface InterviewQuestion {
   JAVA: string[];
