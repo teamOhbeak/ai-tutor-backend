@@ -14,10 +14,10 @@ export class PromptController {
     private readonly batchService: BatchService,
   ) {}
 
-  @Get()
+  @Get('saveLocalDataToDB')
   @ApiResponse({
     status: 200,
-    description: '로컬에서 가져온 GPT 결과값을 DB에 저장합니다.',
+    description: '로컬에서 가져온 GPT 결과값을 DB에 저장합니다.(GPT 사용안함)',
     type: String,
   })
   async getTestPrompt() {
