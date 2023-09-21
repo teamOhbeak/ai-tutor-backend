@@ -39,6 +39,8 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
+
+    
     const user = new UserResponse();
     user.userName = '이민규';
     return new MyInterviewDetailResponse(
@@ -69,19 +71,19 @@ export class InterviewController {
     return this.interviewService.getMyInterviewDetail(userId, interviewId);
   }
 
-  // @Put(':interviewId') // 면접 진행 중 나가기
-  // @ApiNoContentResponse({ description: '면접 취소' })
-  // async cancelInterview(
-  //   @Param('interviewId') interviewId: number,
-  // ): Promise<any> {
-  //   return null;
-  // }
+  @Put(':interviewId') // 면접 진행 중 나가기
+  @ApiNoContentResponse({ description: '면접 취소' })
+  async cancelInterview(
+    @Param('interviewId') interviewId: number,
+  ): Promise<any> {
+    return null;
+  }
 
-  // @Delete(':interviewId') // 면접 목록 리스트 삭제
-  // @ApiOkResponse({ description: '면접 삭제' })
-  // async deleteInterview(
-  //   @Param('interviewId') interviewId: number,
-  // ): Promise<any> {
-  //   return null;
-  // }
+  @Delete(':interviewId') // 면접 목록 리스트 삭제
+  @ApiOkResponse({ description: '면접 삭제' })
+  async deleteInterview(
+    @Param('interviewId') interviewId: number,
+  ): Promise<any> {
+    return null;
+  }
 }

@@ -9,12 +9,12 @@ export class CreateInterviewRequest {
   stack: StackType;
 
   @ApiProperty({ example: 10 })
-  @IsInt() // 정수여야 합니다.
-  @IsNotEmpty() // 비어 있으면 안됩니다.
+  @IsInt()
+  @IsNotEmpty()
   questionCount: number;
 
   @ApiProperty({ example: 3 })
-  @IsInt() // 정수여야 합니다.
-  @IsNotEmpty() // 비어 있으면 안됩니다.
+  @IsInt() 
+  @IsNotEmpty()
   maxWait: number;
 }
