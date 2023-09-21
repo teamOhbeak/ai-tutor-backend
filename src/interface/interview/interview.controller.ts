@@ -15,7 +15,10 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { InterviewStatus, MyInterviewDetailResponse } from './response/my-interview-detail.response';
+import {
+  InterviewStatus,
+  MyInterviewDetailResponse,
+} from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
 import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
 import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
