@@ -13,7 +13,7 @@ export class QnaRoomService {
   constructor(
     // private readonly _configService: ConfigService,
     private qnaRoomRepository: QnaRoomRepository,
-  ) { }
+  ) {}
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
