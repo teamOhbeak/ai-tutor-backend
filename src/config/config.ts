@@ -13,7 +13,7 @@ export default () => ({
     database: process.env.DB_DATABASE,
     entities: [
       __dirname + '/../domain/**/entity/*.entity.{js,ts}',
-      __dirname + '/../domain/**/*.entity.{js,ts}'
+      __dirname + '/../domain/**/*.entity.{js,ts}',
     ],
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
