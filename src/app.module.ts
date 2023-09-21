@@ -11,6 +11,7 @@ import { DatabaseModule } from './domain/database/database.module';
 import { QuestionBankModule } from './domain/questionsBank/questionBank.module';
 import { QuestionBankService } from './domain/questionsBank/service/questionBank.service';
 import { QuestionBankRepository } from './domain/questionsBank/repository/questionsBank.repository';
+import { UserModule } from './domain/user/user.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { QuestionBankRepository } from './domain/questionsBank/repository/questi
       isGlobal: true,
       load: [config],
     }),
+    UserModule,
     InterviewModule,
     QnaRoomModule,
     AuthModule,
