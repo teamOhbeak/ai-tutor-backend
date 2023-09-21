@@ -17,10 +17,9 @@ export class InterviewService {
   ) {}
 
   public async createInterview(
-    userId: number, 
+    userId: number,
     dto: CreateInterviewRequest,
   ): Promise<InterviewEntity> {
-    
     const interview = InterviewEntity.CreateInterview(userId, dto);
     return await this.interviewRepository.save(interview);
   }

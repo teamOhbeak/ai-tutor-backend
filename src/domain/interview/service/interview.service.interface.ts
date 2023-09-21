@@ -4,7 +4,10 @@ import { CreateInterviewRequest } from '@/interface/interview/request/create-int
 import { InterviewEntity } from '../entity/interview.entity';
 
 export interface IInterviewService {
-  createInterview(userId: number, dto: CreateInterviewRequest): Promise<InterviewEntity>;
+  createInterview(
+    userId: number,
+    dto: CreateInterviewRequest,
+  ): Promise<InterviewEntity>;
   getMyInterviews(userId: number): Promise<MyInterviewResponse[]>;
   getMyInterviewDetail(
     userId: number,

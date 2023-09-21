@@ -18,11 +18,12 @@ import { InterviewEntity, StackType } from '../entity/interview.entity';
 export class FakeInterviewService implements IInterviewService {
   constructor() {}
 
-  async createInterview(userId: number, dto: CreateInterviewRequest)
-  : Promise<InterviewEntity>
-  {
+  async createInterview(
+    userId: number,
+    dto: CreateInterviewRequest,
+  ): Promise<InterviewEntity> {
     throw new Error('Method not implemented.');
-  };
+  }
 
   async getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {
     return Promise.resolve([
@@ -40,7 +41,7 @@ export class FakeInterviewService implements IInterviewService {
     return Promise.resolve(<MyInterviewDetailResponse>{
       id: interviewId,
       status: InterviewStatus.COMPLETED,
-      stack: StackType.Java,
+      stack: StackType.JAVA,
       questionCount: 2,
       maxWait: 1,
       createdAt: '2023-09-19 13:00',

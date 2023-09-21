@@ -12,7 +12,7 @@ import { AuthService } from '../auth/service/auth.service';
   imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
   providers: [
-    AuthService, 
+    AuthService,
     InterviewService,
     InterviewRepositoryImpl,
     PromptService,

@@ -1,4 +1,5 @@
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
+import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export default () => ({
@@ -11,7 +12,7 @@ export default () => ({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [
-      InterviewEntity
+      InterviewEntity, InterviewQuestionsEntity
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
       // __dirname + '/../domain/**/*.entity.{js,ts}'
     ],

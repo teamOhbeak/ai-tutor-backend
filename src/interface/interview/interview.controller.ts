@@ -31,8 +31,9 @@ import { AuthService } from '@/domain/auth/service/auth.service';
 @ApiTags('InterviewController')
 export class InterviewController {
   constructor(
-    private readonly authService: AuthService, 
-    private readonly interviewService: InterviewService) {}
+    private readonly authService: AuthService,
+    private readonly interviewService: InterviewService,
+  ) {}
 
   @Post()
   @ApiCreatedResponse({
@@ -42,9 +43,11 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
-    
     const userId = await this.authService.getAuth().userId;
-    const interviewId = await this.interviewService.createInterview(userId, dto);
+    const interviewId = await this.interviewService.createInterview(
+      userId,
+      dto,
+    );
 
     const user = new UserResponse();
     user.userName = '이민규';

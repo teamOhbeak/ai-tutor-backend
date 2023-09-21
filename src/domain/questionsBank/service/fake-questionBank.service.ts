@@ -21,7 +21,7 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
     return Promise.resolve([
       new QuestionBankResponse(
         1,
-        StackType.Java,
+        StackType.JAVA,
         'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
         QuestionStatus.APPROVED,
         new Date('2023-09-12 15:01'),
