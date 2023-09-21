@@ -43,7 +43,7 @@ export class InterviewController {
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
   async getMyInterviews(): Promise<MyInterviewResponse[]> {
     const userId = 1;
-    await this.interviewService.getMyInterviews(userId)
+    await this.interviewService.getMyInterviews(userId);
     return this.interviewService.getMyInterviews(userId);
   }
 

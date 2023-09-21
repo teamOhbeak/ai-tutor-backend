@@ -1,11 +1,15 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { InterviewEntity } from "./interview.entity";
-import { QuestionBankEntity } from "./questionBank.entity";
-
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { InterviewEntity } from './interview.entity';
+import { QuestionBankEntity } from './questionBank.entity';
 
 @Entity('Interview_questions', { schema: 'test' })
 export class InterviewQuestionsEntity {
-
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
   id: number;
 

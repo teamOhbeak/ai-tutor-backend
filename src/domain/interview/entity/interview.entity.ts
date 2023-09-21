@@ -11,7 +11,6 @@ import { InterviewQuestionsEntity } from './interviewQuestions.entity';
 
 @Entity('interview', { schema: 'test' })
 export class InterviewEntity {
-  
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
   id: number;
 
