@@ -35,4 +35,11 @@ export class QnaRoomRepository extends Repository<QnaRoom> {
   async deleteQnaRoom(id: number): Promise<void> {
     await this.update({ id }, { deleted: true });
   }
+
+  async findQnaRoomWithQnas(roomId: number): Promise<QnaRoom | undefined> {
+    return this.findOne({
+      where: { id: roomId },
+      relations: ['qnas'],
+    });
+  }
 }
