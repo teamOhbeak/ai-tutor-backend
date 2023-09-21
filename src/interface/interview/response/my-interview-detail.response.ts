@@ -10,7 +10,7 @@ export enum InterviewStatus {
   NO_SHOW = 5,
 }
 
-export enum StacktType {
+export enum StackType {
   JAVA = 0,
   JAVASCRIPT = 1,
   KOTLIN = 2,
@@ -30,7 +30,7 @@ export class MyInterviewDetailResponse {
 
   // TODO: enum 선언되면 교체
   @ApiProperty({ example: 'java' })
-  stack: StacktType;
+  stack: StackType;
 
   @ApiProperty()
   questionCount: number;

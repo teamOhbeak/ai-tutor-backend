@@ -4,7 +4,7 @@ import { MyInterviewResponse } from 'src/interface/interview/response/my-intervi
 import {
   InterviewStatus,
   MyInterviewDetailResponse,
-  StacktType,
+  StackType,
 } from 'src/interface/interview/response/my-interview-detail.response';
 import {
   QuestionResponse,
@@ -34,7 +34,7 @@ export class FakeInterviewService implements IInterviewService {
     return Promise.resolve(<MyInterviewDetailResponse>{
       id: interviewId,
       status: InterviewStatus.COMPLETED,
-      stack: StacktType.JAVA,
+      stack: StackType.JAVA,
       questionCount: 2,
       maxWait: 1,
       createdAt: '2023-09-19 13:00',

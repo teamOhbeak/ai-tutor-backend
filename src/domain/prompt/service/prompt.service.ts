@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
+import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
+import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 
+export interface InterviewQuestion {
+  JAVA: string[];
+  JAVASCRIPT: string[];
+  KOTLIN: string[];
+  REACTJS: string[];
+  NEXTJS: string[];
+  NESTJS: string[];
+  SPRINT: string[];
+  CS: string[];
+}
 @Injectable()
 export class PromptService {
   constructor(private readonly configService: ConfigService) {}
 
-  async getInterviewQuestionsPrompt() {
+  async getInterviewQuestionsPrompt(): Promise<InterviewQuestion> {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
-
-    interface InterviewQuestion {
-      JAVA: string[];
-      JAVASCRIPT: string[];
-      KOTLIN: string[];
-      REACTJS: string[];
-      NEXTJS: string[];
-      NESTJS: string[];
-      SPRINT: string[];
-      CS: string[];
-    }
 
     const schema = {
       type: 'object',
@@ -71,6 +72,39 @@ export class PromptService {
           type: 'array',
           items: {
             type: 'string',
+          },
+        },
+      },
+    };
+
+    const schema2 = {
+      type: 'object',
+      properties: {
+        stack: {
+          items: {
+            type: 'string',
+            enum: [
+              'JAVA',
+              'JAVASCRIPT',
+              'KOTLIN',
+              'REACTJS',
+              'NEXTJS',
+              'NESTJS',
+              'SPRING',
+              'CS',
+            ],
+          },
+        },
+        question: {
+          items: {
+            type: 'string',
+          },
+        },
+        status: {
+          type: 'string',
+          items: {
+            type: 'number',
+            enum: ["'NOT_ANSWERED'", "'ANSWERED'"],
           },
         },
       },

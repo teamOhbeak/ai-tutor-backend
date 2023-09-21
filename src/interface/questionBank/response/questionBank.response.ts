@@ -1,5 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
-import { StacktType } from '../../interview/response/my-interview-detail.response';
+import { StackType } from '../../interview/response/my-interview-detail.response';
 import { QuestionStatus } from '../../../domain/questionsBank/entity/questionBank.entity';
 
 export class QuestionBankResponse {
@@ -7,7 +7,7 @@ export class QuestionBankResponse {
   id: number;
 
   @ApiProperty()
-  stack: StacktType;
+  stack: StackType;
 
   @ApiProperty()
   question: string;
@@ -23,7 +23,7 @@ export class QuestionBankResponse {
 
   constructor(
     id: number,
-    stack: StacktType,
+    stack: StackType,
     question: string,
     status: QuestionStatus,
     createdAt: Date,
