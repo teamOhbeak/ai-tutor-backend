@@ -37,23 +37,23 @@ export class InterviewEntity {
   stack: StackType;
 
   @Column({
-    type: 'int'
+    type: 'int',
   })
   questionCount: number;
 
   @Column({
-    type: 'int'
+    type: 'int',
   })
   maxWait: number;
 
   @CreateDateColumn({
-    name: 'created_at'
+    name: 'created_at',
   })
   createdAt: Date;
 
   @Column({
     name: 'finished_at',
-    nullable: true
+    nullable: true,
   })
   finishedAt?: Date;
 

@@ -8,13 +8,13 @@ export class InterviewQuestionsEntity {
 
   @Column({
     name: 'question_text',
-    type: 'text'
+    type: 'text',
   })
   questionText: string;
 
   @Column({
     name: 'sequence',
-    type: 'int'
+    type: 'int',
   })
   sequence: number;
 

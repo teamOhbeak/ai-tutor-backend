@@ -35,6 +35,6 @@ export class QuestionBank {
   @Column({ type: 'timestamp' })
   updatedAt: Date;
 
-    // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-    // questions: InterviewQuestionsEntity[];
+  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  // questions: InterviewQuestionsEntity[];
 }

@@ -12,7 +12,8 @@ export default () => ({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [
-      InterviewEntity, InterviewQuestionsEntity
+      InterviewEntity,
+      InterviewQuestionsEntity,
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
       // __dirname + '/../domain/**/*.entity.{js,ts}'
     ],
