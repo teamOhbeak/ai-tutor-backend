@@ -4,7 +4,7 @@ import { PromptService } from '../prompt/service/prompt.service';
 
 @Injectable()
 export class BatchService {
-  constructor(private readonly promptService: PromptService) { }
+  constructor(private readonly promptService: PromptService) {}
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async questionCollector() {

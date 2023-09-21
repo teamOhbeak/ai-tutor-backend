@@ -14,9 +14,10 @@ export const databaseProviders = [
       console.log(`dataSourceOption: ${JSON.stringify(dataSourceOption)}`);
       const dataSource = new DataSource(dataSourceOption);
 
-      dataSource.initialize()
-        .then((source: DataSource) => { })
-        .catch(() => { });
+      dataSource
+        .initialize()
+        .then((source: DataSource) => {})
+        .catch(() => {});
       return dataSource;
     },
   },
