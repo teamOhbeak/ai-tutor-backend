@@ -7,7 +7,7 @@ import {
   QuestionBankResponse,
 } from '../../../interface/questionBank/response/questionBank.response';
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
-import { StacktType } from '../../../interface/interview/response/my-interview-detail.response';
+import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
 import { QuestionStatus } from '../entity/questionBank.entity';
 
 @Injectable()
@@ -21,7 +21,39 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
     return Promise.resolve([
       new QuestionBankResponse(
         1,
-        StacktType.JAVA,
+        StackType.JAVA,
+        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
+        QuestionStatus.APPROVED,
+        new Date('2023-09-12 15:01'),
+        null,
+      ),
+      new QuestionBankResponse(
+        1,
+        StackType.JAVA,
+        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
+        QuestionStatus.APPROVED,
+        new Date('2023-09-12 15:01'),
+        null,
+      ),
+      new QuestionBankResponse(
+        1,
+        StackType.JAVA,
+        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
+        QuestionStatus.APPROVED,
+        new Date('2023-09-12 15:01'),
+        null,
+      ),
+      new QuestionBankResponse(
+        1,
+        StackType.JAVA,
+        'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
+        QuestionStatus.APPROVED,
+        new Date('2023-09-12 15:01'),
+        null,
+      ),
+      new QuestionBankResponse(
+        1,
+        StackType.JAVA,
         'JAVA에서는 멀티쓰레딩은 어떻게 해야할까요',
         QuestionStatus.APPROVED,
         new Date('2023-09-12 15:01'),
@@ -29,7 +61,7 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
       ),
       new QuestionBankResponse(
         2,
-        StacktType.NESTJS,
+        StackType.NESTJS,
         'Nest.js에서 DI는 어떻게 하는 겁니까?',
         QuestionStatus.PENDING,
         new Date('2023-09-19 13:01'),

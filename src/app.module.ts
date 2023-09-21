@@ -11,6 +11,7 @@ import { DatabaseModule } from './domain/database/database.module';
 import { QuestionBankModule } from './domain/questionsBank/questionBank.module';
 import { QuestionBankService } from './domain/questionsBank/service/questionBank.service';
 import { QuestionBankRepository } from './domain/questionsBank/repository/questionsBank.repository';
+import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
 
 @Module({
@@ -29,6 +30,11 @@ import { UserModule } from './domain/user/user.module';
     QuestionBankModule,
   ],
   controllers: [PromptController],
-  providers: [PromptService, QuestionBankService, QuestionBankRepository],
+  providers: [
+    PromptService,
+    QuestionBankService,
+    QuestionBankRepository,
+    BatchService,
+  ],
 })
 export class AppModule {}

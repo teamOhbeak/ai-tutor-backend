@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { StacktType } from '../../../interface/interview/response/my-interview-detail.response';
+import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
 
 export enum QuestionStatus {
   PENDING = 0,
@@ -15,7 +15,7 @@ export class QuestionBank {
   @Column({
     type: 'int',
   })
-  stack: StacktType;
+  stack: StackType;
 
   @Column({
     type: 'varchar',
@@ -30,6 +30,6 @@ export class QuestionBank {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', default: null })
   updatedAt: Date;
 }
