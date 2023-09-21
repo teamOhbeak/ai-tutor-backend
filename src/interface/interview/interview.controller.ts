@@ -39,8 +39,6 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
-
-    
     const user = new UserResponse();
     user.userName = '이민규';
     return new MyInterviewDetailResponse(
