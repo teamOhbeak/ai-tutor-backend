@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
+import { UserResponse } from './user.response';
 
 export enum InterviewStatus {
   COMPLETED = 0,
@@ -47,15 +48,20 @@ export class MyInterviewDetailResponse {
   @ApiProperty()
   userId: number;
 
+  @ApiProperty()
+  userName: string;
+
   constructor(
     id: number,
     status: InterviewStatus,
     createdAt: string,
     questions: QuestionResponse[],
+    user: UserResponse,
   ) {
     this.id = id;
     this.status = status;
     this.createdAt = createdAt;
     this.questions = questions;
+    this.userName = user.userName;
   }
 }

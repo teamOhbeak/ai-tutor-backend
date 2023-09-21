@@ -12,6 +12,7 @@ import { QuestionBankModule } from './domain/questionsBank/questionBank.module';
 import { QuestionBankService } from './domain/questionsBank/service/questionBank.service';
 import { QuestionBankRepository } from './domain/questionsBank/repository/questionsBank.repository';
 import { BatchService } from './domain/batch/batch.service';
+import { UserModule } from './domain/user/user.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BatchService } from './domain/batch/batch.service';
       isGlobal: true,
       load: [config],
     }),
+    UserModule,
     InterviewModule,
     QnaRoomModule,
     AuthModule,
