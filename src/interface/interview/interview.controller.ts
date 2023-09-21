@@ -23,6 +23,7 @@ import {
 import { CreateInterviewRequest } from './request/create-interview.request';
 import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
 import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
+import { UserResponse } from './response/user.response';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -40,11 +41,14 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<MyInterviewDetailResponse> {
+    const user = new UserResponse();
+    user.userName = '이민규';
     return new MyInterviewDetailResponse(
       1,
       InterviewStatus.COMPLETED,
       '2023-09-01 13:00',
       [],
+      user  
     );
   }
 
@@ -61,6 +65,8 @@ export class InterviewController {
     @Param('interviewId') interviewId: number,
   ): Promise<MyInterviewDetailResponse> {
     const userId = 1;
+    const user = new UserResponse();
+    user.userName = '이민규';
     return this.interviewService.getMyInterviewDetail(userId, interviewId);
   }
 
