@@ -41,6 +41,7 @@ export class QnaRoom {
     if (createQnaRoomRequest) {
       this.title = createQnaRoomRequest.title;
       this.deleted = false;
+      this.qnas = [];
     }
   }
 
