@@ -7,7 +7,7 @@ import { QnaService } from '@/domain/qna/service/qna.service';
 @Controller('api/qna-rooms/:roomId/questions')
 @ApiTags('QnaRoomQnaController')
 export class QnaController {
-  constructor(private readonly qnaService: QnaService) { }
+  constructor(private readonly qnaService: QnaService) {}
 
   @Post()
   @ApiCreatedResponse({
