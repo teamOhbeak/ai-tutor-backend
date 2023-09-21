@@ -17,9 +17,9 @@ import {
 } from '@nestjs/swagger';
 import { MyInterviewDetailResponse } from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
-import { createInterview } from '../../domain/interview/service/interview.model';
-import { InterviewService } from '@/domain/interview/service/interview.service';
-import { MyInterviewResponse } from './response/my-interview.response';
+import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
+import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
+import { UserResponse } from './response/user.response';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -32,11 +32,17 @@ export class InterviewController {
     type: MyInterviewDetailResponse,
   })
   async createInterview(
-    @Body() request: CreateInterviewRequest,
-  ): Promise<number> {
-    // dto -> model
-    const interviewInfoResult = createInterview(request);
-    return await this.interviewService.createInterview(interviewInfoResult);
+    @Body() dto: CreateInterviewRequest,
+  ): Promise<MyInterviewDetailResponse> {
+    const user = new UserResponse();
+    user.userName = '이민규';
+    return new MyInterviewDetailResponse(
+      1,
+      InterviewStatus.COMPLETED,
+      '2023-09-01 13:00',
+      [],
+      user,
+    );
   }
 
   @Get()
@@ -47,14 +53,16 @@ export class InterviewController {
     return this.interviewService.getMyInterviews(userId);
   }
 
-  // @Get(':interviewId')
-  // @ApiOkResponse({ description: '면접 상세', type: MyInterviewDetailResponse })
-  // async getMyInterviewDetail(
-  //   @Param('interviewId') interviewId: number,
-  // ): Promise<MyInterviewDetailResponse> {
-  //   const userId = 1;
-  //   return this.interviewService.getMyInterviewDetail(userId, interviewId);
-  // }
+  @Get(':interviewId')
+  @ApiOkResponse({ description: '면접 상세', type: MyInterviewDetailResponse })
+  async getMyInterviewDetail(
+    @Param('interviewId') interviewId: number,
+  ): Promise<MyInterviewDetailResponse> {
+    const userId = 1;
+    const user = new UserResponse();
+    user.userName = '이민규';
+    return this.interviewService.getMyInterviewDetail(userId, interviewId);
+  }
 
   // @Put(':interviewId') // 면접 진행 중 나가기
   // @ApiNoContentResponse({ description: '면접 취소' })

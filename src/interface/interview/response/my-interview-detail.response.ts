@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
+import { UserResponse } from './user.response';
 import { Stack } from '@/domain/interview/service/interview.model';
 import { StackType } from '@/domain/interview/entity/interview.entity';
 
@@ -37,15 +38,20 @@ export class MyInterviewDetailResponse {
   @ApiProperty()
   userId: number;
 
+  @ApiProperty()
+  userName: string;
+
   constructor(
     id: number,
     status: InterviewStatus,
     createdAt: string,
     questions: QuestionResponse[],
+    user: UserResponse,
   ) {
     this.id = id;
     this.status = status;
     this.createdAt = createdAt;
     this.questions = questions;
+    this.userName = user.userName;
   }
 }
