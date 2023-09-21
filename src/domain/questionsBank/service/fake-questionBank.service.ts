@@ -6,7 +6,6 @@ import { IFakeQuestionBankService } from './fake-questionBank.interface';
 import { QuestionStatus } from '../entity/questionBank.entity';
 import { StackType } from '@/domain/interview/entity/stack-type.enum';
 
-
 @Injectable()
 export class FakeQuestionBankService implements IFakeQuestionBankService {
   constructor() {}

@@ -12,7 +12,7 @@ import {
 } from 'src/interface/interview/response/question.response';
 import { AnswerResponse } from 'src/interface/interview/response/answer.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { InterviewEntity,  } from '../entity/interview.entity';
+import { InterviewEntity } from '../entity/interview.entity';
 import { StackType } from '../entity/stack-type.enum';
 
 @Injectable()
