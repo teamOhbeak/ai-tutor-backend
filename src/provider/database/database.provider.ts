@@ -16,7 +16,9 @@ export const databaseProviders = [
 
       dataSource
         .initialize()
-        .then((source: DataSource) => {})
+        .then((source: DataSource) => {
+          console.log(`db initialized!`);
+        })
         .catch(() => {});
       return dataSource;
     },
