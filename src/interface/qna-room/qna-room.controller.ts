@@ -9,7 +9,7 @@ import { QnaRoomDeleteResponse } from './response/qna-room-delete.response';
 @Controller('api/qna-rooms')
 @ApiTags('QnaRoomController')
 export class QnaRoomController {
-  constructor(private readonly qnaRoomService: QnaRoomService) {}
+  constructor(private readonly qnaRoomService: QnaRoomService) { }
 
   @Post()
   @ApiCreatedResponse({

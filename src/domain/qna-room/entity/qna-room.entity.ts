@@ -36,7 +36,7 @@ export class QnaRoom {
   @OneToMany(() => Qna, (qna) => qna.qnaRoom)
   qnas: Qna[];
 
-  constructor(createQnaRoomRequest?: CreateQnaRoomRequest) {
+  constructor(createQnaRoomRequest: CreateQnaRoomRequest) {
     if (createQnaRoomRequest) {
       this.title = createQnaRoomRequest.title;
       this.deleted = false;

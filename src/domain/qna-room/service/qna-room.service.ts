@@ -13,15 +13,15 @@ export class QnaRoomService {
   constructor(
     // private readonly _configService: ConfigService,
     private qnaRoomRepository: QnaRoomRepository,
-  ) {}
+  ) { }
 
   async createQnaRoom(
     qnaRoomRequest: CreateQnaRoomRequest,
   ): Promise<QnaRoomResponse> {
     console.log(qnaRoomRequest);
-    const qnaRoom = new QnaRoom(qnaRoomRequest);
+    const qnaRoom = await new QnaRoom(qnaRoomRequest);
     const result = await this.qnaRoomRepository.createQnaRoom(qnaRoom);
-    const response = result.toResponse();
+    const response = await result.toResponse();
     // return Promise.resolve(<QnaRoomResponse>{
     //   id: 1,
     //   title: 'this is title.',
