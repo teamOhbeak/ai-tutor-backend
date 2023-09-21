@@ -12,16 +12,7 @@ import { IsEnum } from 'class-validator';
 export enum StackType {
   JAVA = 'Java',
   JAVA_SCRIPT = 'JavaScript',
-
-  // 'Java',
-  // 'JavaScript',
-  // 'Kotlin',
-  // 'React',
-  // 'Next.js',
-  // 'Node.js',
-  // 'Nest.js',
-  // 'Spring',
-  // 'CS',
+  NESTJS = 'NestJS',
 }
 
 @Entity('interview')
