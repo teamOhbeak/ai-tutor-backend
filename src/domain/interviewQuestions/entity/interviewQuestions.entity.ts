@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { InterviewEntity } from '../../interview/entity/interview.entity';
-import { QuestionBankEntity } from '../../interview/entity/questionBank.entity';
+import { QuestionBank } from '@/domain/questionsBank/entity/questionBank.entity';
 
 @Entity('Interview_questions', { schema: 'test' })
 export class InterviewQuestionsEntity {
@@ -25,6 +25,6 @@ export class InterviewQuestionsEntity {
   @ManyToOne(() => InterviewEntity, (interview) => interview.questions)
   interview: InterviewEntity;
 
-  @ManyToOne(() => QuestionBankEntity, (questionBank) => questionBank.questions)
-  questionBank: QuestionBankEntity;
+  @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
+  questionBank: QuestionBank;
 }

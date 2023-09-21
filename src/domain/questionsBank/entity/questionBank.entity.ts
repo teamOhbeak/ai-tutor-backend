@@ -1,5 +1,6 @@
 import { StackType } from '@/domain/interview/entity/interview.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum QuestionStatus {
   PENDING = 0,
@@ -32,4 +33,7 @@ export class QuestionBank {
 
   @Column({ type: 'timestamp' })
   updatedAt: Date;
+
+  @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  questions: InterviewQuestionsEntity[];
 }
