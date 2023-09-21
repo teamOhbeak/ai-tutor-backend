@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule';
 import { PromptService } from '../../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../repository/questionsBank.repository';
 import {
-  CreateQuestionBankResponse,
   QuestionBankResponse,
 } from '../../../interface/questionBank/response/questionBank.response';
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
@@ -29,7 +27,7 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
       ),
       new QuestionBankResponse(
         2,
-        StackType['Nest.js'],
+        StackType.NESTJS,
         'Nest.js에서 DI는 어떻게 하는 겁니까?',
         QuestionStatus.PENDING,
         new Date('2023-09-19 13:01'),

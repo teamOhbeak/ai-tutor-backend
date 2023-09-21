@@ -5,6 +5,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export default () => ({
   DB: {
     type: 'mysql',
+    // host: process.env.MODE_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
     host: process.env.MODE_ENV === 'local' ? 'mysql' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username:
