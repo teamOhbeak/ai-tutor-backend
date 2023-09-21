@@ -4,7 +4,8 @@ import { QuestionBankRepository } from '../repository/questionsBank.repository';
 import { QuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
 import { QuestionStatus } from '../entity/questionBank.entity';
-import { StackType } from '@/domain/interview/entity/interview.entity';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
+
 
 @Injectable()
 export class FakeQuestionBankService implements IFakeQuestionBankService {

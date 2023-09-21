@@ -1,4 +1,5 @@
-import { StackType } from '@/domain/interview/entity/interview.entity';
+
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 

@@ -1,6 +1,6 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { QuestionStatus } from '../../../domain/questionsBank/entity/questionBank.entity';
-import { StackType } from '@/domain/interview/entity/interview.entity';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 
 export class QuestionBankResponse {
   @ApiProperty()

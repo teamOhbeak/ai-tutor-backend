@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
 import { UserResponse } from './user.response';
-import { StackType } from '@/domain/interview/entity/interview.entity';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 
 export enum InterviewStatus {
   COMPLETED = 0,

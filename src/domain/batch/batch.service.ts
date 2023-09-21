@@ -4,7 +4,7 @@ import { PromptService } from '../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
 import { QuestionStatus } from '../questionsBank/entity/questionBank.entity';
 import data from './fake-data';
-import { StackType } from '../interview/entity/interview.entity';
+import { StackType } from '../interview/entity/stack-type.enum';
 
 @Injectable()
 export class BatchService {

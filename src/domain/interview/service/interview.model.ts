@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { CreateInterviewRequest } from '../../../interface/interview/request/create-interview.request';
-import { StackType } from '../entity/interview.entity';
+import { StackType } from '../entity/stack-type.enum';
 
 // Request Dto -> model
 export type CreateInterviewInfo = {
