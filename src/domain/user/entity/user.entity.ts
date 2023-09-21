@@ -1,6 +1,6 @@
-import { Type } from "class-transformer";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { UserStatus } from "./user-status";
+import { Type } from 'class-transformer';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { UserStatus } from './user-status';
 
 @Entity('user')
 export class UserEntity {
@@ -12,10 +12,10 @@ export class UserEntity {
 
   @Column()
   password: string;
- 
+
   @Column({
     type: 'enum',
-    enum: UserStatus
+    enum: UserStatus,
   })
   status: UserStatus;
 }
