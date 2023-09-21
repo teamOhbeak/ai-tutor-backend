@@ -8,12 +8,10 @@ import {
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { IsEnum } from 'class-validator';
+import { StackType } from './stack-type.enum';
+import { InterviewStatus } from './insterview-status.enum';
 
-export enum StackType {
-  JAVA = 'Java',
-  JAVA_SCRIPT = 'JavaScript',
-  NESTJS = 'NestJS',
-}
+
 
 @Entity('interview')
 export class InterviewEntity {
@@ -36,6 +34,10 @@ export class InterviewEntity {
     type: 'int',
   })
   maxWait: number;
+
+  @Column()
+  @IsEnum(InterviewStatus)
+  status: InterviewStatus;
 
   @CreateDateColumn({
     name: 'created_at',

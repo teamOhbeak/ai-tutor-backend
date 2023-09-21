@@ -44,10 +44,8 @@ export class InterviewController {
   async createInterview(
     @Body() dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
-    
     const userId = await this.authService.getAuth().userId;
-    const interview = await this.interviewService
-      .createInterview(userId, dto);
+    const interview = await this.interviewService.createInterview(userId, dto);
     return new CreateInterviewResponse(interview.id);
   }
 
