@@ -14,6 +14,7 @@ import { QnaModule } from './domain/qna/qna.module';
 import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { QnaRoomService } from './domain/qna-room/service/qna-room.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './domain/user/user.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       isGlobal: true,
       load: [config],
     }),
+    UserModule,
     InterviewModule,
     QnaRoomModule,
     AuthModule,
