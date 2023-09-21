@@ -1,14 +1,10 @@
 import { Module } from '@nestjs/common';
-import { QnaRoomQnaController } from 'src/interface/qna-room-qna/qna-room-qna.controller';
-import { QnaRoomController } from 'src/interface/qna-room/qna-room.controller';
 import { UserService } from './service/user.service';
 import { UserRepository } from './repository/user.repository';
+import { DatabaseModule } from '../database/database.module';
 @Module({
-  imports: [],
+  imports: [DatabaseModule],
   controllers: [],
-  providers: [
-    UserService, 
-    UserRepository,
-  ],
+  providers: [UserService, UserRepository],
 })
 export class UserModule {}
