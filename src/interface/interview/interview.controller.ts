@@ -19,6 +19,7 @@ import { MyInterviewDetailResponse } from './response/my-interview-detail.respon
 import { CreateInterviewRequest } from './request/create-interview.request';
 import { createInterview } from '../../domain/interview/service/interview.model';
 import { InterviewService } from '@/domain/interview/service/interview.service';
+import { MyInterviewResponse } from './response/my-interview.response';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -38,12 +39,13 @@ export class InterviewController {
     return await this.interviewService.createInterview(interviewInfoResult);
   }
 
-  // @Get()
-  // @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
-  // async getMyInterviews(): Promise<MyInterviewResponse[]> {
-  //   const userId = 1;
-  //   return this.interviewService.getMyInterviews(userId);
-  // }
+  @Get()
+  @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
+  async getMyInterviews(): Promise<MyInterviewResponse[]> {
+    const userId = 1;
+    await this.interviewService.getMyInterviews(userId)
+    return this.interviewService.getMyInterviews(userId);
+  }
 
   // @Get(':interviewId')
   // @ApiOkResponse({ description: '면접 상세', type: MyInterviewDetailResponse })
