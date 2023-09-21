@@ -1,8 +1,5 @@
-
-
 export class allQuestionResponse {
+  questionId: number;
 
-  questionId: number
-
-  questionText: string
+  questionText: string;
 }

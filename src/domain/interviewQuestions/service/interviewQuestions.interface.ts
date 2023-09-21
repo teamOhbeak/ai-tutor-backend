@@ -1,7 +1,8 @@
-import { allQuestionResponse } from "@/interface/interview-qna/response/allQuestion.response";
+import { allQuestionResponse } from '@/interface/interview-qna/response/allQuestion.response';
 
-
-
-export interface InterviewQuestionsService{
-  getQuestions(interviewId: number, stack: string):Promise< allQuestionResponse[]>;
+export interface InterviewQuestionsService {
+  getQuestions(
+    interviewId: number,
+    stack: string,
+  ): Promise<allQuestionResponse[]>;
 }

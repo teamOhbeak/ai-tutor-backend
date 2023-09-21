@@ -9,6 +9,6 @@ import { InterviewQuestionsModule } from '../interviewQuestions/interviewQuestio
 @Module({
   imports: [DatabaseModule],
   controllers: [InterviewController],
-    providers: [FakeInterviewService],
+  providers: [FakeInterviewService],
 })
 export class InterviewModule {}
