@@ -19,7 +19,9 @@ export class InterviewEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    name: 'user_id'
+  })
   userId: number;
 
   @Column()
@@ -47,6 +49,7 @@ export class InterviewEntity {
 
   @Column({
     name: 'finished_at',
+    type: 'timestamp',
     nullable: true,
   })
   finishedAt?: Date;
