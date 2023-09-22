@@ -4,11 +4,11 @@ import { InterviewQuestionService } from '@/domain/interview-question/service/in
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { IFakeQuestionBankService } from '@/domain/questionsBank/service/fake-questionBank.interface';
 import { FakeQuestionBankService } from '@/domain/questionsBank/service/fake-questionBank.service';
-import { InterviewQuestionUtil } from '../utils/interview-question.util';
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
 import { InterviewUtil } from '../utils/interview.util';
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
+import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 
 @Injectable()
 export class InterviewFacade {
@@ -43,7 +43,7 @@ export class InterviewFacade {
         interviewQuestions,
       );
 
-    return InterviewQuestionUtil.toCreateInterviewResponse(interviewRoom);
+    return InterviewUtil.toCreateInterviewResponse(interviewRoom);
   }
 
   async getMyCompletedInterviews(
@@ -56,13 +56,10 @@ export class InterviewFacade {
   }
 
   async getMyInterviewDetail(
-    userId: number,
-    interviewId: number,
+    userId: number, 
+    interviewId: number
   ): Promise<MyInterviewDetailResponse> {
-    const interview = await this.interviewService.findInterview(
-      userId,
-      interviewId,
-    );
+    const interview = await this.interviewService.findInterview(userId, interviewId);
     return InterviewUtil.toInterviewDetailResponse(interview);
   }
 }
