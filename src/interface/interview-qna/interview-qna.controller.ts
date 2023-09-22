@@ -42,7 +42,8 @@ export class InterviewQnaController {
   @Post(':questionId/answer')
   // @ApiCreatedResponse()
   @ApiOkResponse({
-    description: '대답하고 꼬리질문 받기, 대답할때 해당 대답이 메인 질문인지 꼬리 질문인지 요청 request필요',
+    description:
+      '대답하고 꼬리질문 받기, 대답할때 해당 대답이 메인 질문인지 꼬리 질문인지 요청 request필요',
     type: [followUpQuestionResponse],
   })
   async submitAnswer(
