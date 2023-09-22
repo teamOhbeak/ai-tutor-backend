@@ -11,7 +11,7 @@ import {
 import { Qna } from '@/domain/qna/entity/qna.entity';
 import { QnaRoomDetailResponse } from '@/interface/qna-room/response/qna-room-detail.response';
 
-@Entity('qna_room')
+@Entity({ name: 'qna_room', schema: 'test' })
 export class QnaRoom {
   @PrimaryGeneratedColumn()
   id: number;

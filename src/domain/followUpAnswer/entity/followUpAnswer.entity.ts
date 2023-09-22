@@ -5,14 +5,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ name: 'interview_answer', schema: 'test' })
-export class InterviewAnswer {
+@Entity({ name: 'follow_up_answer', schema: 'test' })
+export class FollowUpAnswer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,7 +17,7 @@ export class InterviewAnswer {
   answer: string;
 
   @Column()
-  interviewQuestionId: number;
+  followUpQuestionId: number;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -28,12 +25,8 @@ export class InterviewAnswer {
   })
   createdAt: Date;
 
-  // @ManyToOne(() => InterviewQuestionsEntity, (interviewQuestionId) => interviewQuestionId)
-  // @JoinColumn({name: 'interviewQuestionId'})
-  // interviewQuestionId: InterviewQuestion
-
   constructor(answer: string, questionId: number) {
     this.answer = answer;
-    this.interviewQuestionId = questionId;
+    this.followUpQuestionId = questionId;
   }
 }

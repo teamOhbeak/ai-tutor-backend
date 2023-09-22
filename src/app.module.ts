@@ -13,9 +13,11 @@ import { QuestionBankRepository } from './domain/questionsBank/repository/questi
 import { QnaModule } from './domain/qna/qna.module';
 import { QnaRoomModule } from './domain/qna-room/qna-room.module';
 import { QnaRoomService } from './domain/qna-room/service/qna-room.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
+import { InterviewQuestionsModule } from './domain/interviewQuestions/interviewQuestions.module';
+import { InterviewAnswerModule } from './domain/interviewAnswer/interviewAnswer.module';
+import { FollowUpQuestionsModule } from './domain/followUpQuestions/followUpQuestions.module';
 
 @Module({
   imports: [
@@ -27,6 +29,9 @@ import { UserModule } from './domain/user/user.module';
     DatabaseModule,
     UserModule,
     InterviewModule,
+    InterviewQuestionsModule,
+    InterviewAnswerModule,
+    FollowUpQuestionsModule,
     QnaRoomModule,
     AuthModule,
     PromptModule,
