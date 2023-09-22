@@ -42,28 +42,33 @@ export class InterviewQuestionsServiceImpl
     try {
       const gptResponse = await this.promptService.submitAnswer(answer);
 
-      const interviewAnswer = new InterviewAnswer(answer, questionId);
+      // const interviewAnswer = new InterviewAnswer(answer, questionId);
 
-      await this.interviewAnswersRepository.save(
-        this.interviewAnswersRepository.create(interviewAnswer),
-      );
+      // await this.interviewAnswersRepository.save(
+      //   this.interviewAnswersRepository.create(interviewAnswer),
+      // );
 
-      const checkSequence =
-        await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
+      // const checkSequence =
+      //   await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      const followUpQuestions = new FollowUpQuestions(
-        gptResponse,
-        checkSequence,
-        questionId,
-      );
-      const follow_up_questions = await this.followUpQuestionsRepository.save(
-        this.followUpQuestionsRepository.create(followUpQuestions),
-      );
+      // const followUpQuestions = new FollowUpQuestions(
+      //   gptResponse,
+      //   checkSequence,
+      //   questionId,
+      // );
+      // const follow_up_questions = await this.followUpQuestionsRepository.save(
+      //   this.followUpQuestionsRepository.create(followUpQuestions),
+      // );
 
       // DTO를 사용하여 데이터를 래핑합니다.
-      const responseDto: followUpQuestionResponse = {
+      // const responseDto: followUpQuestionResponse = {
+      //   questionId: questionId,
+      //   followUpQuestionsSequence: follow_up_questions.sequence,
+      //   followUpQuestion: gptResponse,
+      // };
+            const responseDto: followUpQuestionResponse = {
         questionId: questionId,
-        followUpQuestionsSequence: follow_up_questions.sequence,
+        followUpQuestionsSequence: 1,
         followUpQuestion: gptResponse,
       };
 
