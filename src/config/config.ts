@@ -34,7 +34,7 @@ export default () => ({
       InterviewAnswer,
       InterviewQuestionsEntity,
       FollowUpQuestions,
-      FollowUpAnswer,
+      // FollowUpAnswer,
       // 'dist/**/**/**/**.entity{.ts,.js}',
       // __dirname + '/../domain/**/*.entity.{js,ts}',
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
