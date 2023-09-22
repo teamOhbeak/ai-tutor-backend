@@ -9,6 +9,7 @@ import { InterviewQuestionsServiceImpl } from '@/domain/interviewQuestions/servi
 import { InterviewQuestionDTO } from './response/InterviewQuestionDTO';
 import { AnswerRequestDto } from './request/answer.resquest';
 import { followUpQuestionResponse } from './response/followUpQuestionResponse';
+import { AnswerResponse } from './response/answer.response';
 
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
@@ -39,23 +40,21 @@ export class InterviewQnaController {
     return await this.interviewQuestionsService.getQuestions(interviewId);
   }
 
-  @Post(':questionId/answer')
+  @Post('answer')
   // @ApiCreatedResponse()
   @ApiOkResponse({
     description:
-      '대답하고 꼬리질문 받기, 대답할때 해당 대답이 메인 질문인지 꼬리 질문인지 요청 request필요',
-    type: [followUpQuestionResponse],
+      '대답 제출, 대답할때 해당 대답이 메인 질문인지 꼬리 질문인지 요청 request필요',
+    type: [AnswerResponse],
   })
   async submitAnswer(
     @Param() params,
-    @Param('questionId') questionId: number,
     @Body() answerRequestDto: AnswerRequestDto,
-  ): Promise<followUpQuestionResponse> {
+  ): Promise<AnswerResponse> {
     // questionId와 answerRequestDto를 서비스로 전달
     const interviewId = params.interviewId;
     return await this.interviewQuestionsService.submitAnswer(
       interviewId,
-      questionId,
       answerRequestDto,
     );
   }

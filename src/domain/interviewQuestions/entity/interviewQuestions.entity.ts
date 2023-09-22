@@ -28,17 +28,11 @@ export class InterviewQuestionsEntity {
   })
   sequence: number;
 
-  @Column()
+  @Column({ default: false })
   status: boolean;
-
-  @ManyToOne((type) => InterviewEntity, (interview) => interview)
-  interview!: InterviewEntity;
 
   @Column()
   interviewId: number;
-
-  @UpdateDateColumn({ type: 'int', nullable: true })
-  intervieAnswerId: number | null;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -46,16 +40,9 @@ export class InterviewQuestionsEntity {
   })
   createdAt: Date;
 
-  // @ManyToOne(() => InterviewEntity, (interviewId) => interviewId)
-  // @JoinColumn({name: 'interviewId'})
-  // interviewId: InterviewEntity
-
-  // @OneToMany(
-  //   () => FollowUpQuestions,
-  //   (followUpQuestions) => followUpQuestions.interviewQuestions,
-  // )
-  // followUpQuestions: FollowUpQuestions[];
-
-  // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
-  // questionBank: QuestionBank;
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }

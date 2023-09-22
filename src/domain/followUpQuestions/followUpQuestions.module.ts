@@ -11,6 +11,7 @@ import { PromptService } from '../prompt/service/prompt.service';
 import { InterviewQuestionsServiceImpl } from '../interviewQuestions/service/interviewQuestions.service';
 import { InterviewQuestionsRepositoryImpl } from '../interviewQuestions/repository/interviewQuestion.repository';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
+import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/followUpAnswer.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -26,6 +27,7 @@ import { InterviewAnswersRepository } from '../interviewAnswer/repository/interv
     InterviewAnswersRepository,
     FollowUpQuestionsRepositoryImpl,
     PromptService,
+    FollowUpAnswerRepositoryImpl,
   ],
 })
 export class FollowUpQuestionsModule {}

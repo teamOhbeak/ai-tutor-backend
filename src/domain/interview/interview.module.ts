@@ -12,6 +12,7 @@ import { InterviewQuestionsModule } from '../interviewQuestions/interviewQuestio
 import { InterviewQuestionsRepositoryImpl } from '../interviewQuestions/repository/interviewQuestion.repository';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
 import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository/followUpQuestions.repository';
+import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/followUpAnswer.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -26,6 +27,7 @@ import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
+    FollowUpAnswerRepositoryImpl,
   ],
 })
 export class InterviewModule {}

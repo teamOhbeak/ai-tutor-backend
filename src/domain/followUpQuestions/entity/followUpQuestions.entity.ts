@@ -6,6 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'follow_up_questions', schema: 'test' })
@@ -30,6 +31,8 @@ export class FollowUpQuestions {
   //   (interviewQuestions) => interviewQuestions.id,
   // )
   // interviewQuestions: InterviewQuestionsEntity;
+  @UpdateDateColumn({ default: false })
+  status: boolean;
 
   @Column()
   interviewQuestionsId: number;
@@ -39,6 +42,12 @@ export class FollowUpQuestions {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   createdAt: Date;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 
   constructor(
     questionText: string,

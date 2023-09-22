@@ -26,4 +26,30 @@ export class FollowUpQuestionsRepositoryImpl
       throw new Error('Failed to get questions.');
     }
   }
+
+  async updateQuestionStatus(followUpQuestionId: number): Promise<FollowUpQuestions| null> {
+    try {
+      // 업데이트된 엔티티를 조회
+      const updatedEntity = await this.findOne({
+        where: { id: followUpQuestionId },
+      });
+  
+      if (updatedEntity) {
+        // 엔티티 업데이트
+        updatedEntity.status = true;
+        updatedEntity.updatedAt = new Date();
+  
+        // 엔티티 저장
+        await this.save(updatedEntity);
+  
+        return updatedEntity; // 업데이트된 엔티티 반환
+      } else {
+        return null; // 해당 ID에 해당하는 엔티티가 없을 경우 null 반환
+      }
+    } catch (error) {
+      console.error('Error in updateQuestionStatus:', error);
+      throw new Error('Failed to update question status.');
+    }
+  }
+  
 }

@@ -13,6 +13,7 @@ import { QuestionBankRepository } from '../questionsBank/repository/questionsBan
 import { PromptService } from '../prompt/service/prompt.service';
 import { InterviewQuestionsRepositoryImpl } from '../interviewQuestions/repository/interviewQuestion.repository';
 import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository/followUpQuestions.repository';
+import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/followUpAnswer.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -28,6 +29,7 @@ import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository
     InterviewAnswersRepository,
     FollowUpQuestionsRepositoryImpl,
     PromptService,
+    FollowUpAnswerRepositoryImpl,
   ],
 })
 export class InterviewAnswerModule {}
