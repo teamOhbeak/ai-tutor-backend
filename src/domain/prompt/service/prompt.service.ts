@@ -1,3 +1,4 @@
+import { Qna } from '@/domain/qna/entity/qna.entity';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
@@ -14,7 +15,7 @@ export interface InterviewQuestion {
 }
 @Injectable()
 export class PromptService {
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   async getInterviewQuestionsPrompt(): Promise<InterviewQuestion> {
     const openAI = new OpenAI({
@@ -133,8 +134,7 @@ export class PromptService {
 
     return promptResult;
   }
-
-  async getQnaPrompt(question: string): Promise<any> {
+  async getQnaPrompt(question: string, qna: Qna): Promise<any> {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
@@ -158,6 +158,14 @@ export class PromptService {
         messages: [
           {
             role: 'system',
+            content: qna != null ? qna.question : '이전 질문이 없습니다.',
+          },
+          {
+            role: 'user',
+            content: qna != null ? qna.answer : '이전 답변이 없습니다.',
+          },
+          {
+            role: 'system',
             content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
           },
           {
@@ -176,6 +184,7 @@ export class PromptService {
         return JSON.parse(generateText);
       })
       .catch((err) => {
+        console.log(err.message);
         return { error: err.message };
       });
 

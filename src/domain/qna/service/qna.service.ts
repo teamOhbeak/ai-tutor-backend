@@ -21,18 +21,20 @@ export class QnaService {
       qnaRequest.roomId,
     );
 
-    const qnaList = qnaRoom.qnas;
-    let sequence: number;
-
     if (qnaRoom == null || qnaRoom === undefined) {
       throw new Error('qnaRoom is null');
     }
 
+    const qnaList = qnaRoom.qnas;
+    let sequence: number;
+
+    let lastQna;
     if (!qnaList || qnaList.length === 0) {
       sequence = 0;
     } else {
       const maxSequence = Math.max(...qnaList.map((qna) => qna.sequence));
       sequence = maxSequence + 1;
+      lastQna = qnaList.find((qna) => qna.sequence === maxSequence);
     }
 
     /* TODO: answer
@@ -40,10 +42,11 @@ export class QnaService {
     */
     const { answer } = await this.promptService.getQnaPrompt(
       qnaRequest.question,
+      lastQna,
     );
-
-    console.log('answer: ' + answer);
-    const qna = new Qna(qnaRequest.question, answer, sequence, qnaRoom);
+    const realAnswer =
+      answer == undefined || answer == null ? '답변이 없습니다.' : answer;
+    const qna = new Qna(qnaRequest.question, realAnswer, sequence, qnaRoom);
     const savedQna = await this.qnaRepository.save(qna);
     if (!qnaRoom.qnas) {
       qnaRoom.qnas = []; // Initialize qnas as an empty array if it's not already defined

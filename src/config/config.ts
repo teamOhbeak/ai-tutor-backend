@@ -16,13 +16,7 @@ export default () => ({
       process.env.MODE_ENV === 'local' ? 'root' : process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [
-      UserEntity,
-      InterviewEntity,
-      QuestionBank,
-      Qna,
-      QnaRoom
-    ],
+    entities: [UserEntity, InterviewEntity, QuestionBank, Qna, QnaRoom],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
