@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
+import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
 export class InterviewUtil {
   static toCreateInterviewResponse(
     interview: InterviewEntity,
@@ -46,5 +47,11 @@ export class InterviewUtil {
         return InterviewQuestionUtil.toInterviewQuestionResponse(question);
       }),
     };
+  }
+
+  static toCanceledInterviewResponse(
+    interview: InterviewEntity,
+  ): CanceledInterviewResponse {
+    return new CanceledInterviewResponse(interview.id, interview.status);
   }
 }
