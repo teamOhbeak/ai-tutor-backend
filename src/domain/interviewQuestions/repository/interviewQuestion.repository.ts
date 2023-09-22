@@ -6,7 +6,7 @@ import {
   getRepository,
 } from 'typeorm';
 import { InterviewQuestionsEntity } from '../entity/interviewQuestions.entity';
-import { InterviewQuestionsRepository } from './interviewQuestions.repository.';
+import { InterviewQuestionsRepository } from './interviewQuestions.repository.interface';
 import { Inject, Injectable } from '@nestjs/common';
 import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
 

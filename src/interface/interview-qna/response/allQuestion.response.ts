@@ -1,5 +1,8 @@
-export class allQuestionResponse {
+
+
+
+export class followUpQuestionResponse {
   questionId: number;
 
-  questionText: string;
+  followUpQuestion: string;
 }

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InterviewQuestionsService } from './interviewQuestions.interface';
-import { InterviewQuestionsRepository } from '../repository/interviewQuestions.repository.';
-import { allQuestionResponse } from '@/interface/interview-qna/response/allQuestion.response';
-import { InterviewQuestionsRepositoryImpl } from '../repository/interviewQuestion.repository.interface';
+import { followUpQuestionResponse } from '@/interface/interview-qna/response/allQuestion.response';
+import { InterviewQuestionsRepositoryImpl } from '../repository/interviewQuestion.repository';
 import { PromptService } from '@/domain/prompt/service/prompt.service';
 import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
 import { InterviewAnswersRepository } from '@/domain/interviewAnswer/repository/interviewAnswer.repository.interface';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
+import { FollowUpQuestionsRepositoryImpl } from '@/domain/followUpQuestions/repository/followUpQuestions.repository';
+import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
+import { FollowUpQuestionsRepository } from '@/domain/followUpQuestions/repository/followUpQuestions.repository.interface';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -17,12 +17,11 @@ export class InterviewQuestionsServiceImpl
   constructor(
     private readonly interviewQuestionsRepository: InterviewQuestionsRepositoryImpl,
     private readonly interviewAnswersRepository: InterviewAnswersRepository,
+    private readonly followUpQuestionsRepository: FollowUpQuestionsRepositoryImpl,
     private readonly promptService: PromptService,
   ) {}
 
-  public async getQuestions(
-    interviewId: number,
-  ): Promise<InterviewQuestionDTO[]> {
+  public async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
     try {
       const repo = await this.interviewQuestionsRepository.getQuestions(
         interviewId,
@@ -33,25 +32,43 @@ export class InterviewQuestionsServiceImpl
     }
   }
 
-  async submitAnswer(answer: string) {
+  async submitAnswer(
+    questionId: number,
+    answer: string,
+  ): Promise<followUpQuestionResponse> {
     try {
-      const gptRes = await this.promptService.submitAnswer(answer);
+      const gptResponse = await this.promptService.submitAnswer(answer);
 
-      console.error('???'); // 에러 로깅 추가
+      const interviewAnswer = new InterviewAnswer(answer, questionId);
+      
 
-      const interviewAnswer = new InterviewAnswer(gptRes, 1);
-      // interviewAnswer.answer = answer;
-      // interviewAnswer.questionId = 1; // 임시로 1번으로 설정
       await this.interviewAnswersRepository.save(
         this.interviewAnswersRepository.create(interviewAnswer),
       );
 
-      console.error('!!!'); // 에러 로깅 추가
+      const checkSequence = await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      return gptRes;
+      const followUpQuestions = new FollowUpQuestions(gptResponse, checkSequence, questionId);
+      await this.followUpQuestionsRepository.save(
+        this.followUpQuestionsRepository.create(followUpQuestions),
+      );
+
+      // DTO를 사용하여 데이터를 래핑합니다.
+      const responseDto: followUpQuestionResponse = {
+        questionId: questionId,
+        followUpQuestion: gptResponse, // 또는 다른 필요한 값을 여기에 추가
+      };
+
+      return responseDto;
     } catch (error) {
-      console.error('Service Error in submitAnswer :', error); // 에러 로깅 추가
+      console.error('Service Error in submitAnswer :', error);
       throw new Error('Method not implemented.');
     }
   }
 }
+
+
+
+
+
+

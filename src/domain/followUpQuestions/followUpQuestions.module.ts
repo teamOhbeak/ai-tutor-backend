@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
 import { InterviewQnaController } from 'src/interface/interview-qna/interview-qna.controller';
+import { InterviewController } from 'src/interface/interview/interview.controller';
 import { DatabaseModule } from '../database/database.module';
-import { InterviewService } from './service/interview.service';
-import { InterviewRepositoryImpl } from './repository/interview.repository';
-import { InterviewController } from '@/interface/interview/interview.controller';
-import { PromptService } from '../prompt/service/prompt.service';
-import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
+import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository/followUpQuestions.repository';
+import { InterviewService } from '../interview/service/interview.service';
 import { AuthService } from '../auth/service/auth.service';
+import { InterviewRepositoryImpl } from '../interview/repository/interview.repository';
+import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
+import { PromptService } from '../prompt/service/prompt.service';
 import { InterviewQuestionsServiceImpl } from '../interviewQuestions/service/interviewQuestions.service';
-import { InterviewQuestionsModule } from '../interviewQuestions/interviewQuestions.module';
 import { InterviewQuestionsRepositoryImpl } from '../interviewQuestions/repository/interviewQuestion.repository';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
-import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository/followUpQuestions.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -28,4 +27,4 @@ import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository
     InterviewAnswersRepository,
   ],
 })
-export class InterviewModule {}
+export class FollowUpQuestionsModule {}
