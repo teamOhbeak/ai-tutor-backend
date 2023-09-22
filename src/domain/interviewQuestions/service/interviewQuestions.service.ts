@@ -34,7 +34,10 @@ export class InterviewQuestionsServiceImpl
     }
   }
 
-  async submitAnswer(questionId: number,answer: string,): Promise<followUpQuestionResponse> {
+  async submitAnswer(
+    questionId: number,
+    answer: string,
+  ): Promise<followUpQuestionResponse> {
     try {
       const gptResponse = await this.promptService.submitAnswer(answer);
 
