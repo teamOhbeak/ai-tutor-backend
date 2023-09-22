@@ -39,4 +39,16 @@ export class InterviewQuestionEntity {
   @ManyToOne(() => InterviewEntity)
   @JoinColumn({ name: 'interview_id' })
   interviewInfo: InterviewEntity;
+  
+  @Column({
+    type: 'datetime',
+    nullable: true
+  })
+  startedAt?: Date;
+
+  @Column({
+    type: 'datetime',
+    nullable: true
+  })
+  finishedAt?: Date;
 }

@@ -1,22 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { QuestionResponse } from './question.response';
-import { UserResponse } from './user.response';
 import { StackType } from '@/domain/interview/entity/stack-type.enum';
-
-export enum InterviewStatus {
-  COMPLETED = 0,
-  IN_PROGRESS = 1,
-  WAITING = 2,
-  CANCELED = 3,
-  EXPIRED = 4,
-  NO_SHOW = 5,
-}
-
+import { InterviewStatus } from '@/domain/interview/entity/insterview-status.enum';
+import { InterviewQuestionResponse } from '@/interface/interview-qna/response/interview-question.response';
 export class MyInterviewDetailResponse {
   @ApiProperty({ example: 1000 })
   id: number;
 
-  @ApiProperty({ example: 'U', enum: InterviewStatus })
+  @ApiProperty({ example: InterviewStatus.DONE, enum: InterviewStatus })
   status: InterviewStatus;
 
   @ApiProperty({ example: 'java' })
@@ -31,8 +21,8 @@ export class MyInterviewDetailResponse {
   @ApiProperty({ example: '2023-09-01 13:00' })
   createdAt: string;
 
-  @ApiProperty({ type: [QuestionResponse] })
-  questions: QuestionResponse[] = [];
+  @ApiProperty({ type: [InterviewQuestionResponse] })
+  questions: InterviewQuestionResponse[] = [];
 
   @ApiProperty()
   userId: number;
@@ -41,16 +31,16 @@ export class MyInterviewDetailResponse {
   userName: string;
 
   constructor(
-    id: number,
-    status: InterviewStatus,
-    createdAt: string,
-    questions: QuestionResponse[],
-    user: UserResponse,
+    // id: number,
+    // status: InterviewStatus,
+    // createdAt: string,
+    // questions: QuestionResponse[],
+    // user: UserResponse,
   ) {
-    this.id = id;
-    this.status = status;
-    this.createdAt = createdAt;
-    this.questions = questions;
-    this.userName = user.userName;
+    // this.id = id;
+    // this.status = status;
+    // this.createdAt = createdAt;
+    // this.questions = questions;
+    // this.userName = user.userName;
   }
 }

@@ -1,9 +1,17 @@
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 import { InterviewEntity } from '../entity/interview.entity';
-import { InterviewStatus } from '../entity/insterview-status.enum';
 import * as moment from 'moment';
-
+import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
+import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
+import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 export class InterviewUtil {
+  
+  static toCreateInterviewResponse(
+    interview: InterviewEntity,
+  ): CreateInterviewResponse {
+    return new CreateInterviewResponse(interview.id);
+  }
+
   static toInterviewListResponse(
     interviews: InterviewEntity[],
   ): MyInterviewResponse[] {
@@ -21,5 +29,22 @@ export class InterviewUtil {
           interview.userInfo.userName,
         ),
     );
+  }
+
+  static toInterviewDetailResponse(interview: InterviewEntity)
+  : MyInterviewDetailResponse {
+    return <MyInterviewDetailResponse> {
+      id: interview.id,
+      status: interview.status,
+      createdAt: moment(interview.createdAt).format('YYYY-MM-DD HH:mm'),
+      maxWait: interview.maxWait,
+      questionCount: interview.questionCount,
+      stack: interview.stack,
+      userId: interview.userId,
+      userName: interview.userInfo.userName,
+      questions: interview.questions.map((question) => {
+        return InterviewQuestionUtil.toInterviewQuestionResponse(question);
+      })
+    }
   }
 }
