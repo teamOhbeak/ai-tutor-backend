@@ -5,12 +5,14 @@ import { ConfigService } from '@nestjs/config';
 import { QnaRepository } from '../repository/qna-repository';
 import { QnaRoomRepository } from '@/domain/qna-room/repository/qna-room-repository';
 import { Qna } from '../entity/qna.entity';
+import { PromptService } from '../../prompt/service/prompt.service';
 
 @Injectable()
 export class QnaService {
   constructor(
     private qnaRepository: QnaRepository,
     private qnaRoomRepository: QnaRoomRepository,
+    private readonly promptService: PromptService,
   ) {}
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
@@ -18,7 +20,6 @@ export class QnaService {
     const qnaRoom = await this.qnaRoomRepository.findQnaRoomWithQnas(
       qnaRequest.roomId,
     );
-    console.log('qnaRoomId: ' + qnaRoom.id);
 
     const qnaList = qnaRoom.qnas;
     let sequence: number;
@@ -37,23 +38,19 @@ export class QnaService {
     /* TODO: answer
     아래 answer에 프롬프트 응답값 받아야함. 
     */
-    const answer = 'this is answer.';
+    const { answer } = await this.promptService.getQnaPrompt(
+      qnaRequest.question,
+    );
+
+    console.log('answer: ' + answer);
     const qna = new Qna(qnaRequest.question, answer, sequence, qnaRoom);
     const savedQna = await this.qnaRepository.save(qna);
     if (!qnaRoom.qnas) {
       qnaRoom.qnas = []; // Initialize qnas as an empty array if it's not already defined
     }
-
     qnaRoom.qnas.push(savedQna);
-
     await this.qnaRoomRepository.save(qnaRoom);
     return savedQna.toResponse();
-    // return Promise.resolve(<QnaResponse>{
-    //   id: 1,
-    //   sequence: 1,
-    //   question: 'this is question.',
-    //   answer: 'this is answer.',
-    // });
   }
 
   async getQnas(roomId: number): Promise<QnaResponse[]> {
