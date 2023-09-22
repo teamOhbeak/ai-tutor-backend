@@ -133,4 +133,50 @@ export class PromptService {
 
     return promptResult;
   }
+
+  async getQnaPrompt(question: string): Promise<any> {
+    const openAI = new OpenAI({
+      apiKey: this.configService.get<string>('openAIConfig'),
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        answer: {
+          type: 'string',
+          items: {
+            type: 'string',
+          },
+        },
+      },
+    };
+
+    const promptResult = await openAI.chat.completions
+      .create({
+        messages: [
+          {
+            role: 'system',
+            content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
+          },
+          {
+            role: 'user',
+            content: question,
+          },
+        ],
+        functions: [{ name: 'set_questions', parameters: schema }],
+        function_call: { name: 'set_questions' },
+        model: 'gpt-3.5-turbo-0613',
+      })
+      .then((competions) => {
+        const generateText =
+          competions.choices[0].message.function_call.arguments;
+
+        return JSON.parse(generateText);
+      })
+      .catch((err) => {
+        return { error: err.message };
+      });
+
+    return promptResult;
+  }
 }

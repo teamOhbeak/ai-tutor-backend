@@ -23,10 +23,10 @@ export default () => ({
       Qna,
       QnaRoom,
 
-
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
       // __dirname + '/../domain/**/*.entity.{js,ts}',
     ],
+    // logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
   NEST: {

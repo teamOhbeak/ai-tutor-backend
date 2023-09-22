@@ -5,12 +5,14 @@ import { ConfigService } from '@nestjs/config';
 import { QnaRepository } from '../repository/qna-repository';
 import { QnaRoomRepository } from '@/domain/qna-room/repository/qna-room-repository';
 import { Qna } from '../entity/qna.entity';
+import { PromptService } from '../../prompt/service/prompt.service';
 
 @Injectable()
 export class QnaService {
   constructor(
     private qnaRepository: QnaRepository,
     private qnaRoomRepository: QnaRoomRepository,
+    private readonly promptService: PromptService,
   ) {}
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
@@ -37,7 +39,12 @@ export class QnaService {
     /* TODO: answer
     아래 answer에 프롬프트 응답값 받아야함. 
     */
-    const answer = 'this is answer.';
+
+    const { answer } = await this.promptService.getQnaPrompt(
+      qnaRequest.question,
+    );
+
+    // const answer = 'this is answer.';
     const qna = new Qna(qnaRequest.question, answer, sequence, qnaRoom);
     const savedQna = await this.qnaRepository.save(qna);
     if (!qnaRoom.qnas) {
