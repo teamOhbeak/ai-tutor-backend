@@ -13,7 +13,7 @@ export class QnaService {
     private qnaRepository: QnaRepository,
     private qnaRoomRepository: QnaRoomRepository,
     private readonly promptService: PromptService,
-  ) { }
+  ) {}
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
     console.log(qnaRequest);
