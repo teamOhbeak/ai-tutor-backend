@@ -22,6 +22,7 @@ import { AuthService } from '@/domain/auth/service/auth.service';
 import { CreateInterviewResponse } from './response/create-interview.response';
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import { InterviewFacade } from '@/domain/interview/service/interview.facade';
+import { CanceledInterviewResponse } from './response/canceled-interview.response';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -67,7 +68,7 @@ export class InterviewController {
   @ApiNoContentResponse({ description: '면접 취소' })
   async cancelInterview(
     @Param('interviewId') interviewId: number,
-  ): Promise<any> {
+  ): Promise<CanceledInterviewResponse> {
     const userId = 1;
     return this.interviewFacade.cancelInterview(userId, interviewId);
   }
@@ -77,6 +78,7 @@ export class InterviewController {
   async deleteInterview(
     @Param('interviewId') interviewId: number,
   ): Promise<any> {
-    return null;
+    const userId = 1;
+    return this.interviewFacade.deleteInterview(userId, interviewId);
   }
 }
