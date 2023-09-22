@@ -12,7 +12,6 @@ import { QuestionStatus } from './question-status.enum';
 
 @Entity('interview_question')
 export class InterviewQuestionEntity {
-  
   @PrimaryGeneratedColumn({
     name: 'question_id',
   })
