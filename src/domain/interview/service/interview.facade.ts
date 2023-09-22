@@ -10,28 +10,32 @@ import { MyInterviewResponse } from '@/interface/interview/response/my-interview
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
+import { QuestionBankService } from '../../questionsBank/service/questionBank.service';
 
 @Injectable()
 export class InterviewFacade {
-  private readonly questionBankService: IFakeQuestionBankService;
+  // private readonly questionBankService: IFakeQuestionBankService;
   constructor(
     private readonly interviewService: InterviewService,
     private readonly interviewQuestionService: InterviewQuestionService,
+    private readonly questionBankService: QuestionBankService,
   ) {
-    this.questionBankService = new FakeQuestionBankService();
+    // this.questionBankService = new FakeQuestionBankService();
   }
 
   async createInterview(
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
+    console.log(userId, dto);
     const interviewRoom = await this.interviewService.createInterview(
       userId,
       dto,
     );
 
-    const questions = await this.questionBankService.getFakeQuestions(
+    const questions = await this.questionBankService.getQuestions(
       dto.questionCount,
+      dto.stack,
     );
 
     const interviewQuestions = InterviewQuestionUtil.generateInterviewQuestion(

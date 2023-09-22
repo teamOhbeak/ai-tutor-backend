@@ -16,7 +16,7 @@ import { QnaRoomService } from './domain/qna-room/service/qna-room.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
-import { FakeQuestionBankService } from "./domain/questionsBank/service/fake-questionBank.service";
+import { FakeQuestionBankService } from './domain/questionsBank/service/fake-questionBank.service';
 
 @Module({
   imports: [
