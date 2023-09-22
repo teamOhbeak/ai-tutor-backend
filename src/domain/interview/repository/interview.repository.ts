@@ -33,7 +33,7 @@ export class InterviewRepository extends Repository<InterviewEntity> {
 
   async getInterviewsByUserIdAndStatus(
     userId: number,
-    status: InterviewStatus
+    status: InterviewStatus,
   ): Promise<InterviewEntity[]> {
     return await this.find({
       where: {

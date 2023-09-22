@@ -58,7 +58,7 @@ export class InterviewEntity {
   questions: InterviewQuestionEntity[];
 
   @ManyToOne(() => UserEntity)
-  @JoinColumn({name: 'user_id'})
+  @JoinColumn({ name: 'user_id' })
   userInfo!: UserEntity;
 
   constructor() {}

@@ -18,8 +18,10 @@ export class InterviewService {
   }
 
   async getMyCompletedInterviews(userId: number): Promise<InterviewEntity[]> {
-    return await this.interviewRepository
-      .getInterviewsByUserIdAndStatus(userId, InterviewStatus.DONE);
+    return await this.interviewRepository.getInterviewsByUserIdAndStatus(
+      userId,
+      InterviewStatus.DONE,
+    );
   }
 
   getMyInterviewDetail(
