@@ -13,7 +13,7 @@ export class QnaService {
     private qnaRepository: QnaRepository,
     private qnaRoomRepository: QnaRoomRepository,
     private readonly promptService: PromptService,
-  ) {}
+  ) { }
 
   async createQna(qnaRequest: CreateQuestionRequest): Promise<QnaResponse> {
     console.log(qnaRequest);
@@ -28,13 +28,22 @@ export class QnaService {
     const qnaList = qnaRoom.qnas;
     let sequence: number;
 
-    let lastQna;
     if (!qnaList || qnaList.length === 0) {
       sequence = 0;
     } else {
       const maxSequence = Math.max(...qnaList.map((qna) => qna.sequence));
       sequence = maxSequence + 1;
-      lastQna = qnaList.find((qna) => qna.sequence === maxSequence);
+    }
+
+    let mostRecentQnas = [];
+    if (qnaList.length === 0) {
+      mostRecentQnas = [];
+    } else if (qnaList.length === 1) {
+      mostRecentQnas = qnaList;
+    } else {
+      mostRecentQnas = qnaList.sort((a, b) => a.sequence - b.sequence);
+      mostRecentQnas = qnaList.slice(-2);
+      mostRecentQnas.sort((a, b) => a.sequence - b.sequence); // Adjust the slice to get the desired number
     }
 
     /* TODO: answer
@@ -42,7 +51,7 @@ export class QnaService {
     */
     const { answer } = await this.promptService.getQnaPrompt(
       qnaRequest.question,
-      lastQna,
+      mostRecentQnas,
     );
     const realAnswer =
       answer == undefined || answer == null ? '답변이 없습니다.' : answer;
