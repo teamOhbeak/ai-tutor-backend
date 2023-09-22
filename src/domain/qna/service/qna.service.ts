@@ -1,7 +1,6 @@
 import { CreateQuestionRequest } from '@/interface/qna-room-qna/request/create-question-request';
 import { QnaResponse } from '@/interface/qna-room-qna/response/qna-response';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { QnaRepository } from '../repository/qna-repository';
 import { QnaRoomRepository } from '@/domain/qna-room/repository/qna-room-repository';
 import { Qna } from '../entity/qna.entity';

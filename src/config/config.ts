@@ -5,6 +5,7 @@ import { Qna } from 'src/domain/qna/entity/qna.entity';
 import { QuestionBank } from 'src/domain/questionsBank/entity/questionBank.entity';
 import { UserEntity } from 'src/domain/user/entity/user.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { InterviewQuestionEntity } from 'src/domain/interview-question/entity/interview-question.entity';
 
 export default () => ({
   DB: {
@@ -16,7 +17,14 @@ export default () => ({
       process.env.MODE_ENV === 'local' ? 'root' : process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [UserEntity, InterviewEntity, QuestionBank, Qna, QnaRoom],
+    entities: [
+      UserEntity,
+      InterviewEntity,
+      QuestionBank,
+      Qna,
+      QnaRoom,
+      InterviewQuestionEntity,
+    ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },

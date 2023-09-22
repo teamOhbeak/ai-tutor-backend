@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PromptService } from '../../prompt/service/prompt.service';
-import { QuestionBankRepository } from '../repository/questionsBank.repository';
 import { QuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
 import { QuestionStatus } from '../entity/questionBank.entity';

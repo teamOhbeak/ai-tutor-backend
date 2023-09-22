@@ -1,0 +1,17 @@
+import { Injectable } from '@nestjs/common';
+import { InterviewQuestionRepository } from '../repository/interview-question.repository';
+import { InterviewQuestionEntity } from '../entity/interview-question.entity';
+import { InterviewQuestion } from '@/domain/prompt/service/prompt.service';
+
+@Injectable()
+export class InterviewQuestionService {
+  constructor(
+    private readonly interviewQuestionRepository: InterviewQuestionRepository,
+  ) {}
+
+  async saveInterviewQuestions(
+    questions: InterviewQuestionEntity[],
+  ): Promise<InterviewQuestionEntity[]> {
+    return await this.interviewQuestionRepository.saveQuestions(questions);
+  }
+}

@@ -4,7 +4,7 @@ import { CreateInterviewInfo } from 'src/domain/interview/service/interview.mode
 import { DataSource, EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(InterviewEntity)
-export class InterviewRepositoryImpl extends Repository<InterviewEntity> {
+export class InterviewRepository extends Repository<InterviewEntity> {
   constructor(
     @Inject('DATA_SOURCE')
     private readonly dataSource: DataSource,
