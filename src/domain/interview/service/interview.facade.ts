@@ -32,8 +32,9 @@ export class InterviewFacade {
       questions,
     );
     interviewRoom.questions =
-      await this.interviewQuestionService
-        .saveInterviewQuestions(interviewQuestions);
+      await this.interviewQuestionService.saveInterviewQuestions(
+        interviewQuestions,
+      );
 
     return InterviewQuestionUtil.toCreateInterviewResponse(interviewRoom);
   }
