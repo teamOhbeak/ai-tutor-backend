@@ -153,26 +153,38 @@ export class PromptService {
       },
     };
 
+    const messages = [];
+
+    if (qna) {
+      messages.push({
+        role: 'user',
+        content: qna.question,
+      });
+      messages.push({
+        role: 'system',
+        content:
+          qna.answer !== '답변이 없습니다.'
+            ? qna.answer
+            : '이전 답변이 없습니다.',
+      });
+    }
+
+    messages.push(
+      {
+        role: 'system',
+        content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
+      },
+      {
+        role: 'user',
+        content: question,
+      },
+    );
+
+    console.log(messages);
+
     const promptResult = await openAI.chat.completions
       .create({
-        messages: [
-          {
-            role: 'system',
-            content: qna != null ? qna.question : '이전 질문이 없습니다.',
-          },
-          {
-            role: 'user',
-            content: qna != null ? qna.answer : '이전 답변이 없습니다.',
-          },
-          {
-            role: 'system',
-            content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
-          },
-          {
-            role: 'user',
-            content: question,
-          },
-        ],
+        messages: messages,
         functions: [{ name: 'set_questions', parameters: schema }],
         function_call: { name: 'set_questions' },
         model: 'gpt-3.5-turbo-0613',
@@ -184,6 +196,7 @@ export class PromptService {
         return JSON.parse(generateText);
       })
       .catch((err) => {
+        console.log('open ai error.');
         console.log(err.message);
         return { error: err.message };
       });
