@@ -7,6 +7,8 @@ import { InterviewController } from '@/interface/interview/interview.controller'
 import { PromptService } from '../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
 import { AuthService } from '../auth/service/auth.service';
+import { InterviewQuestionService } from '../interview-question/service/interview-question.service';
+import { InterviewQuestionRepository } from '../interview-question/repository/interview-question.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -15,6 +17,8 @@ import { AuthService } from '../auth/service/auth.service';
     AuthService,
     InterviewService,
     InterviewRepository,
+    InterviewQuestionService,
+    InterviewQuestionRepository,
     QuestionBankRepository,
     PromptService,
   ],
