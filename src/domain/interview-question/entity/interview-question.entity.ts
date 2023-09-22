@@ -7,6 +7,8 @@ import {
 } from 'typeorm';
 import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 import { UserEntity } from '@/domain/user/entity/user.entity';
+import { IsEnum } from 'class-validator';
+import { QuestionStatus } from './question-status.enum';
 
 @Entity('interview_question')
 export class InterviewQuestionEntity {
@@ -27,13 +29,14 @@ export class InterviewQuestionEntity {
   })
   sequence: number;
 
+  @IsEnum(QuestionStatus)
   @Column()
-  status: boolean;
+  status: QuestionStatus;
 
-  @Column({ name: 'user_id' })
-  userId: number;
+  @Column({name: 'interview_id'})
+  interviewId: number;
 
   @ManyToOne(() => InterviewEntity)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'interview_id' })
   interviewInfo: InterviewEntity;
 }

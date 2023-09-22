@@ -3,11 +3,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { IsEnum } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
+import { InterviewQuestionEntity } from '@/domain/interview-question/entity/interview-question.entity';
 
 @Entity('interview')
 export class InterviewEntity {
@@ -46,8 +48,10 @@ export class InterviewEntity {
   })
   finishedAt?: Date;
 
-  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-  // questions: InterviewQuestionsEntity[];
+  @OneToMany(
+    () => InterviewQuestionEntity, 
+    (question) => question.interviewInfo)
+  questions: InterviewQuestionEntity[];
 
   constructor() {}
 
@@ -56,9 +60,9 @@ export class InterviewEntity {
     interview.stack = dto.stack;
     interview.questionCount = dto.questionCount;
     interview.maxWait = dto.maxWait;
-    // interview.questions = [];
     interview.userId = userId;
     interview.status = InterviewStatus.WAIT;
+    interview.questions = [];
     return interview;
   }
 }
