@@ -35,7 +35,10 @@ export class InterviewQuestionsServiceImpl
     }
   }
 
-  async submitAnswer(questionId: number,answer: string,): Promise<followUpQuestionResponse> {
+  async submitAnswer(
+    questionId: number,
+    answer: string,
+  ): Promise<followUpQuestionResponse> {
     try {
       const gptResponse = await this.promptService.submitAnswer(answer);
 
@@ -48,7 +51,11 @@ export class InterviewQuestionsServiceImpl
       const checkSequence =
         await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      const followUpQuestions = new FollowUpQuestions(gptResponse,checkSequence,questionId,);
+      const followUpQuestions = new FollowUpQuestions(
+        gptResponse,
+        checkSequence,
+        questionId,
+      );
       const follow_up_questions = await this.followUpQuestionsRepository.save(
         this.followUpQuestionsRepository.create(followUpQuestions),
       );
