@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InterviewQuestionsService } from './interviewQuestions.interface';
-import { followUpQuestionResponse } from '@/interface/interview-qna/response/allQuestion.response';
 import { InterviewQuestionsRepositoryImpl } from '../repository/interviewQuestion.repository';
 import { PromptService } from '@/domain/prompt/service/prompt.service';
 import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
@@ -8,11 +7,12 @@ import { InterviewAnswersRepository } from '@/domain/interviewAnswer/repository/
 import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
 import { FollowUpQuestionsRepositoryImpl } from '@/domain/followUpQuestions/repository/followUpQuestions.repository';
 import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
-import { FollowUpQuestionsRepository } from '@/domain/followUpQuestions/repository/followUpQuestions.repository.interface';
 import {
   AnswerRequestDto,
   QuestionType,
 } from '@/interface/interview-qna/request/answer.resquest';
+import { followUpQuestionResponse } from '@/interface/interview-qna/response/followUpQuestionResponse';
+import { InterviewRepositoryImpl } from '@/domain/interview/repository/interview.repository';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -22,6 +22,7 @@ export class InterviewQuestionsServiceImpl
     private readonly interviewQuestionsRepository: InterviewQuestionsRepositoryImpl,
     private readonly interviewAnswersRepository: InterviewAnswersRepository,
     private readonly followUpQuestionsRepository: FollowUpQuestionsRepositoryImpl,
+    private readonly interviewRepository: InterviewRepositoryImpl,
     private readonly promptService: PromptService,
   ) {}
 
@@ -40,14 +41,19 @@ export class InterviewQuestionsServiceImpl
   }
 
   async submitAnswer(
+    interviewId: number,
     questionId: number,
     answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse> {
     try {
+      // gpt
       const gptResponse = await this.promptService.submitAnswer(
         answerRequestDto.answer,
       );
-
+      const interview = await this.interviewRepository.findOne({
+        where: { id: interviewId },
+      });
+      
       // 꼬리 질문 저장
       const checkSequence =
         await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
@@ -74,13 +80,28 @@ export class InterviewQuestionsServiceImpl
         );
         // 꼬리 대답 저장
       } else {
+
       }
 
       //DTO를 사용하여 데이터를 래핑합니다.
       const responseDto: followUpQuestionResponse = {
+        interviewId: interview.id,
+        userId: 1,
+        stack: interview.stack,
         questionId: questionId,
-        followUpQuestionsSequence: follow_up_questions.sequence,
-        followUpQuestion: gptResponse,
+        followUpQuestions: [
+          {
+            followUpquestionId: follow_up_questions.id,
+            questionText: follow_up_questions.questionText,
+            createdAt: follow_up_questions.createdAt,
+          }
+          // 여러 follow-up questions가 있다면 각각의 객체를 배열에 추가하세요.
+        ]
+        // questionId: questionId,
+        // followUpQuestionsSequence: follow_up_questions.sequence,
+        // followUpQuestion: gptResponse,
+        // createdAt: follow_up_questions.createdAt,
+        // userId: 1
       };
 
       return responseDto;

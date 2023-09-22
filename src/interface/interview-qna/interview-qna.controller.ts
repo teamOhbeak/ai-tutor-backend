@@ -5,11 +5,10 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { followUpQuestionResponse } from './response/allQuestion.response';
-import { InterviewQuestionsService } from '@/domain/interviewQuestions/service/interviewQuestions.interface';
 import { InterviewQuestionsServiceImpl } from '@/domain/interviewQuestions/service/interviewQuestions.service';
 import { InterviewQuestionDTO } from './response/InterviewQuestionDTO';
 import { AnswerRequestDto } from './request/answer.resquest';
+import { followUpQuestionResponse } from './response/followUpQuestionResponse';
 
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
@@ -40,11 +39,14 @@ export class InterviewQnaController {
   @Post(':questionId/answer')
   @ApiCreatedResponse()
   async submitAnswer(
+    @Param() params,
     @Param('questionId') questionId: number,
     @Body() answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse> {
     // questionId와 answerRequestDto를 서비스로 전달
+    const interviewId = params.interviewId;
     return await this.interviewQuestionsService.submitAnswer(
+      interviewId,
       questionId,
       answerRequestDto,
     );

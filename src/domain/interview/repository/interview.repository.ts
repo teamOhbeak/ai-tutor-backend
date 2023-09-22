@@ -29,4 +29,12 @@ export class InterviewRepositoryImpl extends Repository<InterviewEntity> {
       throw new Error('Method not implemented.');
     }
   }
+
+  // async findInterviewById(interviewId: number): Promise<InterviewEntity | undefined> {
+  //   try {
+  //     return this.findOne(interviewId);
+  //   } catch (error) {
+  //     throw new Error('Failed to find interview by ID.');
+  //   }
+  // }
 }
