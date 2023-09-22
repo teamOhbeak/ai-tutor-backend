@@ -8,6 +8,7 @@ import {
 import { InterviewQuestionsEntity } from '../entity/interviewQuestions.entity';
 import { InterviewQuestionsRepository } from './interviewQuestions.repository.';
 import { Inject, Injectable } from '@nestjs/common';
+import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
 
 @EntityRepository(InterviewQuestionsEntity)
 export class InterviewQuestionsRepositoryImpl
@@ -18,24 +19,26 @@ export class InterviewQuestionsRepositoryImpl
     super(InterviewQuestionsEntity, dataSource.createEntityManager());
   }
 
-  async getQuestions(interviewId: number): Promise<InterviewQuestionsEntity[]> {
-    console.log('레포지토리');
+  async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
     try {
-      // const repository = getRepository(InterviewQuestionsEntity); // getRepository 사용
-      // const results = await repository
-      //   .createQueryBuilder('iq')
-      //   .where('iq.id = :id', { id: questionId })
-      //   .getMany();
-
       const results = await this.createQueryBuilder('interview_questions')
-        .leftJoinAndSelect('interview_questions.interview', 'interview')
+        .select([
+          'interview_questions.id AS interview_questions_id',
+          'interview_questions.questionText AS interview_questions_questionText',
+          'interview.stack AS interview_stack',
+        ])
+        .leftJoin('interview_questions.interview', 'interview')
         .where('interview.id = :interviewId', { interviewId })
-        .getMany();
-      console.log('results');
-      console.log('results가 나오긴하니?');
-      return results;
+        .getRawMany();
+        
+      // DTO로 매핑하여 반환
+      return results.map((result) => ({
+        questionId: result.interview_questions_id,
+        questionText: result.interview_questions_questionText,
+        stack: result.interview_stack,
+      }));
     } catch (error) {
-      console.error('Error in getQuestions:', error); // 에러 로깅 추가
+      console.error('Error in getQuestions:', error);
       throw new Error('Failed to get questions.');
     }
   }

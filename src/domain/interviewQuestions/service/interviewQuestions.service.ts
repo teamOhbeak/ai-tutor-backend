@@ -8,6 +8,7 @@ import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer
 import { InterviewAnswersRepository } from '@/domain/interviewAnswer/repository/interviewAnswer.repository.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -19,26 +20,10 @@ export class InterviewQuestionsServiceImpl
     private readonly promptService: PromptService,
   ) {}
 
-  public async getQuestions(
-    interviewId: number,
-  ): Promise<allQuestionResponse[]> {
-    console.log('서비스');
-
+  public async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
     try {
-      console.log('레포가기전');
-
-      const repo = await this.interviewQuestionsRepository.getQuestions(
-        interviewId,
-      );
-      console.log('레포간 후');
-
-      console.log(repo);
-      return [
-        {
-          questionId: 1,
-          questionText: 'zzz',
-        },
-      ];
+      const repo = await this.interviewQuestionsRepository.getQuestions(interviewId);
+      return repo;
     } catch {
       throw new Error('Method not implemented.');
     }

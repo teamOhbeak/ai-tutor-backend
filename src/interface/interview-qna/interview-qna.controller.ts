@@ -8,6 +8,7 @@ import {
 import { allQuestionResponse } from './response/allQuestion.response';
 import { InterviewQuestionsService } from '@/domain/interviewQuestions/service/interviewQuestions.interface';
 import { InterviewQuestionsServiceImpl } from '@/domain/interviewQuestions/service/interviewQuestions.service';
+import { InterviewQuestionDTO } from './response/InterviewQuestionDTO';
 
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
@@ -27,17 +28,9 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param() params): Promise<allQuestionResponse[]> {
+  async getQuestions(@Param() params): Promise<InterviewQuestionDTO[]> {
     const interviewId = params.interviewId; // interviewId 파라미터 추출
-
-    await this.interviewQuestionsService.getQuestions(interviewId);
-
-    return [
-      {
-        questionId: 1,
-        questionText: 'zzz',
-      },
-    ];
+    return await this.interviewQuestionsService.getQuestions(interviewId);
   }
 
   @Post(':questionId/answer')
