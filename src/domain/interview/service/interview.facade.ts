@@ -46,11 +46,12 @@ export class InterviewFacade {
     return InterviewQuestionUtil.toCreateInterviewResponse(interviewRoom);
   }
 
-  async getMyCompletedInterviews(userId: number)
-  : Promise<MyInterviewResponse[]> {
-      
-    const interviews = await this.interviewService
-      .getMyCompletedInterviews(userId);
+  async getMyCompletedInterviews(
+    userId: number,
+  ): Promise<MyInterviewResponse[]> {
+    const interviews = await this.interviewService.getMyCompletedInterviews(
+      userId,
+    );
     return InterviewUtil.toInterviewListResponse(interviews);
   }
 }

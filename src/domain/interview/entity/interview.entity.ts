@@ -20,7 +20,7 @@ export class InterviewEntity {
   id: number;
 
   @Column({
-    name: 'user_id'
+    name: 'user_id',
   })
   userId: number;
 

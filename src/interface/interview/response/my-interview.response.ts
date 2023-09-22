@@ -17,17 +17,17 @@ export class MyInterviewResponse {
   @ApiProperty({ example: '2023-09-01 13:00' })
   finishedAt: string;
 
-  @ApiProperty({ example: 0})
+  @ApiProperty({ example: 0 })
   userId: number;
 
-
   constructor(
-    id: number, 
-    status: InterviewStatus, 
+    id: number,
+    status: InterviewStatus,
     createdAt: string,
     finishedAt: string,
-    userId: number, 
-    userName: string) {
+    userId: number,
+    userName: string,
+  ) {
     this.id = id;
     this.status = status;
     this.createdAt = createdAt;
