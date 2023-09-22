@@ -17,9 +17,9 @@ export class InterviewService {
   }
 
   async getMyInterviews(userId: number): Promise<InterviewEntity[]> {
-    const interviews = await this.interviewRepository.findBy({
-      userId: userId,
-    });
+    const interviews = await this.interviewRepository
+      .getCompletedInterviewsByUserId(userId);
+      
     console.log(`interviews: ${JSON.stringify(interviews)}`);
     return interviews;
   }
