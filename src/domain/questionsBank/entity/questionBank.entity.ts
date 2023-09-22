@@ -24,6 +24,7 @@ export class QuestionBank {
 
   @Column({
     type: 'int',
+    default: QuestionStatus.PENDING,
   })
   status: QuestionStatus;
 
