@@ -18,6 +18,7 @@ import { UserModule } from './domain/user/user.module';
 import { InterviewQuestionsModule } from './domain/interviewQuestions/interviewQuestions.module';
 import { InterviewAnswerModule } from './domain/interviewAnswer/interviewAnswer.module';
 import { FollowUpQuestionsModule } from './domain/followUpQuestions/followUpQuestions.module';
+import { FollowUpAnswerModule } from './domain/followUpAnswer/followUpAnswer.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { FollowUpQuestionsModule } from './domain/followUpQuestions/followUpQues
     PromptModule,
     QuestionBankModule,
     QnaModule,
+    FollowUpAnswerModule,
   ],
   controllers: [PromptController],
   providers: [
