@@ -23,16 +23,13 @@ export class InterviewService {
     const interview = InterviewEntity.CreateInterview(userId, dto);
     return await this.interviewRepository.save(interview);
   }
-
-  
-
   async getMyInterviews(userId: number): Promise<InterviewEntity[]> {
     const interviews = await this.interviewRepository.findBy({
       userId: userId,
     });
     return interviews;
   }
-  
+
   getMyInterviewDetail(
     userId: number,
     interviewId: number,
