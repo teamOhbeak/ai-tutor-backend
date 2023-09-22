@@ -1,6 +1,6 @@
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
 import { InterviewStatus } from '../entity/insterview-status.enum';
@@ -22,6 +22,18 @@ export class InterviewService {
       userId,
       InterviewStatus.DONE,
     );
+  }
+
+  async findInterview(userId: number, interviewId: number) {
+    const interview = await this.interviewRepository.getInterviewDetailById(
+      interviewId,
+      userId,
+    );
+
+    if (!interview)
+      throw new HttpException({ error: '면접정보를 찾을 수 없습니다.' }, 404);
+
+    return interview;
   }
 
   getMyInterviewDetail(

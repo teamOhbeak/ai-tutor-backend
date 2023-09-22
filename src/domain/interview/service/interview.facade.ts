@@ -6,9 +6,9 @@ import { IFakeQuestionBankService } from '@/domain/questionsBank/service/fake-qu
 import { FakeQuestionBankService } from '@/domain/questionsBank/service/fake-questionBank.service';
 import { InterviewQuestionUtil } from '../utils/interview-question.util';
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
-import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewUtil } from '../utils/interview.util';
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
+import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 
 @Injectable()
 export class InterviewFacade {
@@ -53,5 +53,16 @@ export class InterviewFacade {
       userId,
     );
     return InterviewUtil.toInterviewListResponse(interviews);
+  }
+
+  async getMyInterviewDetail(
+    userId: number,
+    interviewId: number,
+  ): Promise<MyInterviewDetailResponse> {
+    const interview = await this.interviewService.findInterview(
+      userId,
+      interviewId,
+    );
+    return InterviewUtil.toInterviewDetailResponse(interview);
   }
 }
