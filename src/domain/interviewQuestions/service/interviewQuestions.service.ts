@@ -20,9 +20,13 @@ export class InterviewQuestionsServiceImpl
     private readonly promptService: PromptService,
   ) {}
 
-  public async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
+  public async getQuestions(
+    interviewId: number,
+  ): Promise<InterviewQuestionDTO[]> {
     try {
-      const repo = await this.interviewQuestionsRepository.getQuestions(interviewId);
+      const repo = await this.interviewQuestionsRepository.getQuestions(
+        interviewId,
+      );
       return repo;
     } catch {
       throw new Error('Method not implemented.');

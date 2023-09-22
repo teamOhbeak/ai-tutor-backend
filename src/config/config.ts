@@ -26,7 +26,7 @@ export default () => ({
       // QnaRoom,
       // InterviewAnswer,
       // InterviewQuestionsEntity,
-      "dist/**/**/**/**.entity{.ts,.js}",
+      'dist/**/**/**/**.entity{.ts,.js}',
       // __dirname + '/../domain/**/*.entity.{js,ts}',
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
     ],

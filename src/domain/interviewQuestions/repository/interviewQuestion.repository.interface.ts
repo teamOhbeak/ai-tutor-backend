@@ -30,7 +30,7 @@ export class InterviewQuestionsRepositoryImpl
         .leftJoin('interview_questions.interview', 'interview')
         .where('interview.id = :interviewId', { interviewId })
         .getRawMany();
-        
+
       // DTO로 매핑하여 반환
       return results.map((result) => ({
         questionId: result.interview_questions_id,
