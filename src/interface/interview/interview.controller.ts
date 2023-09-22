@@ -27,6 +27,7 @@ import { InterviewService } from '@/domain/interview/service/interview.service';
 import { MyInterviewResponse } from './response/my-interview.response';
 import { AuthService } from '@/domain/auth/service/auth.service';
 import { CreateInterviewResponse } from './response/create-interview.response';
+import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
@@ -51,10 +52,10 @@ export class InterviewController {
 
   @Get()
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
-  async getMyInterviews(): Promise<MyInterviewResponse[]> {
+  async getMyInterviews(): Promise<InterviewEntity[]> {
     const userId = 1;
-    await this.interviewService.getMyInterviews(userId);
-    return this.interviewService.getMyInterviews(userId);
+    const interviews = await this.interviewService.getMyInterviews(userId);
+    return interviews;
   }
 
   @Get(':interviewId')

@@ -16,7 +16,7 @@ export class InterviewService {
     private readonly openAi: PromptService,
   ) {}
 
-  public async createInterview(
+  async createInterview(
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<InterviewEntity> {
@@ -24,9 +24,15 @@ export class InterviewService {
     return await this.interviewRepository.save(interview);
   }
 
-  getMyInterviews(userId: number): Promise<MyInterviewResponse[]> {
-    throw new Error('Method not implemented.');
+  
+
+  async getMyInterviews(userId: number): Promise<InterviewEntity[]> {
+    const interviews = await this.interviewRepository.findBy({
+      userId: userId,
+    });
+    return interviews;
   }
+  
   getMyInterviewDetail(
     userId: number,
     interviewId: number,
