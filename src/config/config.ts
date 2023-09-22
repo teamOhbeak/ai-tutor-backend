@@ -21,12 +21,9 @@ export default () => ({
       InterviewEntity,
       QuestionBank,
       Qna,
-      QnaRoom,
-
-      // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
-      // __dirname + '/../domain/**/*.entity.{js,ts}',
+      QnaRoom
     ],
-    // logging: true,
+    logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
   },
   NEST: {
