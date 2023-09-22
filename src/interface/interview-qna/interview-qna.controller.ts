@@ -44,14 +44,10 @@ export class InterviewQnaController {
   @Post(':questionId/answer')
   @ApiCreatedResponse()
   async submitAnswer(
-    @Param('interviewId') interviewId: number,
-    @Param('questionId') questionId: number,
-    @Body() dto: any,
-  ): Promise<any> {
-    return {
-      id: interviewId,
-      questionId: questionId,
-    };
+    @Body() body: {answer: string}
+  ): Promise<string> {
+    const { answer } = body;
+     return await this.interviewQuestionsService.submitAnswer(answer);
   }
 
   @Patch(':questionId/answer')

@@ -7,15 +7,20 @@ import {
 } from 'typeorm';
 import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
 
-@Entity('Interview_answer', { schema: 'test' })
-export class InterviewAnswersEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+@Entity('interview_answer')
+export class InterviewAnswer {
+
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text', { name: 'answer', nullable: false })
+  @Column()
   answer: string;
 
-  @OneToOne(() => InterviewQuestionsEntity)
-  @JoinColumn({ name: 'interview_question_id' })
-  InterviewQuestions: InterviewQuestionsEntity;
+  @Column()
+  questionId: number;
+
+  constructor(answer: string, questionId: number) {
+    this.answer = answer;
+    this.questionId = questionId;
+  }
 }

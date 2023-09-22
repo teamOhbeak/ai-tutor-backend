@@ -1,53 +1,52 @@
-import { DateTime } from 'luxon';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
+  CreateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
+import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
+import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { IsEnum, IsInt } from 'class-validator';
+import { InterviewStatus } from './insterview-status.enum';
+import { StackType } from './stack-type.enum';
 
-export enum StackType {
-  'Java',
-  'JavaScript',
-  'Kotlin',
-  'React',
-  'Next.js',
-  'Node.js',
-  'Nest.js',
-  'Spring',
-  'CS',
-}
-
-@Entity('interview', { schema: 'test' })
+@Entity('interview')
 export class InterviewEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('bigint', { name: 'user_id', nullable: false })
+  @Column()
   userId: number;
 
-  @Column('enum', {
-    name: 'stack',
-    enum: StackType,
-    nullable: true,
-  })
+  @Column()
+  @IsEnum(StackType)
   stack: StackType;
 
-  @Column('int', { name: 'questionCount', nullable: false })
+  @Column({
+    type: 'int',
+  })
   questionCount: number;
 
-  @Column('int', { name: 'maxWait', nullable: false })
+  @Column({
+    type: 'int',
+  })
   maxWait: number;
 
-  @Column('datetime', {
+  @Column()
+  @IsEnum(InterviewStatus)
+  status: InterviewStatus;
+
+  @CreateDateColumn({
     name: 'created_at',
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
+
+  @Column({
+    name: 'finished_at',
+    nullable: true,
+  })
+  finishedAt?: Date;
 
   @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
   questions: InterviewQuestionsEntity[];

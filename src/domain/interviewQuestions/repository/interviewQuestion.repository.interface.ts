@@ -30,8 +30,8 @@ export class InterviewQuestionsRepositoryImpl
       //   .where('iq.id = :id', { id: questionId })
       //   .getMany();
 
-      const results = await this.createQueryBuilder('Interview_questions')
-        .leftJoinAndSelect('Interview_questions.interview', 'interview')
+      const results = await this.createQueryBuilder('interview_questions')
+        .leftJoinAndSelect('interview_questions.interview', 'interview')
         .where('id = :questionId', { questionId })
         .getMany();
       console.log('results');

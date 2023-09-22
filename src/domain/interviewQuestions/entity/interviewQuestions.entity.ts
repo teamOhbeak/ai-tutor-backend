@@ -1,26 +1,29 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { InterviewEntity } from '../../interview/entity/interview.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 
-@Entity('Interview_questions', { schema: 'test' })
+@Entity('interview_questions')
 export class InterviewQuestionsEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text', { name: 'question_text', nullable: false })
+  @Column({
+    name: 'question_text',
+    type: 'text',
+  })
   questionText: string;
 
-  @Column('int', { name: 'sequence', nullable: false })
+  @Column({
+    name: 'sequence',
+    type: 'int',
+  })
   sequence: number;
 
-  @Column('boolean', { name: 'status', nullable: false })
+  @Column()
   status: boolean;
 
   @ManyToOne(() => InterviewEntity, (interview) => interview.id)
   interview: InterviewEntity;
+
+  // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
+  // questionBank: QuestionBank;
 }
