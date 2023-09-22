@@ -1,11 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 import { UserEntity } from '@/domain/user/entity/user.entity';
 
 @Entity('interview_question')
 export class InterviewQuestionEntity {
   @PrimaryGeneratedColumn({
-    name: 'question_id'
+    name: 'question_id',
   })
   questionId: number;
 
@@ -24,10 +30,10 @@ export class InterviewQuestionEntity {
   @Column()
   status: boolean;
 
-  @Column({name: 'user_id'})
+  @Column({ name: 'user_id' })
   userId: number;
 
   @ManyToOne(() => InterviewEntity)
-  @JoinColumn({name: 'user_id'})
+  @JoinColumn({ name: 'user_id' })
   interviewInfo: InterviewEntity;
 }
