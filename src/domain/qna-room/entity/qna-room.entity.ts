@@ -45,17 +45,22 @@ export class QnaRoom {
     }
   }
 
+  getCreatedAt(): string {
+    return this.createdAt.toISOString().slice(0, 16).replace('T', ' ');
+  }
+
   toResponse(): QnaRoomResponse {
-    return new QnaRoomResponse(this.id, this.title, this.createdAt, null);
+    return new QnaRoomResponse(this.id, this.title, this.getCreatedAt(), null);
   }
 
   toDetailResponse(): QnaRoomDetailResponse {
+    const qnaRoomResponses = this.qnas.map((qna) => qna.toResponse());
     return new QnaRoomDetailResponse(
       this.id,
       this.title,
-      this.createdAt,
+      this.getCreatedAt(),
       'username',
-      [],
+      qnaRoomResponses,
     );
   }
 }

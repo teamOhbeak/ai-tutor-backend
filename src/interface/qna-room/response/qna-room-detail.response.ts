@@ -9,7 +9,7 @@ export class QnaRoomDetailResponse {
   title: string;
 
   @ApiProperty({ example: '2023-09-01 13:00' })
-  createdAt: Date;
+  createdAt: string;
 
   @ApiProperty({ example: 'user1' })
   username: string;
@@ -20,7 +20,7 @@ export class QnaRoomDetailResponse {
   constructor(
     id: number,
     title: string,
-    createdAt: Date,
+    createdAt: string,
     username: string,
     qnas: QnaResponse[],
   ) {
