@@ -34,11 +34,16 @@ export class QuestionBankRepository extends Repository<QuestionBank> {
     Stack: StackType,
   ): Promise<QuestionBank[]> {
     const result = await this.find({
-      select: { stack: true },
-      where: { stack: Stack, createdAt: new Date() },
+      select: {
+        id: true,
+        question: true,
+        stack: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      where: { stack: StackType[Stack] },
     });
 
-    //get question by random
     return result.sort(() => Math.random() - Math.random()).slice(0, count);
   }
 }

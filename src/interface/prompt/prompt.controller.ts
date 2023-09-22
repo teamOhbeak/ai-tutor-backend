@@ -4,11 +4,13 @@ import { BatchService } from '../../domain/batch/batch.service';
 import { ApiResponse } from '@nestjs/swagger';
 import { FakeQuestionBankService } from '../../domain/questionsBank/service/fake-questionBank.service';
 import { StackType } from '../../domain/interview/entity/stack-type.enum';
+import { QuestionBankService } from '../../domain/questionsBank/service/questionBank.service';
 
 @Controller('promptTest')
 export class PromptController {
   constructor(
     private readonly promptService: PromptService,
+    private readonly questionBankService: QuestionBankService,
     private readonly batchService: BatchService,
     private readonly fakeQuestionBankService: FakeQuestionBankService,
   ) {}
@@ -35,13 +37,6 @@ export class PromptController {
     @Query('stack') stack: StackType,
     @Query('count') count: number,
   ) {
-    const result = await this.fakeQuestionBankService.getFakeQuestionByStack(
-      count,
-      stack,
-    );
-
-    console.log(result);
-
-    return result;
+    return await this.questionBankService.getQuestions(count, stack);
   }
 }

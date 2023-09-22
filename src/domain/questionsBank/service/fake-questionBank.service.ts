@@ -42,8 +42,6 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
 
     const exportData = [];
 
-    //create random date and time in today
-
     randomResult.map((question, index) => {
       const randomTime = Math.floor(Math.random() * 24);
       exportData.push(
