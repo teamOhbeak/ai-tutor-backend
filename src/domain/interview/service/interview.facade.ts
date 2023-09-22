@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InterviewService } from './interview.service';
 import { InterviewQuestionService } from '@/domain/interview-question/service/interview-question.service';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { InterviewEntity } from '../entity/interview.entity';
 import { IFakeQuestionBankService } from '@/domain/questionsBank/service/fake-questionBank.interface';
 import { FakeQuestionBankService } from '@/domain/questionsBank/service/fake-questionBank.service';
 import { InterviewQuestionUtil } from '../utils/interview-question.util';
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
+import { InterviewEntity } from '../entity/interview.entity';
+import { InterviewUtil } from '../utils/interview.util';
+import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 
 @Injectable()
 export class InterviewFacade {
@@ -42,5 +44,14 @@ export class InterviewFacade {
       );
 
     return InterviewQuestionUtil.toCreateInterviewResponse(interviewRoom);
+  }
+
+  async getMyCompletedInterviews(
+    userId: number,
+  ): Promise<MyInterviewResponse[]> {
+    const interviews = await this.interviewService.getMyCompletedInterviews(
+      userId,
+    );
+    return InterviewUtil.toInterviewListResponse(interviews);
   }
 }

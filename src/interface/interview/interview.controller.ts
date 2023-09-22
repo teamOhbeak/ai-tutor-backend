@@ -48,9 +48,11 @@ export class InterviewController {
 
   @Get()
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
-  async getMyInterviews(): Promise<InterviewEntity[]> {
+  async getMyInterviews(): Promise<MyInterviewResponse[]> {
     const userId = 1;
-    const interviews = await this.interviewService.getMyInterviews(userId);
+    const interviews = await this.interviewFacade.getMyCompletedInterviews(
+      userId,
+    );
     return interviews;
   }
 

@@ -3,6 +3,7 @@ import { CreateInterviewRequest } from '@/interface/interview/request/create-int
 import { Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
+import { InterviewStatus } from '../entity/insterview-status.enum';
 
 @Injectable()
 export class InterviewService {
@@ -16,12 +17,11 @@ export class InterviewService {
     return await this.interviewRepository.save(interview);
   }
 
-  async getMyInterviews(userId: number): Promise<InterviewEntity[]> {
-    const interviews = await this.interviewRepository.findBy({
-      userId: userId,
-    });
-    console.log(`interviews: ${JSON.stringify(interviews)}`);
-    return interviews;
+  async getMyCompletedInterviews(userId: number): Promise<InterviewEntity[]> {
+    return await this.interviewRepository.getInterviewsByUserIdAndStatus(
+      userId,
+      InterviewStatus.DONE,
+    );
   }
 
   getMyInterviewDetail(
