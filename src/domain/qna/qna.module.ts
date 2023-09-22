@@ -9,7 +9,12 @@ import { QnaService } from './service/qna.service';
 @Module({
   imports: [DatabaseModule],
   controllers: [QnaController],
-  providers: [QnaService, QnaRepository, QnaRoomRepository, PromptService],
+  providers: [
+    QnaService, 
+    QnaRepository, 
+    QnaRoomRepository, 
+    PromptService
+  ],
   exports: [QnaRepository],
 })
 export class QnaModule {}
