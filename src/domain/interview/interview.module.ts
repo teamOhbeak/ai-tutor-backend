@@ -11,6 +11,7 @@ import { InterviewQuestionService } from '../interview-question/service/intervie
 import { InterviewQuestionRepository } from '../interview-question/repository/interview-question.repository';
 import { InterviewFacade } from './service/interview.facade';
 import { QuestionBankService } from '../questionsBank/service/questionBank.service';
+import { FakeQuestionBankService } from '../questionsBank/service/fake-questionBank.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -21,7 +22,7 @@ import { QuestionBankService } from '../questionsBank/service/questionBank.servi
     InterviewRepository,
     InterviewQuestionService,
     InterviewQuestionRepository,
-    QuestionBankService,
+    FakeQuestionBankService,
     InterviewFacade,
   ],
 })
