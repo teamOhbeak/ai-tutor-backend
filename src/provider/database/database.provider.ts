@@ -18,14 +18,14 @@ export const databaseProviders = [
         .then((source: DataSource) => {})
         .catch(() => {});
       dataSource
-      .initialize()
-      .then((source: DataSource) => {
-        console.log(`db initialized`);
-      })
-      .catch((reason: any) => {
-        console.log(`db connection failed: ${JSON.stringify(reason)}`);
-      });
-    return dataSource;
+        .initialize()
+        .then((source: DataSource) => {
+          console.log(`db initialized`);
+        })
+        .catch((reason: any) => {
+          console.log(`db connection failed: ${JSON.stringify(reason)}`);
+        });
+      return dataSource;
     },
   },
 ];

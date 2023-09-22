@@ -15,7 +15,7 @@ export class InterviewQuestionsServiceImpl
 {
   constructor(
     private readonly interviewQuestionsRepository: InterviewQuestionsRepositoryImpl,
-    private readonly interviewAnswersRepository:  InterviewAnswersRepository,
+    private readonly interviewAnswersRepository: InterviewAnswersRepository,
     private readonly promptService: PromptService,
   ) {}
 
@@ -47,25 +47,24 @@ export class InterviewQuestionsServiceImpl
   }
 
   async submitAnswer(answer: string) {
-
     try {
-    const gptRes = await this.promptService.submitAnswer(answer);
+      const gptRes = await this.promptService.submitAnswer(answer);
 
-    console.error('???'); // 에러 로깅 추가
+      console.error('???'); // 에러 로깅 추가
 
-    const interviewAnswer = new InterviewAnswer(gptRes, 1);
-    // interviewAnswer.answer = answer;
-    // interviewAnswer.questionId = 1; // 임시로 1번으로 설정
-    await this.interviewAnswersRepository.save(
-    this.interviewAnswersRepository.create(interviewAnswer));
-    
-    console.error('!!!'); // 에러 로깅 추가
+      const interviewAnswer = new InterviewAnswer(gptRes, 1);
+      // interviewAnswer.answer = answer;
+      // interviewAnswer.questionId = 1; // 임시로 1번으로 설정
+      await this.interviewAnswersRepository.save(
+        this.interviewAnswersRepository.create(interviewAnswer),
+      );
 
-    return gptRes;
+      console.error('!!!'); // 에러 로깅 추가
 
-    }catch (error) {
+      return gptRes;
+    } catch (error) {
       console.error('Service Error in submitAnswer :', error); // 에러 로깅 추가
-    throw new Error('Method not implemented.');
+      throw new Error('Method not implemented.');
     }
   }
 }

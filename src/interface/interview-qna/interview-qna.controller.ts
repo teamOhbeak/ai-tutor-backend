@@ -43,11 +43,9 @@ export class InterviewQnaController {
 
   @Post(':questionId/answer')
   @ApiCreatedResponse()
-  async submitAnswer(
-    @Body() body: {answer: string}
-  ): Promise<string> {
+  async submitAnswer(@Body() body: { answer: string }): Promise<string> {
     const { answer } = body;
-     return await this.interviewQuestionsService.submitAnswer(answer);
+    return await this.interviewQuestionsService.submitAnswer(answer);
   }
 
   @Patch(':questionId/answer')

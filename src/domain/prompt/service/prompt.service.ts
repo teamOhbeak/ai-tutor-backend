@@ -140,7 +140,7 @@ export class PromptService {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
-  
+
     const prompt = `당신은 면접질문 어시스턴스입니다. 
     User의 대답을 듣고 옳고 그름을 판단하고, 대답에 대한 평가를 해주세요.
     또한 관련된 꼬리 질문을 1개 더 해주세요. 꼬리질문을 시작할때는 콜론 기호를 사용해 어디부터 꼬리 질문인지 알려주세요.

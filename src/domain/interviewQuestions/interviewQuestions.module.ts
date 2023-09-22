@@ -16,6 +16,7 @@ import { InterviewAnswerModule } from '../interviewAnswer/interviewAnswer.module
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
-    PromptService],
+    PromptService,
+  ],
 })
 export class InterviewQuestionsModule {}

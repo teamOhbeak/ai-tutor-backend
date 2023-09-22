@@ -9,7 +9,6 @@ import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interv
 
 @Entity('interview_answer')
 export class InterviewAnswer {
-
   @PrimaryGeneratedColumn()
   id: number;
 
