@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-// @Entity('interview_questions')
+@Entity({ name: 'interview_questions', schema: 'test' })
 export class InterviewQuestionsEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -28,8 +28,8 @@ export class InterviewQuestionsEntity {
   @Column()
   status: boolean;
 
-  // @ManyToOne(() => InterviewEntity, (interview) => interview.id)
-  // interview: InterviewEntity;
+  @ManyToOne((type) => InterviewEntity, (interview) => interview)
+  interview!: InterviewEntity;
 
   @Column()
   interviewId: number;
