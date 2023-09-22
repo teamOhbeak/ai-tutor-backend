@@ -11,21 +11,9 @@ export class QuestionBankService {
     private readonly questionBankRepository: QuestionBankRepository,
   ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
-  async collectingQuestionsFromGpt() {
-    const promptResult = await this.promptService.getInterviewQuestionsPrompt();
+  async collectingQuestionsFromGpt() {}
 
-    // const data: CreateQuestionBankResponse = {
-    //   question:
-    // };
-
-    // const questionBank = await this.questionBankRepository.getQuestionBank();
-  }
-
-  async getQuestions(count: number) {
-    // 요청한 개수 만큼의 질문을 가져온다.
-    const result = await this.questionBankRepository.getQuestions(count);
-  }
+  async getQuestions(count: number) {}
 }
 
 export enum QuestionType {
