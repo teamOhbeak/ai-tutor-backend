@@ -20,7 +20,6 @@ export class QnaService {
     const qnaRoom = await this.qnaRoomRepository.findQnaRoomWithQnas(
       qnaRequest.roomId,
     );
-    console.log('qnaRoomId: ' + qnaRoom.id);
 
     const qnaList = qnaRoom.qnas;
     let sequence: number;
