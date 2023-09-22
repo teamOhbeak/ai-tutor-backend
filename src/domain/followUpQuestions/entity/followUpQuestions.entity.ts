@@ -1,7 +1,7 @@
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('follow_up_questions')
+// @Entity('follow_up_questions')
 export class FollowUpQuestions {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,11 +18,14 @@ export class FollowUpQuestions {
   })
   sequence: number;
 
-  @ManyToOne(
-    () => InterviewQuestionsEntity,
-    (interviewQuestions) => interviewQuestions.id,
-  )
-  interviewQuestions: InterviewQuestionsEntity;
+  // @ManyToOne(
+  //   () => InterviewQuestionsEntity,
+  //   (interviewQuestions) => interviewQuestions.id,
+  // )
+  // interviewQuestions: InterviewQuestionsEntity;
+
+  @Column()
+  interviewQuestionsId: number;
 
   constructor(
     questionText: string,
@@ -31,6 +34,6 @@ export class FollowUpQuestions {
   ) {
     this.questionText = questionText;
     this.sequence = checkSequence ? 2 : 1; // checkSequence가 true일 경우2, 아닐 경우 1
-    this.interviewQuestions.id = questionId;
+    this.interviewQuestionsId = questionId;
   }
 }

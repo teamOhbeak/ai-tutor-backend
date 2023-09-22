@@ -16,9 +16,7 @@ export class FollowUpQuestionsRepositoryImpl
     try {
       const count = await this.count({
         where: {
-          interviewQuestions: {
-            id: questionId, // interviewQuestions의 id가 1인 데이터
-          },
+          interviewQuestionsId: questionId,
           sequence: 1, // sequence가 1인 데이터
         },
       });

@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('interview_answer')
+// @Entity('interview_answer')
 export class InterviewAnswer {
   @PrimaryGeneratedColumn()
   id: number;

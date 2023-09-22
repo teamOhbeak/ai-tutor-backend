@@ -20,6 +20,7 @@ export const databaseProviders = [
           console.log(`db initialized`);
         })
         .catch((reason: any) => {
+                  console.log(reason)
           console.log(`db connection failed: ${JSON.stringify(reason)}`);
         });
       return dataSource;

@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('interview_questions')
+// @Entity('interview_questions')
 export class InterviewQuestionsEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -28,14 +28,21 @@ export class InterviewQuestionsEntity {
   @Column()
   status: boolean;
 
-  @ManyToOne(() => InterviewEntity, (interview) => interview.id)
-  interview: InterviewEntity;
+  // @ManyToOne(() => InterviewEntity, (interview) => interview.id)
+  // interview: InterviewEntity;
 
-  @OneToMany(
-    () => FollowUpQuestions,
-    (followUpQuestions) => followUpQuestions.interviewQuestions,
-  )
-  followUpQuestions: FollowUpQuestions[];
+  @Column()
+  interviewId: number;
+
+  @Column()
+  intervieAnswerId: number;
+
+
+  // @OneToMany(
+  //   () => FollowUpQuestions,
+  //   (followUpQuestions) => followUpQuestions.interviewQuestions,
+  // )
+  // followUpQuestions: FollowUpQuestions[];
 
   // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
   // questionBank: QuestionBank;

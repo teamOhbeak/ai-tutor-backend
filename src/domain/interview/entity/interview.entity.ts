@@ -11,7 +11,7 @@ import { IsEnum, IsInt } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
 
-@Entity('interview')
+// @Entity('interview')
 export class InterviewEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -48,8 +48,8 @@ export class InterviewEntity {
   })
   finishedAt?: Date;
 
-  @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-  questions: InterviewQuestionsEntity[];
+  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  // questions: InterviewQuestionsEntity[];
 
   constructor() {}
 
