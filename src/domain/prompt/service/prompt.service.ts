@@ -14,7 +14,7 @@ export interface InterviewQuestion {
 }
 @Injectable()
 export class PromptService {
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   async getInterviewQuestionsPrompt(): Promise<InterviewQuestion> {
     const openAI = new OpenAI({
@@ -133,7 +133,6 @@ export class PromptService {
 
     return promptResult;
   }
-
 
   async submitAnswer(answer: string): Promise<string> {
     const openAI = new OpenAI({
