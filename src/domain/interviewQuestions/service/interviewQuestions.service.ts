@@ -53,7 +53,7 @@ export class InterviewQuestionsServiceImpl
       const interview = await this.interviewRepository.findOne({
         where: { id: interviewId },
       });
-      
+
       // 꼬리 질문 저장
       const checkSequence =
         await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
@@ -80,7 +80,6 @@ export class InterviewQuestionsServiceImpl
         );
         // 꼬리 대답 저장
       } else {
-
       }
 
       //DTO를 사용하여 데이터를 래핑합니다.
@@ -94,9 +93,9 @@ export class InterviewQuestionsServiceImpl
             followUpquestionId: follow_up_questions.id,
             questionText: follow_up_questions.questionText,
             createdAt: follow_up_questions.createdAt,
-          }
+          },
           // 여러 follow-up questions가 있다면 각각의 객체를 배열에 추가하세요.
-        ]
+        ],
         // questionId: questionId,
         // followUpQuestionsSequence: follow_up_questions.sequence,
         // followUpQuestion: gptResponse,
