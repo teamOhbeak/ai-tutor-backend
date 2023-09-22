@@ -21,8 +21,8 @@ export class InterviewQuestionsEntity {
   @Column()
   status: boolean;
 
-  @ManyToOne(() => InterviewEntity, (interview) => interview.questions)
-  interview: InterviewEntity;
+  // @ManyToOne(() => InterviewEntity, (interview) => interview.questions)
+  // interview: InterviewEntity;
 
   // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
   // questionBank: QuestionBank;

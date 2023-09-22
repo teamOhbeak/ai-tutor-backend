@@ -48,8 +48,8 @@ export class InterviewEntity {
   })
   finishedAt?: Date;
 
-  @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
-  questions: InterviewQuestionsEntity[];
+  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  // questions: InterviewQuestionsEntity[];
 
   constructor() {}
 
@@ -58,7 +58,7 @@ export class InterviewEntity {
     interview.stack = dto.stack;
     interview.questionCount = dto.questionCount;
     interview.maxWait = dto.maxWait;
-    interview.questions = [];
+    // interview.questions = [];
     interview.userId = userId;
     interview.status = InterviewStatus.WAIT;
     return interview;

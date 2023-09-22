@@ -15,7 +15,9 @@ export const databaseProviders = [
         .then((source: DataSource) => {
           console.log(`db initialized`);
         })
-        .catch(() => {});
+        .catch((reason: any) => {
+          console.log(`db connection failed: ${JSON.stringify(reason)}`);
+        });
 
       return dataSource;
     },
