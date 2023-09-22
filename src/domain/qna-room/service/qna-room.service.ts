@@ -32,20 +32,12 @@ export class QnaRoomService {
   }
 
   async getQnaRoomDetail(id: number): Promise<QnaRoomDetailResponse> {
-    const found = await this.qnaRoomRepository.findQnaRoomById(id);
+    const found = await this.qnaRoomRepository.findQnaRoomWithQnas(id);
     const qnaRoomDetailResponse = found.toDetailResponse();
     return qnaRoomDetailResponse;
-    // return Promise.resolve(<QnaRoomDetailResponse>{
-    //   id: 1,
-    //   title: 'this is title.',
-    //   username: 'user1',
-    //   createdAt: '2023-09-01 13:00',
-    //   qnas: [],
-    // });
   }
 
   async deleteQnaRoom(id: number): Promise<QnaRoomDeleteResponse> {
-    // add logic for filtering rooms which is deleted
     console.log('room id' + id);
     this.qnaRoomRepository.deleteQnaRoom(id);
     return Promise.resolve(<QnaRoomDeleteResponse>{

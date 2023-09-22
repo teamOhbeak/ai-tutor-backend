@@ -39,28 +39,19 @@ export class QnaService {
     /* TODO: answer
     아래 answer에 프롬프트 응답값 받아야함. 
     */
-
     const { answer } = await this.promptService.getQnaPrompt(
       qnaRequest.question,
     );
 
-    // const answer = 'this is answer.';
+    console.log('answer: ' + answer);
     const qna = new Qna(qnaRequest.question, answer, sequence, qnaRoom);
     const savedQna = await this.qnaRepository.save(qna);
     if (!qnaRoom.qnas) {
       qnaRoom.qnas = []; // Initialize qnas as an empty array if it's not already defined
     }
-
     qnaRoom.qnas.push(savedQna);
-
     await this.qnaRoomRepository.save(qnaRoom);
     return savedQna.toResponse();
-    // return Promise.resolve(<QnaResponse>{
-    //   id: 1,
-    //   sequence: 1,
-    //   question: 'this is question.',
-    //   answer: 'this is answer.',
-    // });
   }
 
   async getQnas(roomId: number): Promise<QnaResponse[]> {
