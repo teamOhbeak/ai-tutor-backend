@@ -1,5 +1,12 @@
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'follow_up_questions', schema: 'test' })
 export class FollowUpQuestions {
@@ -23,7 +30,6 @@ export class FollowUpQuestions {
   //   (interviewQuestions) => interviewQuestions.id,
   // )
   // interviewQuestions: InterviewQuestionsEntity;
-
 
   @Column()
   interviewQuestionsId: number;

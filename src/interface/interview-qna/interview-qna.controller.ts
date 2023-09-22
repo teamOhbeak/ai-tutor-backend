@@ -9,6 +9,7 @@ import { followUpQuestionResponse } from './response/allQuestion.response';
 import { InterviewQuestionsService } from '@/domain/interviewQuestions/service/interviewQuestions.interface';
 import { InterviewQuestionsServiceImpl } from '@/domain/interviewQuestions/service/interviewQuestions.service';
 import { InterviewQuestionDTO } from './response/InterviewQuestionDTO';
+import { AnswerRequestDto } from './request/answer.resquest';
 
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
@@ -28,7 +29,8 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param() params): Promise<InterviewQuestionDTO> {
+  async getQuestions(@Param() params,
+  @Body() body: { answer: string }): Promise<InterviewQuestionDTO> {
     const interviewId = params.interviewId; // interviewId 파라미터 추출
     return await this.interviewQuestionsService.getQuestions(interviewId);
   }
@@ -36,15 +38,13 @@ export class InterviewQnaController {
   @Post(':questionId/answer')
   @ApiCreatedResponse()
   async submitAnswer(
-    @Param('questionId') questionId: number, // questionId 파라미터를 가져옵니다.
-    @Body() body: { answer: string },
+    @Param('questionId') questionId: number,
+    @Body() answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse> {
-    const { answer } = body;
-    return await this.interviewQuestionsService.submitAnswer(
-      questionId,
-      answer,
-    );
+    // questionId와 answerRequestDto를 서비스로 전달
+    return await this.interviewQuestionsService.submitAnswer(questionId,answerRequestDto);
   }
+  
 
   @Patch(':questionId/answer')
   @ApiNoContentResponse()

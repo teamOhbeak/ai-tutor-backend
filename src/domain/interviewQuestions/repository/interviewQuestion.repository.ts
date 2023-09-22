@@ -28,10 +28,14 @@ export class InterviewQuestionsRepositoryImpl
           'interview_questions.questionText AS questionText',
           'interview_questions.createdAt AS createdAt',
         ])
-        .leftJoin('interview', 'interview', 'interview.id = interview_questions.interviewId')
+        .leftJoin(
+          'interview',
+          'interview',
+          'interview.id = interview_questions.interviewId',
+        )
         .where('interview.id = :interviewId', { interviewId })
         .getRawMany();
-  
+
       // "stack" 필드를 기준으로 그룹화
       const groupedResults = results.reduce((acc, result) => {
         if (!acc.stack) {
@@ -47,7 +51,7 @@ export class InterviewQuestionsRepositoryImpl
         });
         return acc;
       }, {} as InterviewQuestionDTO);
-  
+
       return groupedResults;
     } catch (error) {
       console.error('Error in getQuestions:', error);

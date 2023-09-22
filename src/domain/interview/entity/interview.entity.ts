@@ -11,7 +11,6 @@ import { IsEnum, IsInt } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
 
-
 @Entity({ name: 'interview', schema: 'test' })
 export class InterviewEntity {
   @PrimaryGeneratedColumn()

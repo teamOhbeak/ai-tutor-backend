@@ -9,6 +9,7 @@ import { InterviewQuestionDTO } from '@/interface/interview-qna/response/Intervi
 import { FollowUpQuestionsRepositoryImpl } from '@/domain/followUpQuestions/repository/followUpQuestions.repository';
 import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
 import { FollowUpQuestionsRepository } from '@/domain/followUpQuestions/repository/followUpQuestions.repository.interface';
+import { AnswerRequestDto, QuestionType } from '@/interface/interview-qna/request/answer.resquest';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -37,38 +38,41 @@ export class InterviewQuestionsServiceImpl
 
   async submitAnswer(
     questionId: number,
-    answer: string,
+    answerRequestDto: AnswerRequestDto
   ): Promise<followUpQuestionResponse> {
     try {
-      const gptResponse = await this.promptService.submitAnswer(answer);
+      const gptResponse = await this.promptService.submitAnswer(answerRequestDto.answer);
 
-      // const interviewAnswer = new InterviewAnswer(answer, questionId);
+      // 꼬리 질문 저장
+        const checkSequence =
+        await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      // await this.interviewAnswersRepository.save(
-      //   this.interviewAnswersRepository.create(interviewAnswer),
-      // );
+      const followUpQuestions = new FollowUpQuestions(
+        gptResponse,
+        checkSequence,
+        questionId,
+      );
 
-      // const checkSequence =
-      //   await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
+      const follow_up_questions = await this.followUpQuestionsRepository.save(
+        this.followUpQuestionsRepository.create(followUpQuestions),
+      );
 
-      // const followUpQuestions = new FollowUpQuestions(
-      //   gptResponse,
-      //   checkSequence,
-      //   questionId,
-      // );
-      // const follow_up_questions = await this.followUpQuestionsRepository.save(
-      //   this.followUpQuestionsRepository.create(followUpQuestions),
-      // );
+      // 메인 대답 저장
+      if(answerRequestDto.questionType === QuestionType.MAIN) {
+      const interviewAnswer = new InterviewAnswer(answerRequestDto.answer, questionId);
 
-      // DTO를 사용하여 데이터를 래핑합니다.
-      // const responseDto: followUpQuestionResponse = {
-      //   questionId: questionId,
-      //   followUpQuestionsSequence: follow_up_questions.sequence,
-      //   followUpQuestion: gptResponse,
-      // };
+      await this.interviewAnswersRepository.save(
+        this.interviewAnswersRepository.create(interviewAnswer),
+      );
+      // 꼬리 대답 저장
+      } else {
+
+      }
+
+      //DTO를 사용하여 데이터를 래핑합니다.
       const responseDto: followUpQuestionResponse = {
         questionId: questionId,
-        followUpQuestionsSequence: 1,
+        followUpQuestionsSequence: follow_up_questions.sequence,
         followUpQuestion: gptResponse,
       };
 

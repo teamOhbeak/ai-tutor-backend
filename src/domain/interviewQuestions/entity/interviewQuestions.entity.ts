@@ -37,7 +37,7 @@ export class InterviewQuestionsEntity {
   @Column()
   interviewId: number;
 
-  @UpdateDateColumn({ type: 'int', nullable: true }) 
+  @UpdateDateColumn({ type: 'int', nullable: true })
   intervieAnswerId: number | null;
 
   @CreateDateColumn({
