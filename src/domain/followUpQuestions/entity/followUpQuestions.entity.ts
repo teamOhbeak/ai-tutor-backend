@@ -18,9 +18,6 @@ export class FollowUpQuestions {
   })
   sequence: number;
 
-  @Column()
-  status: boolean;
-
   @ManyToOne(
     () => InterviewQuestionsEntity,
     (interviewQuestions) => interviewQuestions.id,
@@ -34,7 +31,6 @@ export class FollowUpQuestions {
   ) {
     this.questionText = questionText;
     this.sequence = checkSequence ? 2 : 1; // checkSequence가 true일 경우2, 아닐 경우 1
-    this.status = false;
     this.interviewQuestions.id = questionId;
   }
 }

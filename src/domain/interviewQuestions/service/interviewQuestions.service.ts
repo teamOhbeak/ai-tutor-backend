@@ -29,15 +29,13 @@ export class InterviewQuestionsServiceImpl
         interviewId,
       );
       return repo;
-    } catch {
+    } catch (error) {
+      console.error('Service Error in getQuestions :', error);
       throw new Error('Method not implemented.');
     }
   }
 
-  async submitAnswer(
-    questionId: number,
-    answer: string,
-  ): Promise<followUpQuestionResponse> {
+  async submitAnswer(questionId: number,answer: string,): Promise<followUpQuestionResponse> {
     try {
       const gptResponse = await this.promptService.submitAnswer(answer);
 
@@ -50,19 +48,16 @@ export class InterviewQuestionsServiceImpl
       const checkSequence =
         await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      const followUpQuestions = new FollowUpQuestions(
-        gptResponse,
-        checkSequence,
-        questionId,
-      );
-      await this.followUpQuestionsRepository.save(
+      const followUpQuestions = new FollowUpQuestions(gptResponse,checkSequence,questionId,);
+      const follow_up_questions = await this.followUpQuestionsRepository.save(
         this.followUpQuestionsRepository.create(followUpQuestions),
       );
 
       // DTO를 사용하여 데이터를 래핑합니다.
       const responseDto: followUpQuestionResponse = {
         questionId: questionId,
-        followUpQuestion: gptResponse, // 또는 다른 필요한 값을 여기에 추가
+        followUpQuestionsSequence: follow_up_questions.sequence,
+        followUpQuestion: gptResponse,
       };
 
       return responseDto;
