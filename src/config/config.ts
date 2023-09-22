@@ -7,6 +7,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
 
 export default () => ({
   DB: {
@@ -26,7 +27,8 @@ export default () => ({
       // QnaRoom,
       // InterviewAnswer,
       // InterviewQuestionsEntity,
-      'dist/**/**/**/**.entity{.ts,.js}',
+      // FollowUpQuestions,
+      // 'dist/**/**/**/**.entity{.ts,.js}',
       __dirname + '/../domain/**/*.entity.{js,ts}',
       __dirname + '/../domain/**/entity/*.entity.{js,ts}',
     ],

@@ -20,11 +20,12 @@ import { InterviewAnswersRepository } from '../interviewAnswer/repository/interv
     InterviewService,
     InterviewRepositoryImpl,
     QuestionBankRepository,
-    FollowUpQuestionsRepositoryImpl,
     PromptService,
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
+    FollowUpQuestionsRepositoryImpl,
+    PromptService,
   ],
 })
 export class FollowUpQuestionsModule {}

@@ -17,6 +17,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
 import { InterviewQuestionsModule } from './domain/interviewQuestions/interviewQuestions.module';
+import { InterviewAnswerModule } from './domain/interviewAnswer/interviewAnswer.module';
+import { FollowUpQuestions } from './domain/followUpQuestions/entity/followUpQuestions.entity';
+import { FollowUpQuestionsModule } from './domain/followUpQuestions/followUpQuestions.module';
 
 @Module({
   imports: [
@@ -34,6 +37,8 @@ import { InterviewQuestionsModule } from './domain/interviewQuestions/interviewQ
     PromptModule,
     QuestionBankModule,
     QnaModule,
+    InterviewAnswerModule,
+    FollowUpQuestionsModule,
   ],
   controllers: [PromptController],
   providers: [

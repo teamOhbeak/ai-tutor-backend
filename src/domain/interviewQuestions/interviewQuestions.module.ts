@@ -16,7 +16,7 @@ import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository
 import { FollowUpQuestionsModule } from '../followUpQuestions/followUpQuestions.module';
 
 @Module({
-  imports: [DatabaseModule, InterviewQuestionsModule, FollowUpQuestionsModule],
+  imports: [DatabaseModule],
   controllers: [InterviewController, InterviewQnaController],
   providers: [
     AuthService,
