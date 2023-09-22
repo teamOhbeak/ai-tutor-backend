@@ -29,9 +29,9 @@ export class InterviewRepository extends Repository<InterviewEntity> {
     return this.findOne({
       where: {
         id: interviewId,
-        userId: userId // 사실 필요없네
+        userId: userId, // 사실 필요없네
       },
-      relations: ['userInfo', 'questions']
+      relations: ['userInfo', 'questions'],
     });
   }
 }

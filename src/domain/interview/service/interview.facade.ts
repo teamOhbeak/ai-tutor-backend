@@ -56,10 +56,13 @@ export class InterviewFacade {
   }
 
   async getMyInterviewDetail(
-    userId: number, 
-    interviewId: number
+    userId: number,
+    interviewId: number,
   ): Promise<MyInterviewDetailResponse> {
-    const interview = await this.interviewService.findInterview(userId, interviewId);
+    const interview = await this.interviewService.findInterview(
+      userId,
+      interviewId,
+    );
     return InterviewUtil.toInterviewDetailResponse(interview);
   }
 }

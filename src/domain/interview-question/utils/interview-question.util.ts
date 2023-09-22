@@ -1,11 +1,10 @@
-import { QuestionBankResponse } from "@/interface/questionBank/response/questionBank.response";
-import { InterviewQuestionEntity } from "../entity/interview-question.entity";
-import { QuestionStatus } from "../entity/question-status.enum";
-import { InterviewQuestionResponse } from "src/interface/interview-qna/response/interview-question.response";
-import { QuestionType } from "../entity/question-type.enum";
+import { QuestionBankResponse } from '@/interface/questionBank/response/questionBank.response';
+import { InterviewQuestionEntity } from '../entity/interview-question.entity';
+import { QuestionStatus } from '../entity/question-status.enum';
+import { InterviewQuestionResponse } from 'src/interface/interview-qna/response/interview-question.response';
+import { QuestionType } from '../entity/question-type.enum';
 
 export class InterviewQuestionUtil {
-
   static generateInterviewQuestion(
     interviewId: number,
     questions: QuestionBankResponse[],
@@ -21,8 +20,9 @@ export class InterviewQuestionUtil {
     });
   }
 
-  static toInterviewQuestionResponse(question: InterviewQuestionEntity)
-  : InterviewQuestionResponse {
+  static toInterviewQuestionResponse(
+    question: InterviewQuestionEntity,
+  ): InterviewQuestionResponse {
     const q = new InterviewQuestionResponse();
     q.id = question.questionId;
     q.sequence = question.sequence;

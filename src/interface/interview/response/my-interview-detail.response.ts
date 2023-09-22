@@ -30,13 +30,8 @@ export class MyInterviewDetailResponse {
   @ApiProperty()
   userName: string;
 
-  constructor(
-    // id: number,
-    // status: InterviewStatus,
-    // createdAt: string,
-    // questions: QuestionResponse[],
-    // user: UserResponse,
-  ) {
+  constructor() {
+    // user: UserResponse, // questions: QuestionResponse[], // createdAt: string, // status: InterviewStatus, // id: number,
     // this.id = id;
     // this.status = status;
     // this.createdAt = createdAt;

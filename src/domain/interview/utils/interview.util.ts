@@ -5,7 +5,6 @@ import { MyInterviewDetailResponse } from '@/interface/interview/response/my-int
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 export class InterviewUtil {
-  
   static toCreateInterviewResponse(
     interview: InterviewEntity,
   ): CreateInterviewResponse {
@@ -31,9 +30,10 @@ export class InterviewUtil {
     );
   }
 
-  static toInterviewDetailResponse(interview: InterviewEntity)
-  : MyInterviewDetailResponse {
-    return <MyInterviewDetailResponse> {
+  static toInterviewDetailResponse(
+    interview: InterviewEntity,
+  ): MyInterviewDetailResponse {
+    return <MyInterviewDetailResponse>{
       id: interview.id,
       status: interview.status,
       createdAt: moment(interview.createdAt).format('YYYY-MM-DD HH:mm'),
@@ -44,7 +44,7 @@ export class InterviewUtil {
       userName: interview.userInfo.userName,
       questions: interview.questions.map((question) => {
         return InterviewQuestionUtil.toInterviewQuestionResponse(question);
-      })
-    }
+      }),
+    };
   }
 }

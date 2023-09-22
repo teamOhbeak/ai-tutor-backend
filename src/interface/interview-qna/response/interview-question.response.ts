@@ -1,5 +1,5 @@
-import { QuestionStatus } from "@/domain/interview-question/entity/question-status.enum";
-import { QuestionType } from "@/domain/interview-question/entity/question-type.enum";
+import { QuestionStatus } from '@/domain/interview-question/entity/question-status.enum';
+import { QuestionType } from '@/domain/interview-question/entity/question-type.enum';
 
 export class InterviewQuestionResponse {
   id: number;

@@ -26,12 +26,13 @@ export class InterviewService {
 
   async findInterview(userId: number, interviewId: number) {
     const interview = await this.interviewRepository.getInterviewDetailById(
-      interviewId, 
-      userId);
-    
-    if (!interview) 
-      throw new HttpException({error: '면접정보를 찾을 수 없습니다.'}, 404);
-    
+      interviewId,
+      userId,
+    );
+
+    if (!interview)
+      throw new HttpException({ error: '면접정보를 찾을 수 없습니다.' }, 404);
+
     return interview;
   }
 
