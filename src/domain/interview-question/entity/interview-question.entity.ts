@@ -33,7 +33,7 @@ export class InterviewQuestionEntity {
   @Column()
   status: QuestionStatus;
 
-  @Column({name: 'interview_id'})
+  @Column({ name: 'interview_id' })
   interviewId: number;
 
   @ManyToOne(() => InterviewEntity)

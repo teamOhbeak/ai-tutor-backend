@@ -49,8 +49,9 @@ export class InterviewEntity {
   finishedAt?: Date;
 
   @OneToMany(
-    () => InterviewQuestionEntity, 
-    (question) => question.interviewInfo)
+    () => InterviewQuestionEntity,
+    (question) => question.interviewInfo,
+  )
   questions: InterviewQuestionEntity[];
 
   constructor() {}
