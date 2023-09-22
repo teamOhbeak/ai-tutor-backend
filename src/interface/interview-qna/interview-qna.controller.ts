@@ -40,7 +40,7 @@ export class InterviewQnaController {
     @Body() body: { answer: string },
   ): Promise<followUpQuestionResponse> {
     const { answer } = body;
-    return await this.interviewQuestionsService.submitAnswer(questionId, answer);
+    return await this.interviewQuestionsService.submitAnswer(questionId,answer);
   }
 
   @Patch(':questionId/answer')

@@ -1,7 +1,7 @@
-import { DataSource, EntityRepository, Repository } from "typeorm";
-import { FollowUpQuestions } from "../entity/followUpQuestions.entity";
-import { Inject } from "@nestjs/common";
-import { FollowUpQuestionsRepository } from "./followUpQuestions.repository.interface";
+import { DataSource, EntityRepository, Repository } from 'typeorm';
+import { FollowUpQuestions } from '../entity/followUpQuestions.entity';
+import { Inject } from '@nestjs/common';
+import { FollowUpQuestionsRepository } from './followUpQuestions.repository.interface';
 
 @EntityRepository(FollowUpQuestions)
 export class FollowUpQuestionsRepositoryImpl
@@ -13,20 +13,19 @@ export class FollowUpQuestionsRepositoryImpl
   }
 
   async hasFollowUpQuestions(questionId: number): Promise<boolean> {
-
     try {
-    const count = await this.count({
-      where: {
-        interviewQuestions: {
-          id: questionId, // interviewQuestions의 id가 1인 데이터
+      const count = await this.count({
+        where: {
+          interviewQuestions: {
+            id: questionId, // interviewQuestions의 id가 1인 데이터
+          },
+          sequence: 1, // sequence가 1인 데이터
         },
-        sequence: 1, // sequence가 1인 데이터
-      },
-    });
-    return count > 0; // count가 0보다 크면 true, 아니면 false 반환
-  } catch(error) {
-    console.error('Error in getQuestions:', error);
-    throw new Error('Failed to get questions.');
-  }
+      });
+      return count > 0; // count가 0보다 크면 true, 아니면 false 반환
+    } catch (error) {
+      console.error('Error in getQuestions:', error);
+      throw new Error('Failed to get questions.');
+    }
   }
 }

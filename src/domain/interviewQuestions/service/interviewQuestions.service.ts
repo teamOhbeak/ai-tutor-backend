@@ -21,7 +21,9 @@ export class InterviewQuestionsServiceImpl
     private readonly promptService: PromptService,
   ) {}
 
-  public async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
+  public async getQuestions(
+    interviewId: number,
+  ): Promise<InterviewQuestionDTO[]> {
     try {
       const repo = await this.interviewQuestionsRepository.getQuestions(
         interviewId,
@@ -32,23 +34,24 @@ export class InterviewQuestionsServiceImpl
     }
   }
 
-  async submitAnswer(
-    questionId: number,
-    answer: string,
-  ): Promise<followUpQuestionResponse> {
+  async submitAnswer(questionId: number,answer: string,): Promise<followUpQuestionResponse> {
     try {
       const gptResponse = await this.promptService.submitAnswer(answer);
 
       const interviewAnswer = new InterviewAnswer(answer, questionId);
-      
 
       await this.interviewAnswersRepository.save(
         this.interviewAnswersRepository.create(interviewAnswer),
       );
 
-      const checkSequence = await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
+      const checkSequence =
+        await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
-      const followUpQuestions = new FollowUpQuestions(gptResponse, checkSequence, questionId);
+      const followUpQuestions = new FollowUpQuestions(
+        gptResponse,
+        checkSequence,
+        questionId,
+      );
       await this.followUpQuestionsRepository.save(
         this.followUpQuestionsRepository.create(followUpQuestions),
       );
@@ -66,9 +69,3 @@ export class InterviewQuestionsServiceImpl
     }
   }
 }
-
-
-
-
-
-

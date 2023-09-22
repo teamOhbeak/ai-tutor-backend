@@ -1,6 +1,3 @@
-
-
-
 export class followUpQuestionResponse {
   questionId: number;
 

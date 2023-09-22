@@ -1,5 +1,5 @@
-import { InterviewQuestionDTO } from "@/interface/interview-qna/response/InterviewQuestionDTO";
-import { followUpQuestionResponse } from "@/interface/interview-qna/response/allQuestion.response";
+import { InterviewQuestionDTO } from '@/interface/interview-qna/response/InterviewQuestionDTO';
+import { followUpQuestionResponse } from '@/interface/interview-qna/response/allQuestion.response';
 
 export interface InterviewQuestionsService {
   getQuestions(
@@ -10,5 +10,5 @@ export interface InterviewQuestionsService {
   submitAnswer(
     questionId: number,
     answer: string,
-  ): Promise<followUpQuestionResponse> ;
+  ): Promise<followUpQuestionResponse>;
 }
