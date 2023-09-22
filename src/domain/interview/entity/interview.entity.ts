@@ -4,12 +4,15 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { IsEnum } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
 import { InterviewQuestionEntity } from '@/domain/interview-question/entity/interview-question.entity';
+import { UserEntity } from '@/domain/user/entity/user.entity';
 
 @Entity('interview')
 export class InterviewEntity {
@@ -53,6 +56,10 @@ export class InterviewEntity {
     (question) => question.interviewInfo,
   )
   questions: InterviewQuestionEntity[];
+
+  @ManyToOne(() => UserEntity)
+  @JoinColumn({name: 'user_id'})
+  userInfo!: UserEntity;
 
   constructor() {}
 

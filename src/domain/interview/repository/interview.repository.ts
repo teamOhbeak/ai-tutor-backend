@@ -31,14 +31,16 @@ export class InterviewRepository extends Repository<InterviewEntity> {
     }
   }
 
-  async getCompletedInterviewsByUserId(userId: number)
-  : Promise<InterviewEntity[]> {
+  async getInterviewsByUserIdAndStatus(
+    userId: number,
+    status: InterviewStatus
+  ): Promise<InterviewEntity[]> {
     return await this.find({
-      where: { 
-        userId: userId, 
-        status: InterviewStatus.DONE
+      where: {
+        userId: userId,
+        status: status,
       },
-      relations: ['uesr']
+      relations: ['userInfo'],
     });
   }
 }
