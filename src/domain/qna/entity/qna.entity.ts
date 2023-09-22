@@ -15,10 +15,10 @@ export class Qna {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'text' })
   question?: string;
 
-  @Column()
+  @Column({ type: 'text' })
   answer?: string;
 
   @Column()

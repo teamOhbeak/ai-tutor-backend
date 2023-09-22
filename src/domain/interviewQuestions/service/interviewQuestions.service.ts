@@ -11,11 +11,10 @@ import {
   AnswerRequestDto,
   QuestionType,
 } from '@/interface/interview-qna/request/answer.resquest';
-import { followUpQuestionResponse } from '@/interface/interview-qna/response/followUpQuestionResponse';
-import { InterviewRepositoryImpl } from '@/domain/interview/repository/interview.repository';
 import { FollowUpAnswer } from '@/domain/followUpAnswer/entity/followUpAnswer.entity';
 import { AnswerResponse } from '@/interface/interview-qna/response/answer.response';
 import { FollowUpAnswerRepositoryImpl } from '@/domain/followUpAnswer/repository/followUpAnswer.repository';
+import { InterviewRepository } from '@/domain/interview/repository/interview.repository';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -25,7 +24,7 @@ export class InterviewQuestionsServiceImpl
     private readonly interviewQuestionsRepository: InterviewQuestionsRepositoryImpl,
     private readonly interviewAnswersRepository: InterviewAnswersRepository,
     private readonly followUpQuestionsRepository: FollowUpQuestionsRepositoryImpl,
-    private readonly interviewRepository: InterviewRepositoryImpl,
+    private readonly interviewRepository: InterviewRepository,
     private readonly followUpAnswersRepository: FollowUpAnswerRepositoryImpl,
     private readonly promptService: PromptService,
   ) {}

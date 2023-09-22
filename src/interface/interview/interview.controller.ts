@@ -6,34 +6,29 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  InterviewStatus,
-  MyInterviewDetailResponse,
-} from './response/my-interview-detail.response';
+import { MyInterviewDetailResponse } from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
-import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
-import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
 import { UserResponse } from './response/user.response';
 import { InterviewService } from '@/domain/interview/service/interview.service';
 import { MyInterviewResponse } from './response/my-interview.response';
 import { AuthService } from '@/domain/auth/service/auth.service';
 import { CreateInterviewResponse } from './response/create-interview.response';
+import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
+import { InterviewFacade } from '@/domain/interview/service/interview.facade';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
 export class InterviewController {
   constructor(
     private readonly authService: AuthService,
-    private readonly interviewService: InterviewService,
+    private readonly interviewFacade: InterviewFacade,
   ) {}
 
   @Post()
@@ -45,16 +40,18 @@ export class InterviewController {
     @Body() dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
     const userId = await this.authService.getAuth().userId;
-    const interview = await this.interviewService.createInterview(userId, dto);
-    return new CreateInterviewResponse(interview.id);
+    const response = await this.interviewFacade.createInterview(userId, dto);
+    return response;
   }
 
   @Get()
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
   async getMyInterviews(): Promise<MyInterviewResponse[]> {
     const userId = 1;
-    await this.interviewService.getMyInterviews(userId);
-    return this.interviewService.getMyInterviews(userId);
+    const interviews = await this.interviewFacade.getMyCompletedInterviews(
+      userId,
+    );
+    return interviews;
   }
 
   @Get(':interviewId')
@@ -63,9 +60,7 @@ export class InterviewController {
     @Param('interviewId') interviewId: number,
   ): Promise<MyInterviewDetailResponse> {
     const userId = 1;
-    const user = new UserResponse();
-    user.userName = '이민규';
-    return this.interviewService.getMyInterviewDetail(userId, interviewId);
+    return this.interviewFacade.getMyInterviewDetail(userId, interviewId);
   }
 
   @Put(':interviewId') // 면접 진행 중 나가기
@@ -73,7 +68,8 @@ export class InterviewController {
   async cancelInterview(
     @Param('interviewId') interviewId: number,
   ): Promise<any> {
-    return null;
+    const userId = 1;
+    return this.interviewFacade.cancelInterview(userId, interviewId);
   }
 
   @Delete(':interviewId') // 면접 목록 리스트 삭제

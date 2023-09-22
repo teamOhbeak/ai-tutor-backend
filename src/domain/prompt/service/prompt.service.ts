@@ -1,3 +1,4 @@
+import { Qna } from '@/domain/qna/entity/qna.entity';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
@@ -133,41 +134,11 @@ export class PromptService {
 
     return promptResult;
   }
-
-  async submitAnswer(answer: string): Promise<string> {
+  async getQnaPrompt(question: string, qnaList: Qna[]): Promise<any> {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
 
-    const prompt = `당신은 면접질문 어시스턴스입니다. 
-    내 대답을 듣고 옳고 그름을 판단하고, 대답에 대한 평가를 해주세요.
-    또한 관련된 꼬리 질문을 1개 더 해주세요, 꼬리질문 할때 :를 쓰지말고 말해주세요.
-    당신이 대답할때 실제 면접 상황 처럼 대화 형식으로 자연스럽게 말해주세요.
-    50자 이내로 말해주세요.
-    내 대답: ${answer}`;
-
-    try {
-      const response = await openAI.chat.completions.create({
-        model: 'gpt-3.5-turbo-0613',
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: prompt },
-        ],
-      });
-
-      if (response.choices && response.choices.length > 0) {
-        return response.choices[0].message.content;
-      } else {
-        throw new Error('No response from OpenAI.');
-      }
-    } catch (error) {
-      throw new Error('Error generating answer: ' + error.message);
-    }
-  }
-  async getQnaPrompt(question: string): Promise<any> {
-    const openAI = new OpenAI({
-      apiKey: this.configService.get<string>('openAIConfig'),
-    });
     console.log('apiToken: ' + openAI.apiKey);
 
     const schema = {
@@ -182,18 +153,59 @@ export class PromptService {
       },
     };
 
+    const messages = [];
+
+    // if (qna) {
+    //   messages.push({
+    //     role: 'user',
+    //     content: qna.question,
+    //   });
+    //   messages.push({
+    //     role: 'system',
+    //     content:
+    //       qna.answer !== '답변이 없습니다.'
+    //         ? qna.answer
+    //         : '이전 답변이 없습니다.',
+    //   });
+    // }
+
+    if (qnaList && qnaList.length > 0) {
+      // Iterate through qnaList and push each Qna's question and answer as messages
+      qnaList.forEach((qna) => {
+        if (qna.question !== null && qna.answer !== '답변이 없습니다.') {
+          messages.push({
+            role: 'user',
+            content: qna.question,
+          });
+          messages.push({
+            role: 'system',
+            content: qna.answer,
+          });
+        }
+      });
+    }
+    messages.push(
+      {
+        role: 'system',
+        content:
+          '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.' +
+          '\n 질문의 답변을 해주세요. 질문을 하는 사람은 배우는 입장이기 때문에. ' +
+          '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 됩니다.' +
+          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.',
+      },
+      {
+        role: 'user',
+        content:
+          question +
+          '\n 한국어로 답변해줘. 그리고 내 질문을 그대로 다시 나한테 보여주진 마.',
+      },
+    );
+
+    console.log(messages);
+
     const promptResult = await openAI.chat.completions
       .create({
-        messages: [
-          {
-            role: 'system',
-            content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
-          },
-          {
-            role: 'user',
-            content: question,
-          },
-        ],
+        messages: messages,
         functions: [{ name: 'set_questions', parameters: schema }],
         function_call: { name: 'set_questions' },
         model: 'gpt-3.5-turbo-0613',
@@ -205,6 +217,8 @@ export class PromptService {
         return JSON.parse(generateText);
       })
       .catch((err) => {
+        console.log('open ai error.');
+        console.log(err.message);
         return { error: err.message };
       });
 

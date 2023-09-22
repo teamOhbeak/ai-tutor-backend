@@ -1,14 +1,8 @@
-import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
-import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'interview_questions', schema: 'test' })

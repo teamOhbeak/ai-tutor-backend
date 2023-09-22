@@ -6,15 +6,16 @@ import { InterviewQuestionsServiceImpl } from './service/interviewQuestions.serv
 import { InterviewQuestionsRepositoryImpl } from './repository/interviewQuestion.repository';
 import { PromptService } from '../prompt/service/prompt.service';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
-import { InterviewEntity } from '../interview/entity/interview.entity';
-import { InterviewAnswerModule } from '../interviewAnswer/interviewAnswer.module';
 import { AuthService } from '../auth/service/auth.service';
 import { InterviewService } from '../interview/service/interview.service';
-import { InterviewRepositoryImpl } from '../interview/repository/interview.repository';
 import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
 import { FollowUpQuestionsRepositoryImpl } from '../followUpQuestions/repository/followUpQuestions.repository';
-import { FollowUpQuestionsModule } from '../followUpQuestions/followUpQuestions.module';
 import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/followUpAnswer.repository';
+import { InterviewRepository } from '../interview/repository/interview.repository';
+import { InterviewFacade } from '../interview/service/interview.facade';
+import { FakeQuestionBankService } from '../questionsBank/service/fake-questionBank.service';
+import { InterviewQuestionService } from '../interview-question/service/interview-question.service';
+import { InterviewQuestionRepository } from '../interview-question/repository/interview-question.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -22,7 +23,7 @@ import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/follo
   providers: [
     AuthService,
     InterviewService,
-    InterviewRepositoryImpl,
+    InterviewRepository,
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
@@ -30,6 +31,10 @@ import { FollowUpAnswerRepositoryImpl } from '../followUpAnswer/repository/follo
     QuestionBankRepository,
     FollowUpQuestionsRepositoryImpl,
     FollowUpAnswerRepositoryImpl,
+    InterviewFacade,
+    FakeQuestionBankService,
+    InterviewQuestionService,
+    InterviewQuestionRepository,
   ],
 })
 export class InterviewQuestionsModule {}
