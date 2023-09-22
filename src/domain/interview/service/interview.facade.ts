@@ -67,13 +67,15 @@ export class InterviewFacade {
     return InterviewUtil.toInterviewDetailResponse(interview);
   }
 
-  async cancelInterview(userId: number, interviewId: number)
-  : Promise<CanceledInterviewResponse> {
-    
-    const canceledInterview = await this.interviewService
-      .cancelInterview(userId, interviewId);
-    
-    return InterviewUtil
-      .toCanceledInterviewResponse(canceledInterview)
+  async cancelInterview(
+    userId: number,
+    interviewId: number,
+  ): Promise<CanceledInterviewResponse> {
+    const canceledInterview = await this.interviewService.cancelInterview(
+      userId,
+      interviewId,
+    );
+
+    return InterviewUtil.toCanceledInterviewResponse(canceledInterview);
   }
 }

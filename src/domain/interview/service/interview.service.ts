@@ -36,8 +36,10 @@ export class InterviewService {
     return interview;
   }
 
-  async cancelInterview(userId: number, interviewId: number)
-  : Promise<InterviewEntity> {
+  async cancelInterview(
+    userId: number,
+    interviewId: number,
+  ): Promise<InterviewEntity> {
     const interview = await this.findInterview(userId, interviewId);
     interview.cancel(userId);
     return await this.interviewRepository.save(interview);

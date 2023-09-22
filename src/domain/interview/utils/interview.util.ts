@@ -50,7 +50,7 @@ export class InterviewUtil {
   }
 
   static toCanceledInterviewResponse(
-    interview: InterviewEntity
+    interview: InterviewEntity,
   ): CanceledInterviewResponse {
     return new CanceledInterviewResponse(interview.id, interview.status);
   }
