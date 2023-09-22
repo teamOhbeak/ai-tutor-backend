@@ -9,6 +9,7 @@ import { InterviewUtil } from '../utils/interview.util';
 import { MyInterviewResponse } from '@/interface/interview/response/my-interview.response';
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
+import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
 
 @Injectable()
 export class InterviewFacade {
@@ -64,5 +65,15 @@ export class InterviewFacade {
       interviewId,
     );
     return InterviewUtil.toInterviewDetailResponse(interview);
+  }
+
+  async cancelInterview(userId: number, interviewId: number)
+  : Promise<CanceledInterviewResponse> {
+    
+    const canceledInterview = await this.interviewService
+      .cancelInterview(userId, interviewId);
+    
+    return InterviewUtil
+      .toCanceledInterviewResponse(canceledInterview)
   }
 }

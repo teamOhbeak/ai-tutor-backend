@@ -36,10 +36,10 @@ export class InterviewService {
     return interview;
   }
 
-  getMyInterviewDetail(
-    userId: number,
-    interviewId: number,
-  ): Promise<MyInterviewDetailResponse> {
-    throw new Error('Method not implemented.');
+  async cancelInterview(userId: number, interviewId: number)
+  : Promise<InterviewEntity> {
+    const interview = await this.findInterview(userId, interviewId);
+    interview.cancel(userId);
+    return await this.interviewRepository.save(interview);
   }
 }
