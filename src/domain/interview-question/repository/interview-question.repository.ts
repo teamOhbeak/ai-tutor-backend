@@ -1,10 +1,9 @@
-import { DataSource, EntityRepository, Repository } from "typeorm";
-import { InterviewQuestionEntity } from "../entity/interview-question.entity";
-import { Inject } from "@nestjs/common";
+import { DataSource, EntityRepository, Repository } from 'typeorm';
+import { InterviewQuestionEntity } from '../entity/interview-question.entity';
+import { Inject } from '@nestjs/common';
 
 @EntityRepository(InterviewQuestionEntity)
 export class InterviewQuestionRepository extends Repository<InterviewQuestionEntity> {
-
   /**
    *
    */
