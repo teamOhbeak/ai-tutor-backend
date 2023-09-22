@@ -73,7 +73,6 @@ export class InterviewFacade {
     userId: number,
     interviewId: number,
   ): Promise<CanceledInterviewResponse> {
-    
     const canceledInterview = await this.interviewService.cancelInterview(
       userId,
       interviewId,
@@ -82,14 +81,17 @@ export class InterviewFacade {
   }
 
   async deleteInterview(
-    userId: number, 
+    userId: number,
     interviewId: number,
   ): Promise<DeletedInterviewResponse> {
-    
     //TODO: interview-qna.service -> deleteQuestionsByInterviewId
-    await this.interviewQuestionService.deleteInterviewQuestionsByInterviewId(interviewId)
-    const deletedInterview = await this.interviewService
-      .deleteInterview(userId, interviewId);
+    await this.interviewQuestionService.deleteInterviewQuestionsByInterviewId(
+      interviewId,
+    );
+    const deletedInterview = await this.interviewService.deleteInterview(
+      userId,
+      interviewId,
+    );
     return InterviewUtil.toDeletedInterviewResponse(deletedInterview);
   }
 }

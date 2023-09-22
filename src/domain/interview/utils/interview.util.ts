@@ -7,7 +7,6 @@ import { InterviewQuestionUtil } from '@/domain/interview-question/utils/intervi
 import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
 import { DeletedInterviewResponse } from '@/interface/interview/response/deleted-interview.response';
 export class InterviewUtil {
-  
   static toCreateInterviewResponse(
     interview: InterviewEntity,
   ): CreateInterviewResponse {
@@ -57,8 +56,9 @@ export class InterviewUtil {
     return new CanceledInterviewResponse(interview.id, interview.status);
   }
 
-  static toDeletedInterviewResponse(deletedInterview: InterviewEntity)
-  : DeletedInterviewResponse {
+  static toDeletedInterviewResponse(
+    deletedInterview: InterviewEntity,
+  ): DeletedInterviewResponse {
     return new DeletedInterviewResponse(deletedInterview.id);
   }
 }

@@ -45,8 +45,8 @@ export class InterviewService {
   }
 
   async deleteInterview(
-    userId: number, 
-    interviewId: number
+    userId: number,
+    interviewId: number,
   ): Promise<InterviewEntity> {
     const interview = await this.findInterview(userId, interviewId);
     return await this.interviewRepository.remove(interview);
