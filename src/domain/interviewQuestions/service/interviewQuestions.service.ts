@@ -9,7 +9,10 @@ import { InterviewQuestionDTO } from '@/interface/interview-qna/response/Intervi
 import { FollowUpQuestionsRepositoryImpl } from '@/domain/followUpQuestions/repository/followUpQuestions.repository';
 import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
 import { FollowUpQuestionsRepository } from '@/domain/followUpQuestions/repository/followUpQuestions.repository.interface';
-import { AnswerRequestDto, QuestionType } from '@/interface/interview-qna/request/answer.resquest';
+import {
+  AnswerRequestDto,
+  QuestionType,
+} from '@/interface/interview-qna/request/answer.resquest';
 
 @Injectable()
 export class InterviewQuestionsServiceImpl
@@ -38,13 +41,15 @@ export class InterviewQuestionsServiceImpl
 
   async submitAnswer(
     questionId: number,
-    answerRequestDto: AnswerRequestDto
+    answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse> {
     try {
-      const gptResponse = await this.promptService.submitAnswer(answerRequestDto.answer);
+      const gptResponse = await this.promptService.submitAnswer(
+        answerRequestDto.answer,
+      );
 
       // 꼬리 질문 저장
-        const checkSequence =
+      const checkSequence =
         await this.followUpQuestionsRepository.hasFollowUpQuestions(questionId);
 
       const followUpQuestions = new FollowUpQuestions(
@@ -58,15 +63,17 @@ export class InterviewQuestionsServiceImpl
       );
 
       // 메인 대답 저장
-      if(answerRequestDto.questionType === QuestionType.MAIN) {
-      const interviewAnswer = new InterviewAnswer(answerRequestDto.answer, questionId);
+      if (answerRequestDto.questionType === QuestionType.MAIN) {
+        const interviewAnswer = new InterviewAnswer(
+          answerRequestDto.answer,
+          questionId,
+        );
 
-      await this.interviewAnswersRepository.save(
-        this.interviewAnswersRepository.create(interviewAnswer),
-      );
-      // 꼬리 대답 저장
+        await this.interviewAnswersRepository.save(
+          this.interviewAnswersRepository.create(interviewAnswer),
+        );
+        // 꼬리 대답 저장
       } else {
-
       }
 
       //DTO를 사용하여 데이터를 래핑합니다.

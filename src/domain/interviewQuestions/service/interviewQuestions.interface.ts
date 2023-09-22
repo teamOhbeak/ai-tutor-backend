@@ -10,6 +10,6 @@ export interface InterviewQuestionsService {
 
   submitAnswer(
     questionId: number,
-    answerRequestDto: AnswerRequestDto
+    answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse>;
 }

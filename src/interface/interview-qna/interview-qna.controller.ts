@@ -29,8 +29,10 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param() params,
-  @Body() body: { answer: string }): Promise<InterviewQuestionDTO> {
+  async getQuestions(
+    @Param() params,
+    @Body() body: { answer: string },
+  ): Promise<InterviewQuestionDTO> {
     const interviewId = params.interviewId; // interviewId 파라미터 추출
     return await this.interviewQuestionsService.getQuestions(interviewId);
   }
@@ -42,9 +44,11 @@ export class InterviewQnaController {
     @Body() answerRequestDto: AnswerRequestDto,
   ): Promise<followUpQuestionResponse> {
     // questionId와 answerRequestDto를 서비스로 전달
-    return await this.interviewQuestionsService.submitAnswer(questionId,answerRequestDto);
+    return await this.interviewQuestionsService.submitAnswer(
+      questionId,
+      answerRequestDto,
+    );
   }
-  
 
   @Patch(':questionId/answer')
   @ApiNoContentResponse()

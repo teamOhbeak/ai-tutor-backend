@@ -1,13 +1,11 @@
-
-
 export enum QuestionType {
   MAIN = 'MAIN',
-  FOLLOWUP = 'FOLLOWUP'
+  FOLLOWUP = 'FOLLOWUP',
 }
 
 export class AnswerRequestDto {
   questionType: QuestionType;
   interviewQuestionId: number;
   followUpQuestionId: number;
-  answer: string
+  answer: string;
 }
