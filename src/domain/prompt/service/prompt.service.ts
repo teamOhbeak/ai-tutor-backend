@@ -134,7 +134,7 @@ export class PromptService {
 
     return promptResult;
   }
-  async getQnaPrompt(question: string, qna: Qna): Promise<any> {
+  async getQnaPrompt(question: string, qnaList: Qna[]): Promise<any> {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
     });
@@ -155,28 +155,49 @@ export class PromptService {
 
     const messages = [];
 
-    if (qna) {
-      messages.push({
-        role: 'user',
-        content: qna.question,
-      });
-      messages.push({
-        role: 'system',
-        content:
-          qna.answer !== '답변이 없습니다.'
-            ? qna.answer
-            : '이전 답변이 없습니다.',
+    // if (qna) {
+    //   messages.push({
+    //     role: 'user',
+    //     content: qna.question,
+    //   });
+    //   messages.push({
+    //     role: 'system',
+    //     content:
+    //       qna.answer !== '답변이 없습니다.'
+    //         ? qna.answer
+    //         : '이전 답변이 없습니다.',
+    //   });
+    // }
+
+    if (qnaList && qnaList.length > 0) {
+      // Iterate through qnaList and push each Qna's question and answer as messages
+      qnaList.forEach((qna) => {
+        if (qna.question !== null && qna.answer !== '답변이 없습니다.') {
+          messages.push({
+            role: 'user',
+            content: qna.question,
+          });
+          messages.push({
+            role: 'system',
+            content: qna.answer,
+          });
+        }
       });
     }
-
     messages.push(
       {
         role: 'system',
-        content: '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.',
+        content:
+          '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.' +
+          '\n 질문의 답변을 해주세요. 질문을 하는 사람은 배우는 입장이기 때문에. ' +
+          '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 됩니다.' +
+          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.',
       },
       {
         role: 'user',
-        content: question,
+        content:
+          question +
+          '\n 한국어로 답변해줘. 그리고 내 질문을 그대로 다시 나한테 보여주진 마.',
       },
     );
 

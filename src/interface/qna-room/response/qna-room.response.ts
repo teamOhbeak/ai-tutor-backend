@@ -17,6 +17,6 @@ export class QnaRoomResponse {
     this.id = id;
     this.title = title;
     this.createdAt = createdAt;
-    this.username = username;
+    this.username = 'user1';
   }
 }
