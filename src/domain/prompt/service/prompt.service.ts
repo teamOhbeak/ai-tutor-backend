@@ -14,7 +14,7 @@ export interface InterviewQuestion {
 }
 @Injectable()
 export class PromptService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   async getInterviewQuestionsPrompt(): Promise<InterviewQuestion> {
     const openAI = new OpenAI({
@@ -139,9 +139,7 @@ export class PromptService {
       apiKey: this.configService.get<string>('openAIConfig'),
     });
 
-    console.log(
-      'open ai token : ' + this.configService.get<string>('openAIConfig'),
-    );
+    console.log('apiToken: ' + openAI.apiKey);
 
     const schema = {
       type: 'object',
