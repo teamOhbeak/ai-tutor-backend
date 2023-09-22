@@ -28,7 +28,7 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param() params): Promise<InterviewQuestionDTO[]> {
+  async getQuestions(@Param() params): Promise<InterviewQuestionDTO> {
     const interviewId = params.interviewId; // interviewId 파라미터 추출
     return await this.interviewQuestionsService.getQuestions(interviewId);
   }

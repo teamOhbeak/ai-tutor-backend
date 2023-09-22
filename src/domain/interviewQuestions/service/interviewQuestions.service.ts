@@ -23,7 +23,7 @@ export class InterviewQuestionsServiceImpl
 
   public async getQuestions(
     interviewId: number,
-  ): Promise<InterviewQuestionDTO[]> {
+  ): Promise<InterviewQuestionDTO> {
     try {
       const repo = await this.interviewQuestionsRepository.getQuestions(
         interviewId,

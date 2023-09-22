@@ -19,24 +19,36 @@ export class InterviewQuestionsRepositoryImpl
     super(InterviewQuestionsEntity, dataSource.createEntityManager());
   }
 
-  async getQuestions(interviewId: number): Promise<InterviewQuestionDTO[]> {
+  async getQuestions(interviewId: number): Promise<InterviewQuestionDTO> {
     try {
       const results = await this.createQueryBuilder('interview_questions')
         .select([
-          'interview_questions.id AS interview_questions_id',
-          'interview_questions.questionText AS interview_questions_questionText',
-          'interview.stack AS interview_stack',
+          'interview.stack AS stack',
+          'interview_questions.id AS questionId',
+          'interview_questions.questionText AS questionText',
+          'interview_questions.createdAt AS createdAt',
         ])
-        .leftJoin('interview_questions.interview', 'interview')
+        .leftJoin('interview', 'interview', 'interview.id = interview_questions.interviewId')
         .where('interview.id = :interviewId', { interviewId })
         .getRawMany();
-
-      // DTO로 매핑하여 반환
-      return results.map((result) => ({
-        questionId: result.interview_questions_id,
-        questionText: result.interview_questions_questionText,
-        stack: result.interview_stack,
-      }));
+  
+      // "stack" 필드를 기준으로 그룹화
+      const groupedResults = results.reduce((acc, result) => {
+        if (!acc.stack) {
+          acc.interviewId = interviewId;
+          acc.userId = 1;
+          acc.stack = result.stack;
+          acc.questions = [];
+        }
+        acc.questions.push({
+          questionId: result.questionId,
+          questionText: result.questionText,
+          createdAt: result.createdAt,
+        });
+        return acc;
+      }, {} as InterviewQuestionDTO);
+  
+      return groupedResults;
     } catch (error) {
       console.error('Error in getQuestions:', error);
       throw new Error('Failed to get questions.');

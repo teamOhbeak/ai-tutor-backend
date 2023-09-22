@@ -5,7 +5,7 @@ export interface InterviewQuestionsService {
   getQuestions(
     interviewId: number,
     stack: string,
-  ): Promise<InterviewQuestionDTO[]>;
+  ): Promise<InterviewQuestionDTO>;
 
   submitAnswer(
     questionId: number,

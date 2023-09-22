@@ -1,5 +1,5 @@
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'follow_up_questions', schema: 'test' })
 export class FollowUpQuestions {
@@ -24,8 +24,15 @@ export class FollowUpQuestions {
   // )
   // interviewQuestions: InterviewQuestionsEntity;
 
+
   @Column()
   interviewQuestionsId: number;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
 
   constructor(
     questionText: string,

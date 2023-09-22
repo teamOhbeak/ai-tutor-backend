@@ -1,7 +1,12 @@
+import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
+import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { InterviewQuestion } from '@/domain/prompt/service/prompt.service';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -15,10 +20,20 @@ export class InterviewAnswer {
   answer: string;
 
   @Column()
-  questionId: number;
+  interviewQuestionId: number;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  // @ManyToOne(() => InterviewQuestionsEntity, (interviewQuestionId) => interviewQuestionId)
+  // @JoinColumn({name: 'interviewQuestionId'})
+  // interviewQuestionId: InterviewQuestion
 
   constructor(answer: string, questionId: number) {
     this.answer = answer;
-    this.questionId = questionId;
+    this.interviewQuestionId = questionId;
   }
 }

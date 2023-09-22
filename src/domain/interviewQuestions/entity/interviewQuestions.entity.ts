@@ -2,10 +2,13 @@ import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQue
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'interview_questions', schema: 'test' })
@@ -34,8 +37,18 @@ export class InterviewQuestionsEntity {
   @Column()
   interviewId: number;
 
-  @Column()
-  intervieAnswerId: number;
+  @UpdateDateColumn({ type: 'int', nullable: true }) 
+  intervieAnswerId: number | null;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  // @ManyToOne(() => InterviewEntity, (interviewId) => interviewId)
+  // @JoinColumn({name: 'interviewId'})
+  // interviewId: InterviewEntity
 
   // @OneToMany(
   //   () => FollowUpQuestions,

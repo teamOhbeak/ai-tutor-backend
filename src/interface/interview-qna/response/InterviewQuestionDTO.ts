@@ -1,5 +1,10 @@
 export class InterviewQuestionDTO {
-  questionId: number;
-  questionText: string;
+  interviewId: number;
+  userId: number;
   stack: string;
+  questions: {
+    questionId: number;
+    questionText: string;
+    createdAt: Date;
+  }[];
 }
