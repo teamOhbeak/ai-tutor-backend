@@ -23,7 +23,7 @@ export class InterviewQuestionsEntity {
 
   @ManyToOne(() => InterviewEntity, (interview) => interview.id)
   interview: InterviewEntity;
-  
+
   // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
   // questionBank: QuestionBank;
 }

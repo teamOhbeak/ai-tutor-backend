@@ -29,9 +29,9 @@ export class InterviewQnaController {
   @ApiOkResponse()
   async getQuestions(@Param() params): Promise<allQuestionResponse[]> {
     const interviewId = params.interviewId; // interviewId 파라미터 추출
-  
+
     await this.interviewQuestionsService.getQuestions(interviewId);
-  
+
     return [
       {
         questionId: 1,
@@ -39,7 +39,6 @@ export class InterviewQnaController {
       },
     ];
   }
-  
 
   @Post(':questionId/answer')
   @ApiCreatedResponse()

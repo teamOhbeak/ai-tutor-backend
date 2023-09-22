@@ -23,8 +23,7 @@ import { InterviewAnswersRepository } from '../interviewAnswer/repository/interv
     PromptService,
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
-    InterviewAnswersRepository
-
-    ],
+    InterviewAnswersRepository,
+  ],
 })
 export class InterviewModule {}

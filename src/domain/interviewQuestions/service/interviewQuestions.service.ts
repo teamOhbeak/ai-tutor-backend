@@ -19,13 +19,17 @@ export class InterviewQuestionsServiceImpl
     private readonly promptService: PromptService,
   ) {}
 
-  public async getQuestions(interviewId: number): Promise<allQuestionResponse[]> {
+  public async getQuestions(
+    interviewId: number,
+  ): Promise<allQuestionResponse[]> {
     console.log('서비스');
 
     try {
       console.log('레포가기전');
 
-      const repo = await this.interviewQuestionsRepository.getQuestions(interviewId);
+      const repo = await this.interviewQuestionsRepository.getQuestions(
+        interviewId,
+      );
       console.log('레포간 후');
 
       console.log(repo);
