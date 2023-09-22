@@ -27,7 +27,10 @@ export class InterviewQnaController {
   // }
 
   @Get()
-  @ApiOkResponse()
+  @ApiOkResponse({
+    description: '메인 질문 한번에 여러개 가져오기',
+    type: [InterviewQuestionDTO],
+  })
   async getQuestions(
     @Param() params,
     @Body() body: { answer: string },
@@ -37,7 +40,11 @@ export class InterviewQnaController {
   }
 
   @Post(':questionId/answer')
-  @ApiCreatedResponse()
+  // @ApiCreatedResponse()
+  @ApiOkResponse({
+    description: '대답하고 꼬리질문 받기, 대답할때 해당 대답이 메인 질문인지 꼬리 질문인지 요청 request필요',
+    type: [followUpQuestionResponse],
+  })
   async submitAnswer(
     @Param() params,
     @Param('questionId') questionId: number,
