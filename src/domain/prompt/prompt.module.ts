@@ -5,6 +5,5 @@ import { PromptService } from './service/prompt.service';
   imports: [],
   controllers: [],
   providers: [PromptService],
-  //   exports: [PromptService],
 })
 export class PromptModule {}
