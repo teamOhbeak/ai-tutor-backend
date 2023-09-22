@@ -66,7 +66,7 @@ export class InterviewQuestionsServiceImpl
       //   followUpQuestionsSequence: follow_up_questions.sequence,
       //   followUpQuestion: gptResponse,
       // };
-        const responseDto: followUpQuestionResponse = {
+      const responseDto: followUpQuestionResponse = {
         questionId: questionId,
         followUpQuestionsSequence: 1,
         followUpQuestion: gptResponse,

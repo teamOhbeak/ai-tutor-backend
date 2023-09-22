@@ -37,7 +37,6 @@ export class InterviewQuestionsEntity {
   @Column()
   intervieAnswerId: number;
 
-
   // @OneToMany(
   //   () => FollowUpQuestions,
   //   (followUpQuestions) => followUpQuestions.interviewQuestions,
