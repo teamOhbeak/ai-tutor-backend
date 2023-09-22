@@ -1,4 +1,3 @@
-import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
@@ -13,7 +12,7 @@ export class InterviewService {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<InterviewEntity> {
-    const interview = InterviewEntity.CreateInterview(userId, dto);
+    const interview = InterviewEntity.createInterview(userId, dto);
     return await this.interviewRepository.save(interview);
   }
 

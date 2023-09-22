@@ -87,7 +87,7 @@ export class InterviewEntity {
     this.status = InterviewStatus.CANCELED;
   }
 
-  static CreateInterview(userId: number, dto: CreateInterviewRequest) {
+  static createInterview(userId: number, dto: CreateInterviewRequest) {
     const interview = new InterviewEntity();
     interview.stack = dto.stack;
     interview.questionCount = dto.questionCount;
