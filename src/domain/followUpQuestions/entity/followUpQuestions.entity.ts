@@ -26,12 +26,7 @@ export class FollowUpQuestions {
   })
   sequence: number;
 
-  // @ManyToOne(
-  //   () => InterviewQuestionsEntity,
-  //   (interviewQuestions) => interviewQuestions.id,
-  // )
-  // interviewQuestions: InterviewQuestionsEntity;
-  @UpdateDateColumn({ default: false })
+  @Column({ default: false })
   status: boolean;
 
   @Column()

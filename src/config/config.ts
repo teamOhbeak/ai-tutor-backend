@@ -8,6 +8,7 @@ import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
+import { FollowUpAnswer } from '@/domain/followUpAnswer/entity/followUpAnswer.entity';
 
 export default () => ({
   DB: {
@@ -33,6 +34,7 @@ export default () => ({
       InterviewAnswer,
       InterviewQuestionsEntity,
       FollowUpQuestions,
+      FollowUpAnswer,
       // 'dist/**/**/**/**.entity{.ts,.js}',
       // __dirname + '/../domain/**/*.entity.{js,ts}',
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
