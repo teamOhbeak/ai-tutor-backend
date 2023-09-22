@@ -6,35 +6,33 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import {
-  InterviewStatus,
   MyInterviewDetailResponse,
 } from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
-import { IInterviewService } from 'src/domain/interview/service/interview.service.interface';
-import { FakeInterviewService } from 'src/domain/interview/service/fake-interview.service';
 import { UserResponse } from './response/user.response';
 import { InterviewService } from '@/domain/interview/service/interview.service';
 import { MyInterviewResponse } from './response/my-interview.response';
 import { AuthService } from '@/domain/auth/service/auth.service';
 import { CreateInterviewResponse } from './response/create-interview.response';
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
+import { InterviewFacade } from '@/domain/interview/service/interview.facade';
 
 @Controller('api/interviews')
 @ApiTags('InterviewController')
 export class InterviewController {
   constructor(
     private readonly authService: AuthService,
-    private readonly interviewService: InterviewService,
+    private readonly interviewFacade: InterviewFacade,
+    //TODO: interviewFacade get요청 추가 시 삭제
+    private readonly interviewService: InterviewService
   ) {}
 
   @Post()
@@ -46,8 +44,8 @@ export class InterviewController {
     @Body() dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
     const userId = await this.authService.getAuth().userId;
-    const interview = await this.interviewService.createInterview(userId, dto);
-    return new CreateInterviewResponse(interview.id);
+    const response = await this.interviewFacade.createInterview(userId, dto);
+    return response;
   }
 
   @Get()

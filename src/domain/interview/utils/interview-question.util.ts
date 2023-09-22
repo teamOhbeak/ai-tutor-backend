@@ -12,10 +12,10 @@ export class InterviewQuestionUtil {
     let idx = 0;
     return questions.map((question) => {
       const q = new InterviewQuestionEntity();
-      q.interviewId = interviewId;
       q.questionText = question.question;
       q.sequence = idx++;
       q.status = QuestionStatus.WAIT;
+      q.interviewId = interviewId;
       return q;
     });
   }

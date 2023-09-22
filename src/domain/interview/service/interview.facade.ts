@@ -22,20 +22,22 @@ export class InterviewFacade {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
-    const interviewRoom = InterviewEntity.CreateInterview(userId, dto);
+    const interviewRoom = await this.interviewService
+      .createInterview(userId, dto);
 
-    const questions = await this.questionBankService.getFakeQuestions(
-      dto.questionCount,
-    );
-    const interviewQuestions = InterviewQuestionUtil.generateInterviewQuestion(
-      interviewRoom.id,
-      questions,
-    );
-    interviewRoom.questions =
-      await this.interviewQuestionService.saveInterviewQuestions(
-        interviewQuestions,
+    const questions = await this.questionBankService
+      .getFakeQuestions(dto.questionCount);
+    
+    const interviewQuestions = InterviewQuestionUtil
+      .generateInterviewQuestion(
+        interviewRoom.id,
+        questions,
       );
+    
+    interviewRoom.questions = await this.interviewQuestionService
+      .saveInterviewQuestions(interviewQuestions);
 
-    return InterviewQuestionUtil.toCreateInterviewResponse(interviewRoom);
+    return InterviewQuestionUtil
+      .toCreateInterviewResponse(interviewRoom);
   }
 }
