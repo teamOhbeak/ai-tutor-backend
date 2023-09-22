@@ -5,6 +5,7 @@ import { MyInterviewDetailResponse } from '@/interface/interview/response/my-int
 import { CreateInterviewResponse } from '@/interface/interview/response/create-interview.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
+import { DeletedInterviewResponse } from '@/interface/interview/response/deleted-interview.response';
 export class InterviewUtil {
   static toCreateInterviewResponse(
     interview: InterviewEntity,
@@ -53,5 +54,11 @@ export class InterviewUtil {
     interview: InterviewEntity,
   ): CanceledInterviewResponse {
     return new CanceledInterviewResponse(interview.id, interview.status);
+  }
+
+  static toDeletedInterviewResponse(
+    deletedInterview: InterviewEntity,
+  ): DeletedInterviewResponse {
+    return new DeletedInterviewResponse(deletedInterview.id);
   }
 }
