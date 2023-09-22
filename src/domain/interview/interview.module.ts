@@ -9,6 +9,8 @@ import { QuestionBankRepository } from '../questionsBank/repository/questionsBan
 import { AuthService } from '../auth/service/auth.service';
 import { InterviewQuestionService } from '../interview-question/service/interview-question.service';
 import { InterviewQuestionRepository } from '../interview-question/repository/interview-question.repository';
+import { InterviewFacade } from './service/interview.facade';
+import { QuestionBankService } from '../questionsBank/service/questionBank.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -19,8 +21,8 @@ import { InterviewQuestionRepository } from '../interview-question/repository/in
     InterviewRepository,
     InterviewQuestionService,
     InterviewQuestionRepository,
-    QuestionBankRepository,
-    PromptService,
+    QuestionBankService,
+    InterviewFacade,
   ],
 })
 export class InterviewModule {}
