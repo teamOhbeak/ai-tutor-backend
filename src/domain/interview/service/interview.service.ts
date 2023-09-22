@@ -6,9 +6,7 @@ import { InterviewRepository } from '../repository/interview.repository';
 
 @Injectable()
 export class InterviewService {
-  constructor(
-    private readonly interviewRepository: InterviewRepository
-  ) {}
+  constructor(private readonly interviewRepository: InterviewRepository) {}
 
   async createInterview(
     userId: number,

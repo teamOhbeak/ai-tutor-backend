@@ -13,9 +13,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  MyInterviewDetailResponse,
-} from './response/my-interview-detail.response';
+import { MyInterviewDetailResponse } from './response/my-interview-detail.response';
 import { CreateInterviewRequest } from './request/create-interview.request';
 import { UserResponse } from './response/user.response';
 import { InterviewService } from '@/domain/interview/service/interview.service';
@@ -32,7 +30,7 @@ export class InterviewController {
     private readonly authService: AuthService,
     private readonly interviewFacade: InterviewFacade,
     //TODO: interviewFacade get요청 추가 시 삭제
-    private readonly interviewService: InterviewService
+    private readonly interviewService: InterviewService,
   ) {}
 
   @Post()
