@@ -1,5 +1,4 @@
-import { QuestionType } from "../request/answer.resquest";
-
+import { QuestionType } from '../request/answer.resquest';
 
 export class AnswerResponse {
   interviewId: number;
@@ -8,17 +7,17 @@ export class AnswerResponse {
   questionCount: number;
   maxWait: number;
   createdAt: Date;
-  questionType: QuestionType
+  questionType: QuestionType;
   questions: {
-    questionid: number,
-    question: string,
-    status: boolean,
-    sequence: number,
-    createdAt: Date,
-    updatedAt: Date,
+    questionid: number;
+    question: string;
+    status: boolean;
+    sequence: number;
+    createdAt: Date;
+    updatedAt: Date;
     answer: {
-      contents: string,
-      createdAt: Date,
-    },
+      contents: string;
+      createdAt: Date;
+    };
   };
 }

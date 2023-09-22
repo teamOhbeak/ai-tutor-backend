@@ -59,23 +59,26 @@ export class InterviewQuestionsRepositoryImpl
     }
   }
 
-  async updateQuestionStatus(questionId: number, maxSequence: number): Promise<InterviewQuestionsEntity | null> {
+  async updateQuestionStatus(
+    questionId: number,
+    maxSequence: number,
+  ): Promise<InterviewQuestionsEntity | null> {
     try {
       // 다음 질문의 sequence에 맞추기 위해+1
       const currentSequence = maxSequence + 1;
-  
+
       const updatedEntity = await this.findOne({
         where: { id: questionId },
       });
-  
+
       if (updatedEntity) {
         updatedEntity.status = true;
         updatedEntity.sequence = currentSequence;
         updatedEntity.updatedAt = new Date();
-  
+
         await this.save(updatedEntity);
-  
-        return updatedEntity; 
+
+        return updatedEntity;
       } else {
         return null;
       }
@@ -85,13 +88,15 @@ export class InterviewQuestionsRepositoryImpl
     }
   }
 
-  async getHighestSequenceByQuestionId(questionId: number): Promise<number | null> {
+  async getHighestSequenceByQuestionId(
+    questionId: number,
+  ): Promise<number | null> {
     try {
       const result = await this.createQueryBuilder('interview_questions')
         .select('MAX(interview_questions.sequence)', 'max_sequence')
         .where('interview_questions.id = :questionId', { questionId })
         .getRawOne();
-  
+
       if (result && result.max_sequence !== null) {
         return parseInt(result.max_sequence, 10);
       } else {
@@ -101,5 +106,5 @@ export class InterviewQuestionsRepositoryImpl
       console.error('Error in getHighestSequenceByQuestionId:', error);
       throw new Error('Failed to get the highest sequence.');
     }
-  }  
+  }
 }

@@ -6,19 +6,19 @@ export class followUpQuestionResponse {
   maxWait: number;
   createdAt: Date;
   questions: {
-    questionid: number,
-    question: string,
-    status: 0,
-    createdAt: Date,
-    updatedAt: Date,
+    questionid: number;
+    question: string;
+    status: 0;
+    createdAt: Date;
+    updatedAt: Date;
     followUpQuestions: {
       followUpquestionId: number;
       questionText: string;
       createdAt: Date;
-    }[],
+    }[];
     answer: {
-      contents: string,
-      createdAt: string,
-    },
+      contents: string;
+      createdAt: string;
+    };
   }[];
 }
