@@ -3,11 +3,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  OneToMany,
 } from 'typeorm';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { IsEnum, IsInt } from 'class-validator';
+import { IsEnum } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
 
