@@ -18,10 +18,7 @@ export class InterviewQuestionsRepositoryImpl
     super(InterviewQuestionsEntity, dataSource.createEntityManager());
   }
 
-  async getQuestions(
-    questionId: number,
-    stack: string,
-  ): Promise<InterviewQuestionsEntity[]> {
+  async getQuestions(interviewId: number): Promise<InterviewQuestionsEntity[]> {
     console.log('레포지토리');
     try {
       // const repository = getRepository(InterviewQuestionsEntity); // getRepository 사용
@@ -32,7 +29,7 @@ export class InterviewQuestionsRepositoryImpl
 
       const results = await this.createQueryBuilder('interview_questions')
         .leftJoinAndSelect('interview_questions.interview', 'interview')
-        .where('id = :questionId', { questionId })
+        .where('interview.id = :interviewId', { interviewId })
         .getMany();
       console.log('results');
       console.log('results가 나오긴하니?');

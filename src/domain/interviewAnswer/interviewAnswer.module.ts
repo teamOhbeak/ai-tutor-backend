@@ -8,7 +8,7 @@ import { InterviewQuestionsModule } from '../interviewQuestions/interviewQuestio
 import { InterviewAnswersRepository } from './repository/interviewAnswer.repository.interface';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, InterviewQuestionsModule],
   controllers: [InterviewController, InterviewQnaController],
   providers: [InterviewAnswersRepository],
 })

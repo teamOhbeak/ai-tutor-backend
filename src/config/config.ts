@@ -1,12 +1,17 @@
+// import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { QnaRoom } from 'src/domain/qna-room/entity/qna-room.entity';
+import { Qna } from 'src/domain/qna/entity/qna.entity';
+import { QuestionBank } from 'src/domain/questionsBank/entity/questionBank.entity';
+import { UserEntity } from 'src/domain/user/entity/user.entity';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
 import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { QuestionBank } from '@/domain/questionsBank/entity/questionBank.entity';
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export default () => ({
   DB: {
     type: 'mysql',
+    // host: process.env.MODE_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
     host: process.env.MODE_ENV === 'local' ? 'mysql' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username:
@@ -14,10 +19,13 @@ export default () => ({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [
+      UserEntity,
       InterviewEntity,
+      QuestionBank,
+      Qna,
+      QnaRoom,
       InterviewAnswer,
       InterviewQuestionsEntity,
-      QuestionBank,
       // __dirname + '/../domain/**/*.entity.{js,ts}',
       // __dirname + '/../domain/**/entity/*.entity.{js,ts}',
     ],

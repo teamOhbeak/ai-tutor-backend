@@ -1,5 +1,5 @@
+import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 
 @Entity('interview_questions')
 export class InterviewQuestionsEntity {
@@ -23,7 +23,7 @@ export class InterviewQuestionsEntity {
 
   @ManyToOne(() => InterviewEntity, (interview) => interview.id)
   interview: InterviewEntity;
-
+  
   // @ManyToOne(() => QuestionBank, (questionBank) => questionBank.questions)
   // questionBank: QuestionBank;
 }

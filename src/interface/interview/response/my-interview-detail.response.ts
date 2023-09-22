@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionResponse } from './question.response';
 import { UserResponse } from './user.response';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
 
 export enum InterviewStatus {
   COMPLETED = 0,
@@ -11,17 +12,6 @@ export enum InterviewStatus {
   NO_SHOW = 5,
 }
 
-export enum StackType {
-  JAVA = 0,
-  JAVASCRIPT = 1,
-  KOTLIN = 2,
-  REACTJS = 3,
-  NEXTJS = 4,
-  NODEJS = 5,
-  NESTJS = 6,
-  SPRING = 7,
-  CS = 8,
-}
 export class MyInterviewDetailResponse {
   @ApiProperty({ example: 1000 })
   id: number;
@@ -29,7 +19,6 @@ export class MyInterviewDetailResponse {
   @ApiProperty({ example: 'U', enum: InterviewStatus })
   status: InterviewStatus;
 
-  // TODO: enum 선언되면 교체
   @ApiProperty({ example: 'java' })
   stack: StackType;
 

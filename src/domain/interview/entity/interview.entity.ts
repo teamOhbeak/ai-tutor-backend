@@ -50,4 +50,17 @@ export class InterviewEntity {
 
   @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
   questions: InterviewQuestionsEntity[];
+
+  constructor() {}
+
+  static CreateInterview(userId: number, dto: CreateInterviewRequest) {
+    const interview = new InterviewEntity();
+    interview.stack = dto.stack;
+    interview.questionCount = dto.questionCount;
+    interview.maxWait = dto.maxWait;
+    // interview.questions = [];
+    interview.userId = userId;
+    interview.status = InterviewStatus.WAIT;
+    return interview;
+  }
 }

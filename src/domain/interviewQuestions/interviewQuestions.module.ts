@@ -8,15 +8,23 @@ import { PromptService } from '../prompt/service/prompt.service';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
 import { InterviewEntity } from '../interview/entity/interview.entity';
 import { InterviewAnswerModule } from '../interviewAnswer/interviewAnswer.module';
+import { AuthService } from '../auth/service/auth.service';
+import { InterviewService } from '../interview/service/interview.service';
+import { InterviewRepositoryImpl } from '../interview/repository/interview.repository';
+import { QuestionBankRepository } from '../questionsBank/repository/questionsBank.repository';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, InterviewQuestionsModule],
   controllers: [InterviewController, InterviewQnaController],
   providers: [
+    AuthService,
+    InterviewService,
+    InterviewRepositoryImpl,
     InterviewQuestionsServiceImpl,
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
     PromptService,
+    QuestionBankRepository,
   ],
 })
 export class InterviewQuestionsModule {}

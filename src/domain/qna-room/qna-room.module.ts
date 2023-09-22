@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { QnaRoomQnaController } from 'src/interface/qna-room-qna/qna-room-qna.controller';
-import { QnaRoomController } from 'src/interface/qna-room/qna-room.controller';
+import { QnaRoomController } from '@/interface/qna-room/qna-room.controller';
+import { DatabaseModule } from '../database/database.module';
+import { QnaRoomService } from './service/qna-room.service';
+import { QnaRoomRepository } from './repository/qna-room-repository';
 @Module({
-  imports: [],
-  controllers: [QnaRoomController, QnaRoomQnaController],
-  providers: [],
+  imports: [DatabaseModule],
+  controllers: [QnaRoomController],
+  providers: [QnaRoomService, QnaRoomRepository],
+  exports: [QnaRoomRepository],
 })
 export class QnaRoomModule {}

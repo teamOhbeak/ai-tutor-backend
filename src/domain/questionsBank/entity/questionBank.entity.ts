@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { StackType } from '../../../interface/interview/response/my-interview-detail.response';
+import { StackType } from '@/domain/interview/entity/stack-type.enum';
+import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum QuestionStatus {
   PENDING = 0,
@@ -32,4 +33,7 @@ export class QuestionBank {
 
   @Column({ type: 'timestamp', default: null })
   updatedAt: Date;
+
+  // @OneToMany(() => InterviewQuestionsEntity, (question) => question.interview)
+  // questions: InterviewQuestionsEntity[];
 }
