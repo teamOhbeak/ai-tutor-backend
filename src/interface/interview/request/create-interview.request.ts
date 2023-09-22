@@ -14,5 +14,5 @@ export class CreateInterviewRequest {
   @ApiProperty({ example: 3 })
   @IsInt()
   @IsNotEmpty()
-  maxWait: number;
+  maxWait: number; 
 }
