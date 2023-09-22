@@ -9,12 +9,7 @@ import { PromptService } from '../prompt/service/prompt.service';
 @Module({
   imports: [DatabaseModule],
   controllers: [QnaController],
-  providers: [
-    QnaService, 
-    QnaRepository, 
-    QnaRoomRepository, 
-    PromptService
-  ],
+  providers: [QnaService, QnaRepository, QnaRoomRepository, PromptService],
   exports: [QnaRepository],
 })
 export class QnaModule {}
