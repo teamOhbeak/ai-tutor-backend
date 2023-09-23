@@ -51,5 +51,11 @@ export class InterviewQnaController {
   async submitPassAnswer(
     @Param('interviewId') interviewId: number,
     @Param('questionId') questionId: number,
-  ): Promise<void> {}
+  ): Promise<QuestionStateResponse> {
+    return await this.interviewQuestionService.saveAnswer(
+      interviewId,
+      questionId,
+      '',
+    );
+  }
 }

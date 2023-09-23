@@ -4,7 +4,6 @@ import { MainQnaResponse } from '../../../interface/interview-qna/response/main-
 import { InterviewQnaEntity } from '../entity/interview-qna.entity';
 import { QuestionStatus } from '../entity/question-status.enum';
 export class InterviewQnaUtil {
-
   static generateInterviewQuestion(
     interviewId: number,
     questions: QuestionBankResponse[],
@@ -23,7 +22,6 @@ export class InterviewQnaUtil {
       return q;
     });
   }
-
 
   static toMainQuestionResponse(
     question: InterviewQnaEntity,

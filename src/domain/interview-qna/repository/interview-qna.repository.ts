@@ -1,10 +1,9 @@
-import { DataSource, IsNull, Repository } from "typeorm";
-import { InterviewQnaEntity } from "../entity/interview-qna.entity";
-import { Inject } from "@nestjs/common";
-import { QuestionStatus } from "../entity/question-status.enum";
+import { DataSource, IsNull, Repository } from 'typeorm';
+import { InterviewQnaEntity } from '../entity/interview-qna.entity';
+import { Inject } from '@nestjs/common';
+import { QuestionStatus } from '../entity/question-status.enum';
 
 export class InterviewQnaReposiroy extends Repository<InterviewQnaEntity> {
-  
   constructor(
     @Inject('DATA_SOURCE')
     private readonly dataSource: DataSource,
@@ -12,15 +11,14 @@ export class InterviewQnaReposiroy extends Repository<InterviewQnaEntity> {
     super(InterviewQnaEntity, dataSource.createEntityManager());
   }
 
-  async insertInterviewQuestions(questions: InterviewQnaEntity[])
-  :Promise<InterviewQnaEntity[]> {
+  async insertInterviewQuestions(
+    questions: InterviewQnaEntity[],
+  ): Promise<InterviewQnaEntity[]> {
     console.log(`quesetions: ${JSON.stringify(questions)}`);
     return [];
   }
 
-  async getMainQuestions(
-    interviewId: number,
-  ): Promise<InterviewQnaEntity[]> {
+  async getMainQuestions(interviewId: number): Promise<InterviewQnaEntity[]> {
     try {
       console.log(interviewId);
       return await this.findBy({
@@ -49,9 +47,9 @@ export class InterviewQnaReposiroy extends Repository<InterviewQnaEntity> {
       interviewId: interviewId,
       // mainQuestionId: Is
     });
-    return (questions).filter((question) => {
-      return question.mainQuestionId != null
-    })
+    return questions.filter((question) => {
+      return question.mainQuestionId != null;
+    });
   }
 
   async getFollowUpQuestionsByQuestionId(

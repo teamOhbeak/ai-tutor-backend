@@ -1,10 +1,17 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { AnswerStatus } from "./answer-status.enum";
-import { QuestionStatus } from "./question-status.enum";
-import { IsEnum } from "class-validator";
-import { InterviewEntity } from "@/domain/interview/entity/interview.entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { AnswerStatus } from './answer-status.enum';
+import { QuestionStatus } from './question-status.enum';
+import { IsEnum } from 'class-validator';
+import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
 
-@Entity('interview_qna') 
+@Entity('interview_qna')
 export class InterviewQnaEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -67,7 +74,7 @@ export class InterviewQnaEntity {
 
   @ManyToOne(() => InterviewEntity)
   @JoinColumn({
-    name: 'interview_id'
+    name: 'interview_id',
   })
   interviewInfo: InterviewEntity;
 }

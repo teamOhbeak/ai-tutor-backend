@@ -14,7 +14,7 @@ export class InterviewQuestionService {
     private readonly repository: InterviewQnaReposiroy,
     private readonly questionBankRepository: QuestionBankRepository,
   ) {
-    console.log(console.log(`repository: ${this.repository.count()}` ));
+    console.log(console.log(`repository: ${this.repository.count()}`));
   }
 
   async saveInterviewQuestions(
