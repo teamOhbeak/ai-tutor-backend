@@ -4,14 +4,20 @@ import { Inject } from '@nestjs/common';
 
 @EntityRepository(InterviewQuestionEntity)
 export class InterviewQuestionRepository extends Repository<InterviewQuestionEntity> {
-  /**
-   *
-   */
+  
   constructor(
     @Inject('DATA_SOURCE')
     private readonly dataSource: DataSource,
   ) {
     super(InterviewQuestionEntity, dataSource.createEntityManager());
+  }
+
+  async getQuestionsById(interviewId: number): Promise<InterviewQuestionEntity[]> {
+    return await this.find({
+      where: { 
+        interviewId: interviewId
+      }
+    });
   }
 
   async saveQuestions(questions: InterviewQuestionEntity[]) {
