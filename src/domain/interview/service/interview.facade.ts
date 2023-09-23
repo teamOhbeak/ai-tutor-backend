@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InterviewService } from './interview.service';
 import { InterviewQuestionService } from '@/domain/interview-question/service/interview-question.service';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
@@ -10,8 +10,6 @@ import { MyInterviewResponse } from '@/interface/interview/response/my-interview
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
-import { DeletedInterviewResponse } from '@/interface/interview/response/deleted-interview.response';
-import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class InterviewFacade {
@@ -77,21 +75,7 @@ export class InterviewFacade {
       userId,
       interviewId,
     );
-    return InterviewUtil.toCanceledInterviewResponse(canceledInterview);
-  }
 
-  async deleteInterview(
-    userId: number,
-    interviewId: number,
-  ): Promise<DeletedInterviewResponse> {
-    //TODO: interview-qna.service -> deleteQuestionsByInterviewId
-    await this.interviewQuestionService.deleteInterviewQuestionsByInterviewId(
-      interviewId,
-    );
-    const deletedInterview = await this.interviewService.deleteInterview(
-      userId,
-      interviewId,
-    );
-    return InterviewUtil.toDeletedInterviewResponse(deletedInterview);
+    return InterviewUtil.toCanceledInterviewResponse(canceledInterview);
   }
 }
