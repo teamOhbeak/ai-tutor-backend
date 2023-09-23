@@ -1,12 +1,10 @@
-import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
 import { InterviewStatus } from '../entity/insterview-status.enum';
 import { InterviewQuestionAndAnswerRepository } from '../../interview-question/repository/interview-question-and-answer.repository';
 import { InterviewQuestionAndAnswerEntity } from '../../interview-question/entity/interview-question-and-answer.entity';
-import { AnswerStatus } from '../../interview-question/entity/answer-status.enum';
 @Injectable()
 export class InterviewService {
   constructor(

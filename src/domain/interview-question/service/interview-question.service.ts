@@ -1,30 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { InterviewQuestionRepository } from '../repository/interview-question.repository';
-import { InterviewQuestionEntity } from '../entity/interview-question.entity';
 import {
-  InterviewQuestion,
   PromptService,
 } from '@/domain/prompt/service/prompt.service';
 import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
 import { InterviewQuestionAndAnswerRepository } from '../repository/interview-question-and-answer.repository';
 import { InterviewQnaUtil } from '../utils/interview-qna.util';
 import { QuestionBankRepository } from '../../questionsBank/repository/questionsBank.repository';
-import { StackType } from '../../interview/entity/stack-type.enum';
-import { QuestionStatus as questionStatusForQuestion } from '../entity/question-status.enum';
-import {
-  CreateQuestionBankResponse,
-  QuestionBankResponse,
-} from '../../../interface/questionBank/response/questionBank.response';
 import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { MainQnaResponse } from '../../../interface/interview-qna/response/main-qna.response';
-import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 import { FollowUpQuestionRequest } from '../../../interface/prompt/request/followup-question.request';
 import { QuestionStateResponse } from '../../../interface/interview-qna/response/question-state.response';
 
 @Injectable()
 export class InterviewQuestionService {
   constructor(
-    private readonly questionBankRepository: QuestionBankRepository,
     private readonly promptService: PromptService,
     private readonly interviewQnaRepository: InterviewQuestionAndAnswerRepository,
   ) {}

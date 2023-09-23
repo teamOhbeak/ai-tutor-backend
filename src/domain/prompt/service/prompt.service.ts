@@ -247,14 +247,7 @@ export class PromptService {
 
     const messages = [];
 
-    if (
-      request.question !== null ||
-      request.answer !== null ||
-      request.question !== '' ||
-      request.answer !== ''
-    ) {
-      return '꼬리질문이 없습니다.';
-    } else {
+    
       messages.push({
         role: 'system',
         content: request.question,
@@ -264,7 +257,7 @@ export class PromptService {
         role: 'user',
         content: request.answer,
       });
-    }
+    
 
     // 메인질문 + 답변 또는 메인질문 질문만 있을경우 요청없음
     // case1:  (메인질문 + 답변 ) -> return 꼬리질문
@@ -284,7 +277,7 @@ export class PromptService {
         messages: messages,
         functions: [{ name: 'set_questions', parameters: schema }],
         function_call: { name: 'set_questions' },
-        model: 'gpt-3.5-turbo-structkk',
+        model: 'gpt-3.5-turbo',
       })
       .then((competions) => {
         const generateText =
