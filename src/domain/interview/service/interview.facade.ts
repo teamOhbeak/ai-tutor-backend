@@ -27,7 +27,6 @@ export class InterviewFacade {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
-    console.log(userId, dto);
     const interviewRoom = await this.interviewService.createInterview(
       userId,
       dto,

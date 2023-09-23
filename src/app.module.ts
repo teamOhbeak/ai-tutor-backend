@@ -17,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BatchService } from './domain/batch/batch.service';
 import { UserModule } from './domain/user/user.module';
 import { FakeQuestionBankService } from './domain/questionsBank/service/fake-questionBank.service';
+import { InterviewQnaModule } from './domain/interview-qna/interview-qna.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { FakeQuestionBankService } from './domain/questionsBank/service/fake-que
     DatabaseModule,
     UserModule,
     InterviewModule,
+    InterviewQnaModule,
     QnaRoomModule,
     AuthModule,
     PromptModule,
@@ -44,4 +46,5 @@ import { FakeQuestionBankService } from './domain/questionsBank/service/fake-que
     BatchService,
   ],
 })
+
 export class AppModule {}

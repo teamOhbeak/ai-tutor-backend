@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InterviewQuestionRepository } from '../repository/interview-question.repository';
 import { InterviewQuestionEntity } from '../entity/interview-question.entity';
-import { InterviewQuestion } from '@/domain/prompt/service/prompt.service';
 
 @Injectable()
 export class InterviewQuestionService {
@@ -9,6 +8,11 @@ export class InterviewQuestionService {
     private readonly interviewQuestionRepository: InterviewQuestionRepository,
   ) {}
 
+  async getInterviewQuestions(
+    interviewId: number,
+  ): Promise<InterviewQuestionEntity[]> {
+    return await this.interviewQuestionRepository.getQuestionsById(interviewId);
+  }
   async saveInterviewQuestions(
     questions: InterviewQuestionEntity[],
   ): Promise<InterviewQuestionEntity[]> {
