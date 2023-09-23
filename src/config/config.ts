@@ -6,6 +6,7 @@ import { QuestionBank } from 'src/domain/questionsBank/entity/questionBank.entit
 import { UserEntity } from 'src/domain/user/entity/user.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { InterviewQuestionEntity } from 'src/domain/interview-question/entity/interview-question.entity';
+import { InterviewQuestionAndAnswerEntity } from '../domain/interview-question/entity/interview-question-and-answer.entity';
 
 export default () => ({
   DB: {
@@ -20,10 +21,12 @@ export default () => ({
     entities: [
       UserEntity,
       InterviewEntity,
+      InterviewQuestionAndAnswerEntity,
       QuestionBank,
       Qna,
       QnaRoom,
       InterviewQuestionEntity,
+      
     ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,

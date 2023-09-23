@@ -4,10 +4,13 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
 import { InterviewStatus } from '../entity/insterview-status.enum';
-
+import { InterviewQuestionAndAnswerRepository } from '../../interview-question/repository/interview-question-and-answer.repository';
 @Injectable()
 export class InterviewService {
-  constructor(private readonly interviewRepository: InterviewRepository) {}
+  constructor(
+    private readonly interviewRepository: InterviewRepository,
+    private readonly interviewQuestionAndAnswerRepository: InterviewQuestionAndAnswerRepository,
+  ) {}
 
   async createInterview(
     userId: number,

@@ -42,10 +42,10 @@ export class InterviewFacade {
       questions,
     );
 
-    interviewRoom.questions =
-      await this.interviewQuestionService.saveInterviewQuestions(
-        interviewQuestions,
-      );
+    // interviewRoom.questions =
+    //   await this.interviewQuestionService.saveInterviewQuestions(
+    //     interviewQuestions,
+    //   );
 
     return InterviewUtil.toCreateInterviewResponse(interviewRoom);
   }
@@ -67,7 +67,11 @@ export class InterviewFacade {
       userId,
       interviewId,
     );
-    return InterviewUtil.toInterviewDetailResponse(interview);
+    const interviewResponse =
+      InterviewUtil.toInterviewDetailResponse(interview);
+    interviewResponse.questions =
+      this.interviewQuestionService.getInterviewQuestions(interviewId);
+    return interviewResponse;
   }
 
   async cancelInterview(

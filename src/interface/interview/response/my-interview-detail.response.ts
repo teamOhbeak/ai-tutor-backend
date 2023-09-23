@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { StackType } from '@/domain/interview/entity/stack-type.enum';
 import { InterviewStatus } from '@/domain/interview/entity/insterview-status.enum';
 import { InterviewQuestionResponse } from '@/interface/interview-qna/response/interview-question.response';
+import { MainQnaResponse } from '../../interview-qna/response/main-qna.response';
 export class MyInterviewDetailResponse {
   @ApiProperty({ example: 1000 })
   id: number;
@@ -21,8 +22,8 @@ export class MyInterviewDetailResponse {
   @ApiProperty({ example: '2023-09-01 13:00' })
   createdAt: string;
 
-  @ApiProperty({ type: [InterviewQuestionResponse] })
-  questions: InterviewQuestionResponse[] = [];
+  @ApiProperty({ type: [MainQnaResponse] })
+  questions: MainQnaResponse[] = [];
 
   @ApiProperty()
   userId: number;

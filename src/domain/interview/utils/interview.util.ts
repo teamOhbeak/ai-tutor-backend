@@ -44,9 +44,9 @@ export class InterviewUtil {
       userId: interview.userId,
       userName: interview.userInfo.userName,
       record: interview.record,
-      questions: interview.questions.map((question) => {
-        return InterviewQuestionUtil.toInterviewQuestionResponse(question);
-      }),
+      // questions: interview.questions.map((question) => {
+      //   return InterviewQuestionUtil.toInterviewQuestionResponse(question);
+      // }),
     };
   }
 
