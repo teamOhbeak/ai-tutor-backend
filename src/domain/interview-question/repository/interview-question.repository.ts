@@ -15,9 +15,6 @@ export class InterviewQuestionRepository extends Repository<InterviewQuestionEnt
   }
 
   async saveQuestions(questions: InterviewQuestionEntity[]) {
-    
-
-    
     return await this.save(questions);
   }
 }

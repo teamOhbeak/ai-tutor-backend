@@ -88,9 +88,7 @@ export class InterviewQuestionService {
   async createQuestion(count: number, stack: StackType) {
     // 카운트 만큼 가져옴
     const result = await this.questionBankRepository.getQuestions(count);
-    
 
-    // status를 변경 
-
+    // status를 변경
   }
 }

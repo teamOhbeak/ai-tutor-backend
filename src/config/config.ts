@@ -26,7 +26,6 @@ export default () => ({
       Qna,
       QnaRoom,
       InterviewQuestionEntity,
-      
     ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
