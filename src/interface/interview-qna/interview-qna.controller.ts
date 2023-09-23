@@ -1,5 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { InterviewQuestionsServiceImpl } from '@/domain/interviewQuestions/service/interviewQuestions.service';
 import { InterviewQuestionDTO } from './response/InterviewQuestionDTO';
 import { AnswerRequestDto } from './request/answer.resquest';

@@ -11,10 +11,6 @@ import { InterviewQuestionsServiceImpl } from '../interviewQuestions/service/int
 import { InterviewQuestionsRepositoryImpl } from '../interviewQuestions/repository/interviewQuestion.repository';
 import { InterviewAnswersRepository } from '../interviewAnswer/repository/interviewAnswer.repository.interface';
 import { InterviewRepository } from '../interview/repository/interview.repository';
-import { FollowUpAnswerRepositoryImpl } from './repository/followUpAnswer.repository';
-import { InterviewFacade } from '../interview/service/interview.facade';
-import { InterviewQuestionService } from '../interview-question/service/interview-question.service';
-import { InterviewQuestionRepository } from '../interview-question/repository/interview-question.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -29,10 +25,6 @@ import { InterviewQuestionRepository } from '../interview-question/repository/in
     InterviewQuestionsRepositoryImpl,
     InterviewAnswersRepository,
     FollowUpQuestionsRepositoryImpl,
-    InterviewQuestionRepository,
-    FollowUpAnswerRepositoryImpl,
-    InterviewQuestionService,
-    InterviewFacade,
     PromptService,
   ],
 })
