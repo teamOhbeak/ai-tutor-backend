@@ -10,8 +10,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('interview_question_answer')
-export class InterviewQuestionAnswerEntity {
+@Entity('followup_question_answer')
+export class FollowUpQuestionAnswerEntity {
   @PrimaryGeneratedColumn({
     name: 'answer_id',
   })
@@ -23,7 +23,7 @@ export class InterviewQuestionAnswerEntity {
   answerText: string;
 
   @Column({
-    name: 'question_id',
+    name: 'followup_question_id',
   })
   questionId: number;
 
@@ -32,11 +32,7 @@ export class InterviewQuestionAnswerEntity {
   })
   createdAt: Date;
 
-  @OneToOne(() => InterviewQuestionEntity)
-  @JoinColumn({name: 'question_id'})
-  question: InterviewQuestionEntity;
-
-  @OneToMany(() => FollowUpQuestionEntity, (question) => question.mainQuestionAnswer)
-  @JoinColumn({name: 'answer_id'})
-  followupQuestions: FollowUpQuestionEntity[];
+  @OneToOne(() => FollowUpQuestionEntity)
+  @JoinColumn({name: 'followup_question_id'})
+  question: FollowUpQuestionEntity;
 }

@@ -18,6 +18,9 @@ export class InterviewQuestionRepository extends Repository<InterviewQuestionEnt
       where: {
         interviewId: interviewId,
       },
+      relations: [
+        'answer', 'answer.followupQuestions', 'answer.followupQuestions.answer'
+      ]
     });
   }
 
