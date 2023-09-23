@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { IsEnum } from 'class-validator';
+import { IsBoolean, IsEnum } from 'class-validator';
 import { InterviewStatus } from './insterview-status.enum';
 import { StackType } from './stack-type.enum';
 import { InterviewQuestionEntity } from '@/domain/interview-question/entity/interview-question.entity';
@@ -28,6 +28,13 @@ export class InterviewEntity {
   @Column()
   @IsEnum(StackType)
   stack: StackType;
+
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  @IsBoolean()
+  isShowVideo: boolean;
 
   @Column({
     type: 'int',
