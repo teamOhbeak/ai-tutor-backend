@@ -6,11 +6,13 @@ import { QuestionBank } from 'src/domain/questionsBank/entity/questionBank.entit
 import { UserEntity } from 'src/domain/user/entity/user.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { InterviewQuestionEntity } from 'src/domain/interview-question/entity/interview-question.entity';
+import { InterviewQuestionAnswerEntity } from 'src/domain/interview-question-answer/entity/interview-question-answer.entity';
+import { FollowUpQuestionEntity } from 'src/domain/interview-question-answer-followup-question/entity/followup-question.entity';
+import { FollowUpQuestionAnswerEntity } from 'src/domain/interview-question-answer-followup-question/entity/followup-question-answer.entity';
 
 export default () => ({
   DB: {
     type: 'mysql',
-    // host: process.env.MODE_ENV === 'local' ? 'localhost' : process.env.DB_HOST,
     host: process.env.MODE_ENV === 'local' ? 'mysql' : process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username:
@@ -24,6 +26,9 @@ export default () => ({
       Qna,
       QnaRoom,
       InterviewQuestionEntity,
+      InterviewQuestionAnswerEntity,
+      FollowUpQuestionEntity,
+      FollowUpQuestionAnswerEntity,
     ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,

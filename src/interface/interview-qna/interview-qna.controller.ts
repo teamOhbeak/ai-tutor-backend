@@ -1,3 +1,5 @@
+import { InterviewQuestionEntity } from '@/domain/interview-question/entity/interview-question.entity';
+import { InterviewQuestionService } from '@/domain/interview-question/service/interview-question.service';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -9,6 +11,9 @@ import {
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
 export class InterviewQnaController {
+  constructor(
+    private readonly interviewQuestionService: InterviewQuestionService,
+  ) {}
   @Post()
   @ApiCreatedResponse()
   async createQuestion(
@@ -20,8 +25,12 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param('interviewId') interviewId: number): Promise<any> {
-    return { id: interviewId };
+  async getQuestions(
+    @Param('interviewId') interviewId: number,
+  ): Promise<InterviewQuestionEntity[]> {
+    return await this.interviewQuestionService.getInterviewQuestions(
+      interviewId,
+    );
   }
 
   @Post(':questionId/answer')

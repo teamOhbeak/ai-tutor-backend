@@ -15,7 +15,7 @@ import { QuestionBankRepository } from '../questionsBank/repository/questionsBan
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [InterviewController, InterviewQnaController],
+  controllers: [InterviewController],
   providers: [
     AuthService,
     InterviewService,

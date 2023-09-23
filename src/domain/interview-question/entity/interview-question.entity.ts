@@ -3,12 +3,15 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 import { UserEntity } from '@/domain/user/entity/user.entity';
 import { IsEnum } from 'class-validator';
 import { QuestionStatus } from './question-status.enum';
+import { InterviewQuestionAnswerEntity } from '@/domain/interview-question-answer/entity/interview-question-answer.entity';
+import { QuestionType } from './question-type.enum';
 
 @Entity('interview_question')
 export class InterviewQuestionEntity {
@@ -16,6 +19,10 @@ export class InterviewQuestionEntity {
     name: 'question_id',
   })
   questionId: number;
+
+  // @IsEnum(QuestionType)
+  // @Column()
+  // questionType: QuestionType;
 
   @Column({
     name: 'question_text',
@@ -51,4 +58,11 @@ export class InterviewQuestionEntity {
     nullable: true,
   })
   finishedAt?: Date;
+
+  @OneToOne(
+    () => InterviewQuestionAnswerEntity,
+    (question) => question.question,
+  )
+  // @JoinColumn({name: 'question_id'})
+  answer?: InterviewQuestionAnswerEntity;
 }
