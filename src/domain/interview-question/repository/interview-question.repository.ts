@@ -19,8 +19,10 @@ export class InterviewQuestionRepository extends Repository<InterviewQuestionEnt
         interviewId: interviewId,
       },
       relations: [
-        'answer', 'answer.followupQuestions', 'answer.followupQuestions.answer'
-      ]
+        'answer',
+        'answer.followupQuestions',
+        'answer.followupQuestions.answer',
+      ],
     });
   }
 

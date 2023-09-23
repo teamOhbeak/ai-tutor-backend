@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InterviewQuestionRepository } from '../repository/interview-question.repository';
 import { InterviewQuestionEntity } from '../entity/interview-question.entity';
-import { InterviewQuestion } from '@/domain/prompt/service/prompt.service';
 
 @Injectable()
 export class InterviewQuestionService {

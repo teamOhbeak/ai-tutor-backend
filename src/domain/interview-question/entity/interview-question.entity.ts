@@ -59,7 +59,10 @@ export class InterviewQuestionEntity {
   })
   finishedAt?: Date;
 
-  @OneToOne(() => InterviewQuestionAnswerEntity, (question) => question.question)
+  @OneToOne(
+    () => InterviewQuestionAnswerEntity,
+    (question) => question.question,
+  )
   // @JoinColumn({name: 'question_id'})
   answer?: InterviewQuestionAnswerEntity;
 }

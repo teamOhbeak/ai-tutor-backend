@@ -28,7 +28,7 @@ export default () => ({
       InterviewQuestionEntity,
       InterviewQuestionAnswerEntity,
       FollowUpQuestionEntity,
-      FollowUpQuestionAnswerEntity
+      FollowUpQuestionAnswerEntity,
     ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,

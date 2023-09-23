@@ -33,10 +33,13 @@ export class InterviewQuestionAnswerEntity {
   createdAt: Date;
 
   @OneToOne(() => InterviewQuestionEntity)
-  @JoinColumn({name: 'question_id'})
+  @JoinColumn({ name: 'question_id' })
   question: InterviewQuestionEntity;
 
-  @OneToMany(() => FollowUpQuestionEntity, (question) => question.mainQuestionAnswer)
-  @JoinColumn({name: 'answer_id'})
+  @OneToMany(
+    () => FollowUpQuestionEntity,
+    (question) => question.mainQuestionAnswer,
+  )
+  @JoinColumn({ name: 'answer_id' })
   followupQuestions: FollowUpQuestionEntity[];
 }
