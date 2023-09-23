@@ -10,7 +10,7 @@ import {
 import { QnaRoom } from '../../qna-room/entity/qna-room.entity';
 import { QnaResponse } from '@/interface/qna-room-qna/response/qna-response';
 
-@Entity({ name: 'qna', schema: 'test' })
+@Entity()
 export class Qna {
   @PrimaryGeneratedColumn()
   id: number;

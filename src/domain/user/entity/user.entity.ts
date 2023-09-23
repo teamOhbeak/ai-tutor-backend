@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserStatus } from './user-status.enum';
 
-@Entity({ name: 'user', schema: 'test' })
+@Entity('user')
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;

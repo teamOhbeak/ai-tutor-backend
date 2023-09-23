@@ -1,39 +1,21 @@
-import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
-import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { InterviewQuestion } from '@/domain/prompt/service/prompt.service';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+// import { InterviewQuestionsEntity } from '../../interviewQuestions/entity/interviewQuestions.entity';
 
-@Entity({ name: 'interview_answer', schema: 'test' })
-export class InterviewAnswer {
-  @PrimaryGeneratedColumn()
-  id: number;
+// @Entity('Interview_answer', { schema: 'test' })
+// export class InterviewAnswersEntity {
+//   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+//   id: number;
 
-  @Column()
-  answer: string;
+//   @Column('text', { name: 'answer', nullable: false })
+//   answer: string;
 
-  @Column()
-  interviewQuestionId: number;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
-  // @ManyToOne(() => InterviewQuestionsEntity, (interviewQuestionId) => interviewQuestionId)
-  // @JoinColumn({name: 'interviewQuestionId'})
-  // interviewQuestionId: InterviewQuestion
-
-  constructor(answer: string, questionId: number) {
-    this.answer = answer;
-    this.interviewQuestionId = questionId;
-  }
-}
+//   @OneToOne(() => InterviewQuestionsEntity)
+//   @JoinColumn({ name: 'interview_question_id' })
+//   interviewQuestion: InterviewQuestionsEntity;
+// }
