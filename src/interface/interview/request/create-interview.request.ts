@@ -1,4 +1,4 @@
-import { IsEnum, IsInt, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { StackType } from '@/domain/interview/entity/stack-type.enum';
 export class CreateInterviewRequest {
@@ -15,4 +15,9 @@ export class CreateInterviewRequest {
   @IsInt()
   @IsNotEmpty()
   maxWait: number;
+
+  @ApiProperty({ example: false, default: false })
+  @IsBoolean()
+  @IsNotEmpty()
+  isShowVideo: boolean;
 }
