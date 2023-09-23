@@ -19,7 +19,6 @@ import { InterviewQuestionsModule } from './domain/interviewQuestions/interviewQ
 import { InterviewAnswerModule } from './domain/interviewAnswer/interviewAnswer.module';
 import { FollowUpQuestionsModule } from './domain/followUpQuestions/followUpQuestions.module';
 import { FollowUpAnswerModule } from './domain/followUpAnswer/followUpAnswer.module';
-import { FakeQuestionBankService } from './domain/questionsBank/service/fake-questionBank.service';
 
 @Module({
   imports: [
@@ -45,7 +44,6 @@ import { FakeQuestionBankService } from './domain/questionsBank/service/fake-que
   providers: [
     PromptService,
     QuestionBankService,
-    FakeQuestionBankService,
     QuestionBankRepository,
     QnaRoomService,
     BatchService,

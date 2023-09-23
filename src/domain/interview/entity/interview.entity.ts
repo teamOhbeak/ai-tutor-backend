@@ -15,7 +15,7 @@ import { InterviewQuestionEntity } from '@/domain/interview-question/entity/inte
 import { UserEntity } from '@/domain/user/entity/user.entity';
 import { HttpException } from '@nestjs/common';
 
-// @Entity({ name: 'interview', schema: 'test' })
+@Entity({ name: 'interview', schema: 'test' })
 export class InterviewEntity {
   @PrimaryGeneratedColumn()
   id: number;
