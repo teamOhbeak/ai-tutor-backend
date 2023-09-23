@@ -46,4 +46,5 @@ import { InterviewQnaModule } from './domain/interview-qna/interview-qna.module'
     BatchService,
   ],
 })
+
 export class AppModule {}
