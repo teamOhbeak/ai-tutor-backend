@@ -5,6 +5,7 @@ import { IsEnum } from 'class-validator';
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   OneToOne,
@@ -12,11 +13,17 @@ import {
 } from 'typeorm';
 import { FollowUpQuestionAnswerEntity } from './followup-question-answer.entity';
 
-@Entity('followup_question')
+@Entity({
+  name: 'followup_question',
+  orderBy: {
+    questionId: 'DESC'
+  }
+})
 export class FollowUpQuestionEntity {
   @PrimaryGeneratedColumn({
-    name: 'question_id',
+    name: 'followup_question_id',
   })
+  @Index()
   questionId: number;
 
   @Column({
@@ -46,6 +53,7 @@ export class FollowUpQuestionEntity {
     type: 'datetime',
     nullable: true,
   })
+  @Index()
   startedAt?: Date;
 
   @Column({
@@ -59,6 +67,5 @@ export class FollowUpQuestionEntity {
   mainQuestionAnswer: InterviewQuestionAnswerEntity;
 
   @OneToOne(() => FollowUpQuestionAnswerEntity, (question) => question.question)
-  @JoinColumn({ name: 'answer_id' })
   answer?: FollowUpQuestionAnswerEntity;
 }

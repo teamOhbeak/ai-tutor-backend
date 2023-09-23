@@ -23,7 +23,7 @@ export class FollowUpQuestionAnswerEntity {
   answerText: string;
 
   @Column({
-    name: 'followup_question_id',
+    name: 'question_id',
   })
   questionId: number;
 
@@ -33,6 +33,6 @@ export class FollowUpQuestionAnswerEntity {
   createdAt: Date;
 
   @OneToOne(() => FollowUpQuestionEntity)
-  @JoinColumn({ name: 'followup_question_id' })
+  @JoinColumn({ name: 'question_id' })
   question: FollowUpQuestionEntity;
 }
