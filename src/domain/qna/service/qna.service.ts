@@ -52,8 +52,7 @@ export class QnaService {
       qnaRequest.question,
       mostRecentQnas,
     );
-    const realAnswer =
-      answer == undefined || answer == null ? '답변이 없습니다.' : answer;
+    const realAnswer = answer == undefined || answer == null ? '' : answer;
     const qna = new Qna(qnaRequest.question, realAnswer, sequence, qnaRoom);
     const savedQna = await this.qnaRepository.save(qna);
     if (!qnaRoom.qnas) {
