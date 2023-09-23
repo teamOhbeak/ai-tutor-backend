@@ -22,7 +22,6 @@ export class InterviewQuestionService {
   async saveInterviewQuestions(
     questions: InterviewQuestionAndAnswerEntity[],
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
-
     return await this.repository.save(questions);
   }
 
