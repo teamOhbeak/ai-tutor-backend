@@ -14,6 +14,7 @@ import { StackType } from './stack-type.enum';
 import { InterviewQuestionEntity } from '@/domain/interview-question/entity/interview-question.entity';
 import { UserEntity } from '@/domain/user/entity/user.entity';
 import { HttpException } from '@nestjs/common';
+import { InterviewQuestionAndAnswerEntity } from '../../interview-question/entity/interview-question-and-answer.entity';
 
 @Entity('interview')
 export class InterviewEntity {
@@ -25,7 +26,10 @@ export class InterviewEntity {
   })
   userId: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: true,
+  })
   @IsEnum(StackType)
   stack: StackType;
 
@@ -38,11 +42,13 @@ export class InterviewEntity {
 
   @Column({
     type: 'int',
+    default: 0,
   })
   questionCount: number;
 
   @Column({
     type: 'int',
+    default: 0,
   })
   maxWait: number;
 
@@ -66,7 +72,7 @@ export class InterviewEntity {
     () => InterviewQuestionEntity,
     (question) => question.interviewInfo,
   )
-  questions: InterviewQuestionEntity[];
+  questions: InterviewQuestionAndAnswerEntity[];
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id' })
@@ -101,7 +107,7 @@ export class InterviewEntity {
     interview.maxWait = dto.maxWait;
     interview.userId = userId;
     interview.status = InterviewStatus.WAIT;
-    interview.questions = [];
+    // interview.questions = [];
     return interview;
   }
 }

@@ -38,4 +38,6 @@ export class InterviewQnaUtil {
     q.isPass = q.isPass;
     return q;
   }
+
+  // static to
 }

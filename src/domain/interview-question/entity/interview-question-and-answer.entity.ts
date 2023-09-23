@@ -21,6 +21,7 @@ export class InterviewQuestionAndAnswerEntity {
 
   @Column({
     name: 'user_id',
+    default: 1,
   })
   userId: number;
 
@@ -39,7 +40,7 @@ export class InterviewQuestionAndAnswerEntity {
   status: QuestionStatus;
 
   @Column({
-    name: 'answer_yn',
+    name: 'is_pass',
     nullable: true,
   })
   @IsEnum(AnswerStatus)
@@ -49,13 +50,6 @@ export class InterviewQuestionAndAnswerEntity {
     name: 'main_question_id',
   })
   mainQuestionId: number;
-
-  @Column({
-    type: 'boolean',
-    default: false,
-  })
-  @IsBoolean()
-  record: boolean;
 
   @CreateDateColumn({
     name: 'created_at',
@@ -70,7 +64,7 @@ export class InterviewQuestionAndAnswerEntity {
   startedAt?: Date;
 
   @Column({
-    name: 'started_at',
+    name: 'finished_at',
     type: 'timestamp',
     nullable: true,
   })

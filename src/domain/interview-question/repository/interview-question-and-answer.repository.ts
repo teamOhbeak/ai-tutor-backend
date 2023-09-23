@@ -3,6 +3,7 @@ import { InterviewEntity } from '../../interview/entity/interview.entity';
 import { DataSource, EntityRepository, IsNull, Repository } from 'typeorm';
 // import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
+import { QuestionStatus } from '../entity/question-status.enum';
 
 @EntityRepository(InterviewQuestionAndAnswerEntity)
 export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQuestionAndAnswerEntity> {
@@ -25,6 +26,16 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
     } catch (e) {
       console.log('hello error');
     }
+  }
+
+  async getAllQuestionsByInterviewIdAndStatus(
+    interviewId: number,
+    status: QuestionStatus.WAIT,
+  ): Promise<InterviewQuestionAndAnswerEntity[]> {
+    return await this.findBy({
+      interviewId: interviewId,
+      status: status,
+    });
   }
 
   async getFollowUpQuestions(

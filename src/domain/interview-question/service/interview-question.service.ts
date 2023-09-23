@@ -7,6 +7,10 @@ import { InterviewQuestionAndAnswerRepository } from '../repository/interview-qu
 import { InterviewQnaUtil } from '../utils/interview-qna.util';
 import { QuestionBankRepository } from '../../questionsBank/repository/questionsBank.repository';
 import { StackType } from '../../interview/entity/stack-type.enum';
+import { QuestionStatus } from '../entity/question-status.enum';
+import { QuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
+import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
+import { MainQnaResponse } from '../../../interface/interview-qna/response/main-qna.response';
 
 @Injectable()
 export class InterviewQuestionService {
@@ -18,24 +22,23 @@ export class InterviewQuestionService {
   async saveInterviewQuestions(
     questions: InterviewQuestionAndAnswerEntity[],
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
-    return [];
-    // return await this.interviewQuestionRepository.saveQuestions(questions);
+
+    return await this.repository.save(questions);
   }
 
   //1. 인터뷰의 질문 목록을 가져온다. (Detail - FollowUpQuestions까지 구하기)
   // 인터뷰 질문목록 가져오는 인터뷰 상세페이지랑, 인터뷰 진행하는 화면에 사용가능
-  async getInterviewQuestions(interviewId: number) {
+  async getInterviewQuestions(interviewId: number): Promise<MainQnaResponse[]> {
     const questions = await this.repository.getMainQuestions(interviewId);
     const followUpQuestions = await this.repository.getFollowUpQuestions(
       interviewId,
     );
-    const mapQuestions = questions.map((question) => {
+    return questions.map((question) => {
       const questionsOfMain = followUpQuestions.filter((fqs) => {
         return fqs.mainQuestionId === question.id;
       });
-      InterviewQnaUtil.toMainQuestionResponse(question, questionsOfMain);
+      return InterviewQnaUtil.toMainQuestionResponse(question, questionsOfMain);
     });
-    return await this.getInterviewQuestions(interviewId);
   }
 
   // /api/interviews/{interviewId}/questions/{questionId}/answer
@@ -65,7 +68,6 @@ export class InterviewQuestionService {
 
   // 요청 추가 : api/interviews/{interviewid}/question
   //3. 진행할 질문 찾기 ( interviewId에 해당하는 질문들 중 다음 진행해야할 질문이 무엇인지 찾는다. (1.메인질문 || 2.꼬리질문 || 3. null - 면접 종료 ))
-
   //3-1. 인터뷰의 전체 질문 목록을 가져온다. (status -> 대기)
   //3-2. 질문이 있는가?
   //3-2-1. 질문이 없는 경우 : -> 완료 처리하고
@@ -73,6 +75,20 @@ export class InterviewQuestionService {
   //3-3. 질문정보를 찾았는가?
   //3-3-1. 찾았다면 -> 진행
   //3-3-2. 못 찾았다면 -> 면접 종료를 의미 ( 모든 질문을 진행완료했기 때문에 )
+  async getNextQuestionInfo(interviewId: number): Promise<any> {
+    const questions =
+      await this.repository.getAllQuestionsByInterviewIdAndStatus(
+        interviewId,
+        QuestionStatus.WAIT,
+      );
+
+    if (questions.length == 0) {
+      return {
+        progressStatus: InterviewStatus.DONE,
+        questionInfo: {},
+      };
+    }
+  }
 
   // 응답 포멧
   /*{

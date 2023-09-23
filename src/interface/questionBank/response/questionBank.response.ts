@@ -21,6 +21,9 @@ export class QuestionBankResponse {
   @ApiProperty()
   updatedAt: Date;
 
+  // @ApiProperty()
+  // record: boolean;
+
   constructor(
     id: number,
     stack: StackType,

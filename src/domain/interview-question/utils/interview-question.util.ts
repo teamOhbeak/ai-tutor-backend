@@ -3,18 +3,24 @@ import { InterviewQuestionEntity } from '../entity/interview-question.entity';
 import { QuestionStatus } from '../entity/question-status.enum';
 import { InterviewQuestionResponse } from 'src/interface/interview-qna/response/interview-question.response';
 import { QuestionType } from '../entity/question-type.enum';
+import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
 
 export class InterviewQuestionUtil {
   static generateInterviewQuestion(
     interviewId: number,
     questions: QuestionBankResponse[],
-  ): InterviewQuestionEntity[] {
-    let idx = 0;
+  ): InterviewQuestionAndAnswerEntity[] {
+    // let idx = 0;
     return questions.map((question) => {
-      const q = new InterviewQuestionEntity();
+      const q = new InterviewQuestionAndAnswerEntity();
       q.questionText = question.question;
-      q.sequence = idx++;
+      q.userId = 1;
+      q.answerText = '';
       q.status = QuestionStatus.WAIT;
+      q.isPass = null;
+      q.mainQuestionId = null;
+      q.startedAt = null;
+      q.finishedAt = null;
       q.interviewId = interviewId;
       return q;
     });

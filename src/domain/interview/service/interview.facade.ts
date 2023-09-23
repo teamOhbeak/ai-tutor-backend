@@ -27,6 +27,7 @@ export class InterviewFacade {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
+    console.log(`dto: ${JSON.stringify(dto)}`);
     const interviewRoom = await this.interviewService.createInterview(
       userId,
       dto,
@@ -37,15 +38,22 @@ export class InterviewFacade {
       dto.stack,
     );
 
+    // console.log(`questions: ${JSON.stringify(questions)}`);
+
+    // 새로 만든 테이블에 형변환
     const interviewQuestions = InterviewQuestionUtil.generateInterviewQuestion(
       interviewRoom.id,
       questions,
     );
 
-    // interviewRoom.questions =
-    //   await this.interviewQuestionService.saveInterviewQuestions(
-    //     interviewQuestions,
-    //   );
+    // 전달후 저장
+    // /질문 서비스
+    interviewRoom.questions =
+      await this.interviewQuestionService.saveInterviewQuestions(
+        interviewQuestions,
+      );
+
+    // console.log(`questions: ${JSON.stringify(interviewRoom.questions)}`);
 
     return InterviewUtil.toCreateInterviewResponse(interviewRoom);
   }
@@ -70,7 +78,8 @@ export class InterviewFacade {
     const interviewResponse =
       InterviewUtil.toInterviewDetailResponse(interview);
     interviewResponse.questions =
-      this.interviewQuestionService.getInterviewQuestions(interviewId);
+      await this.interviewQuestionService.getInterviewQuestions(interviewId);
+
     return interviewResponse;
   }
 

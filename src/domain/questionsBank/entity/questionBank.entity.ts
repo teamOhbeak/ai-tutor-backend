@@ -13,7 +13,7 @@ export class QuestionBank {
   id: number;
 
   @Column({
-    type: 'int',
+    type: 'varchar',
   })
   stack: StackType;
 
