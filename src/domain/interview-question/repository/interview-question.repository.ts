@@ -4,7 +4,6 @@ import { Inject } from '@nestjs/common';
 
 @EntityRepository(InterviewQuestionEntity)
 export class InterviewQuestionRepository extends Repository<InterviewQuestionEntity> {
-  
   constructor(
     @Inject('DATA_SOURCE')
     private readonly dataSource: DataSource,
@@ -12,11 +11,13 @@ export class InterviewQuestionRepository extends Repository<InterviewQuestionEnt
     super(InterviewQuestionEntity, dataSource.createEntityManager());
   }
 
-  async getQuestionsById(interviewId: number): Promise<InterviewQuestionEntity[]> {
+  async getQuestionsById(
+    interviewId: number,
+  ): Promise<InterviewQuestionEntity[]> {
     return await this.find({
-      where: { 
-        interviewId: interviewId
-      }
+      where: {
+        interviewId: interviewId,
+      },
     });
   }
 

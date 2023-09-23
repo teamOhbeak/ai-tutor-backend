@@ -12,7 +12,7 @@ import { FakeQuestionBankService } from '../questionsBank/service/fake-questionB
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [InterviewController, InterviewQnaController],
+  controllers: [InterviewController],
   providers: [
     AuthService,
     InterviewService,
