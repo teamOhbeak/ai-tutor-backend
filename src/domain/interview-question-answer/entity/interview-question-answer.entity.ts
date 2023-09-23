@@ -1,25 +1,29 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('interview_question')
-export class InterviewQuestionAnswerEntity 
-{
+export class InterviewQuestionAnswerEntity {
   @PrimaryGeneratedColumn({
-    name: 'answer_id'
+    name: 'answer_id',
   })
   answerId: number;
 
   @Column({
-    name: 'answer_text'
+    name: 'answer_text',
   })
   answerText: string;
 
   @Column({
-    name: 'question_id'
+    name: 'question_id',
   })
   questionId: number;
 
   @CreateDateColumn({
-    name: 'created_at'
+    name: 'created_at',
   })
   createdAt: Date;
 }
