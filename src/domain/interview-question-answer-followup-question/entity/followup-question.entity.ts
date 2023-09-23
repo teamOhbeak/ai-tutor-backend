@@ -23,7 +23,6 @@ export class FollowUpQuestionEntity {
   @PrimaryGeneratedColumn({
     name: 'followup_question_id',
   })
-  @Index()
   questionId: number;
 
   @Column({
