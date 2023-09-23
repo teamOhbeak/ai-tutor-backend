@@ -26,13 +26,20 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
     }
   }
 
-  async getAllQuestionsByInterviewIdAndStatus(
+  async findQuestionById(
+    questionId: number,
+  ): Promise<InterviewQuestionAndAnswerEntity> {
+    return await this.findOneBy({
+      id: questionId,
+    });
+  }
+
+  async getWaitQuestions(
     interviewId: number,
-    status: QuestionStatus.WAIT,
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
     return await this.findBy({
       interviewId: interviewId,
-      status: status,
+      status: QuestionStatus.WAIT,
     });
   }
 

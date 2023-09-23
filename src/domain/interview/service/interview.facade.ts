@@ -11,6 +11,7 @@ import { MyInterviewDetailResponse } from '@/interface/interview/response/my-int
 import { InterviewQuestionUtil } from '@/domain/interview-question/utils/interview-question.util';
 import { CanceledInterviewResponse } from '@/interface/interview/response/canceled-interview.response';
 import { QuestionBankService } from '../../questionsBank/service/questionBank.service';
+import { InterviewQuestionAndAnswerEntity } from '../../interview-question/entity/interview-question-and-answer.entity';
 
 @Injectable()
 export class InterviewFacade {
@@ -27,7 +28,6 @@ export class InterviewFacade {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<CreateInterviewResponse> {
-    console.log(`dto: ${JSON.stringify(dto)}`);
     const interviewRoom = await this.interviewService.createInterview(
       userId,
       dto,
@@ -54,12 +54,15 @@ export class InterviewFacade {
       interviewQuestions,
     );
 
-    // interviewRoom.questions =
-    //   await this.interviewQuestionService.saveInterviewQuestions(
-    //     interviewQuestions,
-    //   );
+    interviewRoom.questions =
+      InterviewQuestionUtil.generateInterviewFollowupQuestion(
+        interviewRoom.questions,
+      );
 
-    console.log(`questions: ${JSON.stringify(interviewRoom.questions)}`);
+
+    interviewRoom.questions = await this.interviewService.createData(
+      interviewRoom.questions,
+    );
 
     return InterviewUtil.toCreateInterviewResponse(interviewRoom);
   }

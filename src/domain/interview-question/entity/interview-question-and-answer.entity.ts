@@ -67,4 +67,18 @@ export class InterviewQuestionAndAnswerEntity {
     nullable: true,
   })
   finishedAt?: Date;
+
+  submitAnswer(answerText: string): void {
+    this.answerText = answerText;
+    this.finishedAt = new Date();
+    this.status = QuestionStatus.DONE;
+  }
+
+  submitPass(): void {
+    this.isPass = AnswerStatus.Y;
+  }
+
+  saveFollowUpQuestion(questionText: string): void {
+    this.questionText = questionText;
+  }
 }

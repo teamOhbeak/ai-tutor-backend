@@ -4,13 +4,13 @@ import { QuestionStatus } from '../entity/question-status.enum';
 import { InterviewQuestionResponse } from 'src/interface/interview-qna/response/interview-question.response';
 import { QuestionType } from '../entity/question-type.enum';
 import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
+import data from '../../batch/fake-data';
 
 export class InterviewQuestionUtil {
   static generateInterviewQuestion(
     interviewId: number,
     questions: QuestionBankResponse[],
   ): InterviewQuestionAndAnswerEntity[] {
-    // let idx = 0;
     return questions.map((question) => {
       const q = new InterviewQuestionAndAnswerEntity();
       q.questionText = question.question;
@@ -41,5 +41,28 @@ export class InterviewQuestionUtil {
 
     // q.answer = question.an
     return q;
+  }
+
+  static generateInterviewFollowupQuestion(
+    questions: InterviewQuestionAndAnswerEntity[],
+  ): InterviewQuestionAndAnswerEntity[] {
+    const dataArray = [];
+    questions.map((question) => {
+      for (let i = 0; i < 2; i++) {
+        const q = new InterviewQuestionAndAnswerEntity();
+        q.questionText = '';
+        q.userId = 1;
+        q.answerText = '';
+        q.status = QuestionStatus.WAIT;
+        q.isPass = null;
+        q.mainQuestionId = question.id;
+        q.startedAt = null;
+        q.finishedAt = null;
+        q.interviewId = question.interviewId;
+
+        dataArray.push(q);
+      }
+    });
+    return dataArray;
   }
 }

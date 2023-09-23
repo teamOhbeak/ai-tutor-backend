@@ -53,7 +53,6 @@ export class InterviewService {
   async createData(
     data: InterviewQuestionAndAnswerEntity[],
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
-
     return await this.interviewQuestionAndAnswerRepository.save(data);
   }
 }

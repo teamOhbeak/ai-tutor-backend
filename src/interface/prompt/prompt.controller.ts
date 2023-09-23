@@ -47,20 +47,20 @@ export class PromptController {
     type: String,
   })
   async getwhat() {
-    const data: InterviewQuestionAndAnswerEntity = {
-      id: 1,
-      userId: 1,
-      interviewId: 1,
-      mainQuestionId: 1,
-      questionText: 'hello',
-      answerText: '',
-      status: 1,
-      isPass: AnswerStatus.N,
-    };
+    // const data: InterviewQuestionAndAnswerEntity = {
+    //   id: 1,
+    //   userId: 1,
+    //   interviewId: 1,
+    //   mainQuestionId: 1,
+    //   questionText: 'hello',
+    //   answerText: '',
+    //   status: 1,
+    //   isPass: AnswerStatus.N,
+    // };
 
-    await this.InterviewQuestionAndAnswerRepository.save(data);
+    // await this.InterviewQuestionAndAnswerRepository.save(data);
 
-    return 'hello';
+    // return 'hello';
     // return await this.questionBankService.getQuestions(count, stack);
   }
 }

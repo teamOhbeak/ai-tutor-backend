@@ -2,6 +2,7 @@ import { Qna } from '@/domain/qna/entity/qna.entity';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
+import { FollowUpQuestionRequest } from "../../../interface/prompt/request/followup-question.request";
 
 export interface InterviewQuestion {
   JAVA: string[];
@@ -134,6 +135,7 @@ export class PromptService {
 
     return promptResult;
   }
+
   async getQnaPrompt(question: string, qnaList: Qna[]): Promise<any> {
     const openAI = new OpenAI({
       apiKey: this.configService.get<string>('openAIConfig'),
@@ -188,20 +190,94 @@ export class PromptService {
       {
         role: 'system',
         content:
-          '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.' +
-          '\n 질문의 답변을 해주세요. 질문을 하는 사람은 배우는 입장이기 때문에. ' +
-          '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 됩니다.' +
-          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.',
+          '당신은 코딩 및 CS 관련 질문에 답변을 하는 튜터에요.' +
+          '\n 질문에 답변을 해주세요.' +
+          // '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 되요.' +
+          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.' +
+          // '\n 질문자가 질문을 잘못했을 수도 있으니까요.' +
+          '\n 그리고 최대한 구체적으로 답변을 해주세요.' +
+          '\n 설명은 한국어로 해주세요. \n 그리고 20대의 친근한 여성처럼 부드럽게 답변해주세요.',
       },
       {
         role: 'user',
-        content:
-          question +
-          '\n 한국어로 답변해줘. 그리고 내 질문을 그대로 다시 나한테 보여주진 마.',
+        content: question,
       },
     );
 
     console.log(messages);
+
+    const promptResult = await openAI.chat.completions
+      .create({
+        messages: messages,
+        functions: [{ name: 'set_questions', parameters: schema }],
+        function_call: { name: 'set_questions' },
+        model: 'gpt-3.5-turbo-structkk',
+      })
+      .then((competions) => {
+        const generateText =
+          competions.choices[0].message.function_call.arguments;
+
+        return JSON.parse(generateText);
+      })
+      .catch((err) => {
+        console.log('open ai error.');
+        console.log(err.message);
+        return { error: err.message };
+      });
+
+    return promptResult;
+  }
+
+  async getFollowup(request: FollowUpQuestionRequest): Promise<any> {
+    const openAI = new OpenAI({
+      apiKey: this.configService.get<string>('openAIConfig'),
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        answer: {
+          type: 'string',
+          items: {
+            type: 'string',
+          },
+        },
+      },
+    };
+
+    const messages = [];
+
+    if (
+      request.question !== null ||
+      request.answer !== null ||
+      request.question !== '' ||
+      request.answer !== ''
+    ) {
+      return '꼬리질문이 없습니다.';
+    } else {
+      messages.push({
+        role: 'system',
+        content: request.question,
+      });
+
+      messages.push({
+        role: 'user',
+        content: request.answer,
+      });
+    }
+
+    // 메인질문 + 답변 또는 메인질문 질문만 있을경우 요청없음
+    // case1:  (메인질문 + 답변 ) -> return 꼬리질문
+    // case2 : (메인질문 + 답변 ) -> (꼬리질문 + 답변) -> return 꼬리질문
+
+    messages.push({
+      role: 'system',
+      content:
+        '당신은 꼬리질문을 하는 IT 면접관 입니다.' +
+        '\n 위의 답변의 꼬리질문을 해주세요. 답변을 하는 사람은 초급 개발자입니다.' +
+        '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.' +
+        '질문은 한국어로 해주시고, 20대 여성처럼 부드러운 어조로 질문해주세요.', 
+    });
 
     const promptResult = await openAI.chat.completions
       .create({
