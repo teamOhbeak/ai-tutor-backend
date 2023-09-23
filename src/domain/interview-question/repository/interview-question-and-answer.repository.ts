@@ -33,9 +33,6 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
       id: questionId,
     });
 
-    // questions.filter((question) => {
-    //   return question.mainQuestionId;
-    // })
     return questions;
   }
 
@@ -51,10 +48,11 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
   async getFollowUpQuestions(
     interviewId: number,
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
-    return this.findBy({
-      interviewId: interviewId,
-      // mainQuestionId: Is
-    });
+    return (
+      await this.findBy({
+        interviewId: interviewId,
+      })
+    ).filter((fuq) => fuq.mainQuestionId != null);
   }
 
   async getFollowUpQuestionsByQuestionId(

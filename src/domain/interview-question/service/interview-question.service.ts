@@ -27,7 +27,7 @@ export class InterviewQuestionService {
     private readonly questionBankRepository: QuestionBankRepository,
     private readonly promptService: PromptService,
     private readonly interviewQnaRepository: InterviewQuestionAndAnswerRepository,
-  ) {}
+  ) { }
 
   async saveInterviewQuestions(
     questions: InterviewQuestionAndAnswerEntity[],
