@@ -7,31 +7,41 @@ import { InterviewQuestionAndAnswerRepository } from '../repository/interview-qu
 import { InterviewQnaUtil } from '../utils/interview-qna.util';
 import { QuestionBankRepository } from '../../questionsBank/repository/questionsBank.repository';
 import { StackType } from '../../interview/entity/stack-type.enum';
-import { QuestionStatus } from '../entity/question-status.enum';
-import { QuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
+import { QuestionStatus as questionStatusForQuestion } from '../entity/question-status.enum';
+import {
+  CreateQuestionBankResponse,
+  QuestionBankResponse,
+} from '../../../interface/questionBank/response/questionBank.response';
 import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { MainQnaResponse } from '../../../interface/interview-qna/response/main-qna.response';
+import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 
 @Injectable()
 export class InterviewQuestionService {
   constructor(
     private readonly questionBankRepository: QuestionBankRepository,
-    private readonly repository: InterviewQuestionAndAnswerRepository,
+    private readonly InterviewQuestionAndAnswerRepository: InterviewQuestionAndAnswerRepository,
   ) {}
 
   async saveInterviewQuestions(
     questions: InterviewQuestionAndAnswerEntity[],
   ): Promise<InterviewQuestionAndAnswerEntity[]> {
-    return await this.repository.save(questions);
+    return await this.InterviewQuestionAndAnswerRepository.saveQuestions(
+      questions,
+    );
   }
 
   //1. 인터뷰의 질문 목록을 가져온다. (Detail - FollowUpQuestions까지 구하기)
   // 인터뷰 질문목록 가져오는 인터뷰 상세페이지랑, 인터뷰 진행하는 화면에 사용가능
   async getInterviewQuestions(interviewId: number): Promise<MainQnaResponse[]> {
-    const questions = await this.repository.getMainQuestions(interviewId);
-    const followUpQuestions = await this.repository.getFollowUpQuestions(
-      interviewId,
-    );
+    const questions =
+      await this.InterviewQuestionAndAnswerRepository.getMainQuestions(
+        interviewId,
+      );
+    const followUpQuestions =
+      await this.InterviewQuestionAndAnswerRepository.getFollowUpQuestions(
+        interviewId,
+      );
     return questions.map((question) => {
       const questionsOfMain = followUpQuestions.filter((fqs) => {
         return fqs.mainQuestionId === question.id;
@@ -76,9 +86,9 @@ export class InterviewQuestionService {
   //3-3-2. 못 찾았다면 -> 면접 종료를 의미 ( 모든 질문을 진행완료했기 때문에 )
   async getNextQuestionInfo(interviewId: number): Promise<any> {
     const questions =
-      await this.repository.getAllQuestionsByInterviewIdAndStatus(
+      await this.InterviewQuestionAndAnswerRepository.getAllQuestionsByInterviewIdAndStatus(
         interviewId,
-        QuestionStatus.WAIT,
+        questionStatusForQuestion.WAIT,
       );
 
     if (questions.length == 0) {

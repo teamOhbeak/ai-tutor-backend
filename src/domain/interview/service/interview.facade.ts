@@ -48,12 +48,18 @@ export class InterviewFacade {
 
     // 전달후 저장
     // /질문 서비스
-    interviewRoom.questions =
-      await this.interviewQuestionService.saveInterviewQuestions(
-        interviewQuestions,
-      );
+    //
 
-    // console.log(`questions: ${JSON.stringify(interviewRoom.questions)}`);
+    interviewRoom.questions = await this.interviewService.createData(
+      interviewQuestions,
+    );
+
+    // interviewRoom.questions =
+    //   await this.interviewQuestionService.saveInterviewQuestions(
+    //     interviewQuestions,
+    //   );
+
+    console.log(`questions: ${JSON.stringify(interviewRoom.questions)}`);
 
     return InterviewUtil.toCreateInterviewResponse(interviewRoom);
   }

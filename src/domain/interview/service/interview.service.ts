@@ -5,6 +5,8 @@ import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
 import { InterviewStatus } from '../entity/insterview-status.enum';
 import { InterviewQuestionAndAnswerRepository } from '../../interview-question/repository/interview-question-and-answer.repository';
+import { InterviewQuestionAndAnswerEntity } from '../../interview-question/entity/interview-question-and-answer.entity';
+import { AnswerStatus } from '../../interview-question/entity/answer-status.enum';
 @Injectable()
 export class InterviewService {
   constructor(
@@ -46,5 +48,12 @@ export class InterviewService {
     const interview = await this.findInterview(userId, interviewId);
     interview.cancel(userId);
     return await this.interviewRepository.save(interview);
+  }
+
+  async createData(
+    data: InterviewQuestionAndAnswerEntity[],
+  ): Promise<InterviewQuestionAndAnswerEntity[]> {
+
+    return await this.interviewQuestionAndAnswerRepository.save(data);
   }
 }

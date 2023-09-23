@@ -27,11 +27,13 @@ export class InterviewQuestionAndAnswerEntity {
 
   @Column({
     name: 'question_text',
+    default: '',
   })
   questionText: string;
 
   @Column({
     name: 'answer_text',
+    default: '',
   })
   answerText: string;
 
@@ -48,13 +50,9 @@ export class InterviewQuestionAndAnswerEntity {
 
   @Column({
     name: 'main_question_id',
+    default: null,
   })
   mainQuestionId: number;
-
-  @CreateDateColumn({
-    name: 'created_at',
-  })
-  createdAt: Date;
 
   @Column({
     name: 'started_at',

@@ -1,17 +1,15 @@
-import { Inject } from '@nestjs/common';
-import { InterviewEntity } from '../../interview/entity/interview.entity';
-import { DataSource, EntityRepository, IsNull, Repository } from 'typeorm';
-// import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository, DataSource } from 'typeorm';
 import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
 import { QuestionStatus } from '../entity/question-status.enum';
 
-@EntityRepository(InterviewQuestionAndAnswerEntity)
+@Injectable()
 export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQuestionAndAnswerEntity> {
   constructor(
     @Inject('DATA_SOURCE')
     private readonly dataSource: DataSource,
   ) {
-    super(InterviewEntity, dataSource.createEntityManager());
+    super(InterviewQuestionAndAnswerEntity, dataSource.createEntityManager());
   }
 
   async getMainQuestions(
@@ -58,6 +56,7 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
   }
 
   async saveQuestions(questions: InterviewQuestionAndAnswerEntity[]) {
+    await this.insert(questions);
     return await this.save(questions);
   }
 }
