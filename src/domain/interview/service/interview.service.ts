@@ -1,8 +1,9 @@
 import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
 import { InterviewRepository } from '../repository/interview.repository';
+import { InterviewStatus } from '../entity/insterview-status.enum';
 
 @Injectable()
 export class InterviewService {
@@ -16,18 +17,31 @@ export class InterviewService {
     return await this.interviewRepository.save(interview);
   }
 
-  async getMyInterviews(userId: number): Promise<InterviewEntity[]> {
-    const interviews = await this.interviewRepository.findBy({
-      userId: userId,
-    });
-    console.log(`interviews: ${JSON.stringify(interviews)}`);
-    return interviews;
+  async getMyCompletedInterviews(userId: number): Promise<InterviewEntity[]> {
+    return await this.interviewRepository.getInterviewsByUserIdAndStatus(
+      userId,
+      InterviewStatus.DONE,
+    );
   }
 
-  getMyInterviewDetail(
+  async findInterview(userId: number, interviewId: number) {
+    const interview = await this.interviewRepository.getInterviewDetailById(
+      interviewId,
+      userId,
+    );
+
+    if (!interview)
+      throw new HttpException({ error: '면접정보를 찾을 수 없습니다.' }, 404);
+
+    return interview;
+  }
+
+  async cancelInterview(
     userId: number,
     interviewId: number,
-  ): Promise<MyInterviewDetailResponse> {
-    throw new Error('Method not implemented.');
+  ): Promise<InterviewEntity> {
+    const interview = await this.findInterview(userId, interviewId);
+    interview.cancel(userId);
+    return await this.interviewRepository.save(interview);
   }
 }

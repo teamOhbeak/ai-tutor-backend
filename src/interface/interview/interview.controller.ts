@@ -29,8 +29,6 @@ export class InterviewController {
   constructor(
     private readonly authService: AuthService,
     private readonly interviewFacade: InterviewFacade,
-    //TODO: interviewFacade get요청 추가 시 삭제
-    private readonly interviewService: InterviewService,
   ) {}
 
   @Post()
@@ -48,9 +46,11 @@ export class InterviewController {
 
   @Get()
   @ApiOkResponse({ description: '면접 목록 조회', type: [MyInterviewResponse] })
-  async getMyInterviews(): Promise<InterviewEntity[]> {
+  async getMyInterviews(): Promise<MyInterviewResponse[]> {
     const userId = 1;
-    const interviews = await this.interviewService.getMyInterviews(userId);
+    const interviews = await this.interviewFacade.getMyCompletedInterviews(
+      userId,
+    );
     return interviews;
   }
 
@@ -60,9 +60,7 @@ export class InterviewController {
     @Param('interviewId') interviewId: number,
   ): Promise<MyInterviewDetailResponse> {
     const userId = 1;
-    const user = new UserResponse();
-    user.userName = '이민규';
-    return this.interviewService.getMyInterviewDetail(userId, interviewId);
+    return this.interviewFacade.getMyInterviewDetail(userId, interviewId);
   }
 
   @Put(':interviewId') // 면접 진행 중 나가기
@@ -70,7 +68,8 @@ export class InterviewController {
   async cancelInterview(
     @Param('interviewId') interviewId: number,
   ): Promise<any> {
-    return null;
+    const userId = 1;
+    return this.interviewFacade.cancelInterview(userId, interviewId);
   }
 
   @Delete(':interviewId') // 면접 목록 리스트 삭제

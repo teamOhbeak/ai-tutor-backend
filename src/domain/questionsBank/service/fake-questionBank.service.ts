@@ -3,6 +3,7 @@ import { QuestionBankResponse } from '../../../interface/questionBank/response/q
 import { IFakeQuestionBankService } from './fake-questionBank.interface';
 import { QuestionStatus } from '../entity/questionBank.entity';
 import { StackType } from '@/domain/interview/entity/stack-type.enum';
+import data from '../../batch/fake-data';
 
 @Injectable()
 export class FakeQuestionBankService implements IFakeQuestionBankService {
@@ -27,6 +28,37 @@ export class FakeQuestionBankService implements IFakeQuestionBankService {
         null,
       ),
     ]);
+  }
+
+  async getFakeQuestionByStack(
+    count: number,
+    stack: StackType,
+  ): Promise<QuestionBankResponse[]> {
+    console.log(data, stack);
+    const randomResult = data[stack]
+      .sort(() => Math.random() - Math.random())
+      .slice(0, count);
+    console.log(randomResult);
+
+    const exportData = [];
+
+    randomResult.map((question, index) => {
+      const randomTime = Math.floor(Math.random() * 24);
+      exportData.push(
+        new QuestionBankResponse(
+          index + 1,
+          stack,
+          question,
+          QuestionStatus.PENDING,
+          new Date(new Date().setHours(randomTime)),
+          null,
+        ),
+      );
+    });
+
+    console.log(exportData);
+
+    return Promise.resolve(exportData);
   }
 }
 

@@ -3,6 +3,7 @@ import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule';
 import { PromptService } from '../../prompt/service/prompt.service';
 import { QuestionBankRepository } from '../repository/questionsBank.repository';
 import { CreateQuestionBankResponse } from '../../../interface/questionBank/response/questionBank.response';
+import { StackType } from '../../interview/entity/stack-type.enum';
 
 @Injectable()
 export class QuestionBankService {
@@ -13,7 +14,14 @@ export class QuestionBankService {
 
   async collectingQuestionsFromGpt() {}
 
-  async getQuestions(count: number) {}
+  async getQuestions(count: number, stack: StackType) {
+    const result = await this.questionBankRepository.getQuestionByStack(
+      count,
+      stack,
+    );
+
+    return result.sort(() => Math.random() - Math.random()).slice(0, count);
+  }
 }
 
 export enum QuestionType {
