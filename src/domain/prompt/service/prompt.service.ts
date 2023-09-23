@@ -155,24 +155,14 @@ export class PromptService {
 
     const messages = [];
 
-    // if (qna) {
-    //   messages.push({
-    //     role: 'user',
-    //     content: qna.question,
-    //   });
-    //   messages.push({
-    //     role: 'system',
-    //     content:
-    //       qna.answer !== '답변이 없습니다.'
-    //         ? qna.answer
-    //         : '이전 답변이 없습니다.',
-    //   });
-    // }
-
     if (qnaList && qnaList.length > 0) {
       // Iterate through qnaList and push each Qna's question and answer as messages
       qnaList.forEach((qna) => {
-        if (qna.question !== null && qna.answer !== '답변이 없습니다.') {
+        if (
+          qna.question !== null &&
+          qna.answer !== '답변이 없습니다.' &&
+          qna.answer !== ''
+        ) {
           messages.push({
             role: 'user',
             content: qna.question,
@@ -188,16 +178,17 @@ export class PromptService {
       {
         role: 'system',
         content:
-          '당신은 질문의 답변을 하는 IT 에시스턴스 입니다.' +
-          '\n 질문의 답변을 해주세요. 질문을 하는 사람은 배우는 입장이기 때문에. ' +
-          '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 됩니다.' +
-          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.',
+          '당신은 코딩 및 CS 관련 질문에 답변을 하는 튜터에요.' +
+          '\n 질문에 답변을 해주세요.' +
+          // '\n 질문의 의도가 이해되지 않는데면 질문을 파악하기 위한 다른 질문을 해도 되요.' +
+          '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.' +
+          // '\n 질문자가 질문을 잘못했을 수도 있으니까요.' +
+          '\n 그리고 최대한 구체적으로 답변을 해주세요.' +
+          '\n 설명은 한국어로 해주세요. \n 그리고 20대의 친근한 여성처럼 부드럽게 답변해주세요.',
       },
       {
         role: 'user',
-        content:
-          question +
-          '\n 한국어로 답변해줘. 그리고 내 질문을 그대로 다시 나한테 보여주진 마.',
+        content: question,
       },
     );
 
