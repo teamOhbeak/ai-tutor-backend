@@ -16,8 +16,8 @@ import { FollowUpQuestionAnswerEntity } from './followup-question-answer.entity'
 @Entity({
   name: 'followup_question',
   orderBy: {
-    questionId: 'DESC'
-  }
+    questionId: 'DESC',
+  },
 })
 export class FollowUpQuestionEntity {
   @PrimaryGeneratedColumn({
