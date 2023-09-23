@@ -1,14 +1,11 @@
+import { InterviewEntity } from 'src/domain/interview/entity/interview.entity';
 // import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
 import { QnaRoom } from 'src/domain/qna-room/entity/qna-room.entity';
 import { Qna } from 'src/domain/qna/entity/qna.entity';
 import { QuestionBank } from 'src/domain/questionsBank/entity/questionBank.entity';
 import { UserEntity } from 'src/domain/user/entity/user.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { InterviewEntity } from '@/domain/interview/entity/interview.entity';
-import { InterviewAnswer } from '@/domain/interviewAnswer/entity/interviewAnswer.entity';
-import { InterviewQuestionsEntity } from '@/domain/interviewQuestions/entity/interviewQuestions.entity';
-import { FollowUpQuestions } from '@/domain/followUpQuestions/entity/followUpQuestions.entity';
-import { FollowUpAnswer } from '@/domain/followUpAnswer/entity/followUpAnswer.entity';
+import { InterviewQuestionEntity } from 'src/domain/interview-question/entity/interview-question.entity';
 
 export default () => ({
   DB: {
@@ -26,10 +23,7 @@ export default () => ({
       QuestionBank,
       Qna,
       QnaRoom,
-      InterviewAnswer,
-      InterviewQuestionsEntity,
-      FollowUpQuestions,
-      FollowUpAnswer,
+      InterviewQuestionEntity,
     ],
     logging: true,
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
