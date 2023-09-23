@@ -2,7 +2,7 @@ import { Qna } from '@/domain/qna/entity/qna.entity';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
-import { FollowUpQuestionRequest } from "../../../interface/prompt/request/followup-question.request";
+import { FollowUpQuestionRequest } from '../../../interface/prompt/request/followup-question.request';
 
 export interface InterviewQuestion {
   JAVA: string[];
@@ -276,7 +276,7 @@ export class PromptService {
         '당신은 꼬리질문을 하는 IT 면접관 입니다.' +
         '\n 위의 답변의 꼬리질문을 해주세요. 답변을 하는 사람은 초급 개발자입니다.' +
         '\n 다만 절대로 질문자의 질문을 똑같이 반복해서 물어보지 마세요.' +
-        '질문은 한국어로 해주시고, 20대 여성처럼 부드러운 어조로 질문해주세요.', 
+        '질문은 한국어로 해주시고, 20대 여성처럼 부드러운 어조로 질문해주세요.',
     });
 
     const promptResult = await openAI.chat.completions

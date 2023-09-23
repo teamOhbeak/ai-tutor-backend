@@ -57,9 +57,7 @@ export class PromptController {
     //   status: 1,
     //   isPass: AnswerStatus.N,
     // };
-
     // await this.InterviewQuestionAndAnswerRepository.save(data);
-
     // return 'hello';
     // return await this.questionBankService.getQuestions(count, stack);
   }

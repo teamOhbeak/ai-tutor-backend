@@ -59,7 +59,6 @@ export class InterviewFacade {
         interviewRoom.questions,
       );
 
-
     interviewRoom.questions = await this.interviewService.createData(
       interviewRoom.questions,
     );

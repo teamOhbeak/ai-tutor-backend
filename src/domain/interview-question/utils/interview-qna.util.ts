@@ -4,7 +4,7 @@ import {
   NextQuestionResponse,
   QuestionInfo,
 } from '../../../interface/interview-qna/response/next-question.response';
-import { QuestionStateResponse } from "../../../interface/interview-qna/response/question-state.response";
+import { QuestionStateResponse } from '../../../interface/interview-qna/response/question-state.response';
 import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { InterviewQuestionAndAnswerEntity } from '../entity/interview-question-and-answer.entity';
 export class InterviewQnaUtil {
@@ -71,7 +71,8 @@ export class InterviewQnaUtil {
   }
 
   static toQuestionStateResponse(
-    question: InterviewQuestionAndAnswerEntity,): QuestionStateResponse {
+    question: InterviewQuestionAndAnswerEntity,
+  ): QuestionStateResponse {
     const response = new QuestionStateResponse();
     response.status = question.status;
     // response.
