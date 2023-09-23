@@ -1,3 +1,4 @@
+import { MyInterviewDetailResponse } from '@/interface/interview/response/my-interview-detail.response';
 import { CreateInterviewRequest } from '@/interface/interview/request/create-interview.request';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InterviewEntity } from '../entity/interview.entity';
@@ -12,7 +13,7 @@ export class InterviewService {
     userId: number,
     dto: CreateInterviewRequest,
   ): Promise<InterviewEntity> {
-    const interview = InterviewEntity.createInterview(userId, dto);
+    const interview = InterviewEntity.CreateInterview(userId, dto);
     return await this.interviewRepository.save(interview);
   }
 
@@ -42,13 +43,5 @@ export class InterviewService {
     const interview = await this.findInterview(userId, interviewId);
     interview.cancel(userId);
     return await this.interviewRepository.save(interview);
-  }
-
-  async deleteInterview(
-    userId: number,
-    interviewId: number,
-  ): Promise<InterviewEntity> {
-    const interview = await this.findInterview(userId, interviewId);
-    return await this.interviewRepository.remove(interview);
   }
 }
