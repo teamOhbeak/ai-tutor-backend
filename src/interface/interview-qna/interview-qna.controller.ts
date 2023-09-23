@@ -11,10 +11,9 @@ import {
 @Controller('api/interviews/:interviewId/questions')
 @ApiTags('InterviewQnaController')
 export class InterviewQnaController {
-
   constructor(
-    private readonly interviewQuestionService: InterviewQuestionService) {
-  }
+    private readonly interviewQuestionService: InterviewQuestionService,
+  ) {}
   @Post()
   @ApiCreatedResponse()
   async createQuestion(
@@ -26,10 +25,12 @@ export class InterviewQnaController {
 
   @Get()
   @ApiOkResponse()
-  async getQuestions(@Param('interviewId') interviewId: number)
-  : Promise<InterviewQuestionEntity[]> {
-    return await this.interviewQuestionService
-    .getInterviewQuestions(interviewId);
+  async getQuestions(
+    @Param('interviewId') interviewId: number,
+  ): Promise<InterviewQuestionEntity[]> {
+    return await this.interviewQuestionService.getInterviewQuestions(
+      interviewId,
+    );
   }
 
   @Post(':questionId/answer')

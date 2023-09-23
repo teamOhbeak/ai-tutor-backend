@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from "../database/database.module";
+import { DatabaseModule } from '../database/database.module';
 import { InterviewQnaController } from '@/interface/interview-qna/interview-qna.controller';
 import { AuthService } from '../auth/service/auth.service';
 import { InterviewQuestionService } from '../interview-question/service/interview-question.service';
