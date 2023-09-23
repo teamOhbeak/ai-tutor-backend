@@ -29,7 +29,7 @@ export class InterviewQuestionAndAnswerRepository extends Repository<InterviewQu
   async findQuestionById(
     questionId: number,
   ): Promise<InterviewQuestionAndAnswerEntity> {
-    const questions =  await this.findOneBy({
+    const questions = await this.findOneBy({
       id: questionId,
     });
 

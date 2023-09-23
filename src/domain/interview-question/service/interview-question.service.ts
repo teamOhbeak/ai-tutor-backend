@@ -19,7 +19,7 @@ import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { MainQnaResponse } from '../../../interface/interview-qna/response/main-qna.response';
 import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 import { FollowUpQuestionRequest } from '../../../interface/prompt/request/followup-question.request';
-import { QuestionStateResponse } from "../../../interface/interview-qna/response/question-state.response";
+import { QuestionStateResponse } from '../../../interface/interview-qna/response/question-state.response';
 
 @Injectable()
 export class InterviewQuestionService {
