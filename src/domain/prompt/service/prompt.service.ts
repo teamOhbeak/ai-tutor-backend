@@ -208,7 +208,7 @@ export class PromptService {
         messages: messages,
         functions: [{ name: 'set_questions', parameters: schema }],
         function_call: { name: 'set_questions' },
-        model: 'gpt-3.5-turbo-0613',
+        model: 'gpt-3.5-turbo-structkk',
       })
       .then((competions) => {
         const generateText =

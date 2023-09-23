@@ -31,7 +31,7 @@ export class MyInterviewDetailResponse {
   userName: string;
 
   @ApiProperty()
-  isShowVideo: boolean;
+  record: boolean;
 
   constructor() {
     // user: UserResponse, // questions: QuestionResponse[], // createdAt: string, // status: InterviewStatus, // id: number,

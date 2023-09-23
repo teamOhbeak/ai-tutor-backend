@@ -19,5 +19,5 @@ export class CreateInterviewRequest {
   @ApiProperty({ example: false, default: false })
   @IsBoolean()
   @IsNotEmpty()
-  isShowVideo: boolean;
+  record: boolean;
 }

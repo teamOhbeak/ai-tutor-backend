@@ -43,7 +43,7 @@ export class InterviewUtil {
       stack: interview.stack,
       userId: interview.userId,
       userName: interview.userInfo.userName,
-      isShowVideo: interview.isShowVideo,
+      record: interview.record,
       questions: interview.questions.map((question) => {
         return InterviewQuestionUtil.toInterviewQuestionResponse(question);
       }),

@@ -34,7 +34,7 @@ export class InterviewEntity {
     default: false,
   })
   @IsBoolean()
-  isShowVideo: boolean;
+  record: boolean;
 
   @Column({
     type: 'int',
