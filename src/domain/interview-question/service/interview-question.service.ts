@@ -19,7 +19,7 @@ import { InterviewStatus } from '../../interview/entity/insterview-status.enum';
 import { MainQnaResponse } from '../../../interface/interview-qna/response/main-qna.response';
 import { QuestionStatus } from '../../questionsBank/entity/questionBank.entity';
 import { FollowUpQuestionRequest } from '../../../interface/prompt/request/followup-question.request';
-import { QuestionStateResponse } from '../../../interface/interview-qna/response/question-state.response';
+import { QuestionStateResponse } from "../../../interface/interview-qna/response/question-state.response";
 
 @Injectable()
 export class InterviewQuestionService {
@@ -70,26 +70,30 @@ export class InterviewQuestionService {
     else question.submitPass();
     this.interviewQnaRepository.save(question);
 
-    const nextQuestion = await this.getNextQuestionInfo(interviewId);
-    if (nextQuestion.questionText == null || nextQuestion.questionText == '') {
-      const followUpQuestion = await this.createFollowUpQuestion(<
-        FollowUpQuestionRequest
-      >{
-        question: question.questionText,
-        answer: question.answerText,
-      });
-      nextQuestion.saveFollowUpQuestion(followUpQuestion);
+    const nextQuestions = await this.interviewQnaRepository.getWaitQuestions(
+      interviewId,
+    );
+    if (nextQuestions.length > 0) {
+      const nextQuestion = nextQuestions[0];
+      if (
+        nextQuestion.questionText == null ||
+        nextQuestion.questionText == ''
+      ) {
+        const followUpQuestion = await this.createFollowUpQuestion(
+          question.questionText,
+          question.answerText,
+        );
+        nextQuestion.saveFollowUpQuestion(followUpQuestion);
+      }
     }
     return InterviewQnaUtil.toQuestionStateResponse(question);
   }
 
-  //4. 꼬리질문 생성요청하기 && 꼬리질문 저장하기 (파라미터: '이전 질문의 답변', questionId)
-  //4-1. 답변을 가지고 꼬리 질문을 생성을 요청한다.
-  //4-2. 응답 받은 질문을 questionId에 업데이트 한다.
-  //
-  //
-  async createFollowUpQuestion(followupRequest: FollowUpQuestionRequest) {
-    return await this.promptService.getFollowup(followupRequest);
+  async createFollowUpQuestion(questionText: string, answer: string) {
+    const req = new FollowUpQuestionRequest();
+    req.question = questionText;
+    req.answer = answer;
+    return await this.promptService.getFollowup(req);
   }
 
   // 면접방 생성
@@ -107,7 +111,6 @@ export class InterviewQuestionService {
       interviewId,
     );
 
-    console.log(`questions:${JSON.stringify(questions)}`);
     if (questions.length == 0) {
       return InterviewQnaUtil.toNextQuestionResponse(
         InterviewStatus.DONE,
