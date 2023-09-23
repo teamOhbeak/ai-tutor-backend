@@ -2,10 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('interview_question')
+@Entity('interview_question_answer')
 export class InterviewQuestionAnswerEntity {
   @PrimaryGeneratedColumn({
     name: 'answer_id',
